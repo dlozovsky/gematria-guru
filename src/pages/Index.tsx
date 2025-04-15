@@ -5,6 +5,9 @@ import TextInput from "../components/TextInput";
 import ResultsDisplay from "../components/ResultsDisplay";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Instructions from "../components/Instructions";
+import FAQ from "../components/FAQ";
+import ExampleCard from "../components/ExampleCard";
 import { calculateAllGematria, type GematriaResult } from "../utils/gematriaCalculators";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -59,6 +62,10 @@ const Index = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
+        <ExampleCard />
+        
+        <Instructions />
+        
         <div className="w-full mb-8">
           <TextInput 
             value={inputText}
@@ -83,6 +90,8 @@ const Index = () => {
         ) : (
           <ResultsDisplay results={results} inputText={inputText} />
         )}
+        
+        <FAQ />
       </motion.main>
 
       <Footer />
