@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Info, BookOpen, HelpCircle } from "lucide-react";
+import { Info, BookOpen, HelpCircle, Plus, Minus } from "lucide-react";
 import { 
   Accordion, 
   AccordionContent, 
@@ -50,18 +50,74 @@ const Instructions = () => {
             <li>Reference the FAQ section to learn about common number interpretations.</li>
           </ol>
           
-          <div className="mt-4 space-y-3">
-            <h4 className="font-medium text-sm">Interpreting Your Results:</h4>
-            <p className="text-xs text-muted-foreground">
-              Gematria interpretation is both an art and a science. Consider these approaches:
-            </p>
-            <ul className="list-disc pl-5 text-xs text-muted-foreground space-y-1">
-              <li><span className="font-medium">Word Connections:</span> Find other words with the same value to discover conceptual relationships.</li>
-              <li><span className="font-medium">Number Symbolism:</span> Certain numbers have traditional meanings (7 for completion, 12 for governance).</li>
-              <li><span className="font-medium">Mathematical Properties:</span> Consider if the number is prime, a perfect square, or has interesting factors.</li>
-              <li><span className="font-medium">Cultural Context:</span> Different traditions (Jewish, Christian, etc.) may interpret the same numbers differently.</li>
-            </ul>
-          </div>
+          <Accordion type="single" collapsible className="mt-4">
+            <AccordionItem value="interpretation">
+              <AccordionTrigger className="text-sm font-medium">
+                <span className="flex items-center gap-2">
+                  <HelpCircle size={16} className="text-primary" />
+                  Interpretation Guide
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-xs space-y-3">
+                <p>Gematria interpretation is both an art and a science. Numbers reveal connections between seemingly unrelated concepts and can provide deeper spiritual insights.</p>
+                
+                <div className="space-y-2">
+                  <h5 className="font-medium">Methods of Interpretation:</h5>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><span className="font-medium">Word Connections:</span> Find other words with the same numerical value to discover conceptual relationships.</li>
+                    <li><span className="font-medium">Number Symbolism:</span> Explore traditional meanings of specific numbers across cultures.</li>
+                    <li><span className="font-medium">Mathematical Properties:</span> Consider if the number is prime, a perfect square, or has interesting factors.</li>
+                    <li><span className="font-medium">Patterns and Repetition:</span> Look for recurring numbers in related words or concepts.</li>
+                  </ul>
+                </div>
+                
+                <div className="space-y-2">
+                  <h5 className="font-medium">Common Number Meanings:</h5>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><span className="font-medium">1:</span> Unity, beginnings, singularity, God</li>
+                    <li><span className="font-medium">3:</span> Divine perfection, heavenly completeness</li>
+                    <li><span className="font-medium">7:</span> Spiritual perfection, divine completeness</li>
+                    <li><span className="font-medium">8:</span> New beginnings, resurrection</li>
+                    <li><span className="font-medium">12:</span> Governmental perfection, divine authority</li>
+                    <li><span className="font-medium">18:</span> Life (chai in Hebrew equals 18)</li>
+                    <li><span className="font-medium">26:</span> The divine name YHWH (יהוה)</li>
+                  </ul>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="traditions">
+              <AccordionTrigger className="text-sm font-medium">
+                <span className="flex items-center gap-2">
+                  <BookOpen size={16} className="text-primary" />
+                  Gematria Traditions
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-xs space-y-3">
+                <p>Different cultural and religious traditions have developed their own gematria systems:</p>
+                
+                <div className="space-y-1">
+                  <h5 className="font-medium">Hebrew Gematria:</h5>
+                  <p>The original system dating back thousands of years, assigning specific values to Hebrew letters. It's extensively used in Kabbalah and Jewish mysticism.</p>
+                </div>
+                
+                <div className="space-y-1">
+                  <h5 className="font-medium">Greek Isopsephy:</h5>
+                  <p>The Greek equivalent of gematria, used in ancient Greek texts and early Christian writings.</p>
+                </div>
+                
+                <div className="space-y-1">
+                  <h5 className="font-medium">English Gematria:</h5>
+                  <p>Modern adaptations applying numerical values to English letters, typically using A=1, B=2, etc.</p>
+                </div>
+                
+                <div className="space-y-1">
+                  <h5 className="font-medium">Simple Gematria:</h5>
+                  <p>A system that cycles values from 1-9 (A=1, B=2... I=9, J=1, etc.), creating patterns across longer words.</p>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
           
           <div className="mt-4 text-xs text-muted-foreground italic">
             Gematria is the ancient practice of assigning numerical values to letters to reveal hidden meanings in words and phrases.
