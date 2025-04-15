@@ -10,7 +10,7 @@ export const calculateEnglishGematria = (text: string): GematriaResult => {
   const normalizedText = text.toLowerCase().replace(/[^a-z]/g, '');
   let total = 0;
   
-  for (let i = a; i < normalizedText.length; i++) {
+  for (let i = 0; i < normalizedText.length; i++) {
     const charCode = normalizedText.charCodeAt(i);
     if (charCode >= 97 && charCode <= 122) {
       total += (charCode - 96); // 'a' is 97 in ASCII, so we subtract 96 to get 1
@@ -124,23 +124,4 @@ export const calculateAllGematria = (text: string): GematriaResult[] => {
     calculatePythagoreanGematria(text),
     calculateGreekGematria(text)
   ];
-};
-
-// Fix a typo in the English Gematria function
-export const calculateEnglishGematria = (text: string): GematriaResult => {
-  const normalizedText = text.toLowerCase().replace(/[^a-z]/g, '');
-  let total = 0;
-  
-  for (let i = 0; i < normalizedText.length; i++) {
-    const charCode = normalizedText.charCodeAt(i);
-    if (charCode >= 97 && charCode <= 122) {
-      total += (charCode - 96); // 'a' is 97 in ASCII, so we subtract 96 to get 1
-    }
-  }
-  
-  return {
-    method: "English Gematria",
-    value: total,
-    explanation: "A=1, B=2, C=3, ... Z=26"
-  };
 };
