@@ -43,10 +43,25 @@ const Instructions = () => {
           
           <ol className="list-decimal pl-5 space-y-2 text-sm">
             <li>Enter a word or phrase in the input field above.</li>
-            <li>The calculator will automatically compute the gematria values.</li>
-            <li>View the results for different gematria methods below.</li>
-            <li>Explore the meanings behind different numerical values in the FAQ section.</li>
+            <li>The calculator will automatically compute the gematria values using three different methods.</li>
+            <li>Examine the results and consider what the numbers might symbolize.</li>
+            <li>Look for other words with the same numerical values to find hidden connections.</li>
+            <li>Consider breaking down the number into factors (e.g., 36 = 6×6 or 4×9) to find additional meanings.</li>
+            <li>Reference the FAQ section to learn about common number interpretations.</li>
           </ol>
+          
+          <div className="mt-4 space-y-3">
+            <h4 className="font-medium text-sm">Interpreting Your Results:</h4>
+            <p className="text-xs text-muted-foreground">
+              Gematria interpretation is both an art and a science. Consider these approaches:
+            </p>
+            <ul className="list-disc pl-5 text-xs text-muted-foreground space-y-1">
+              <li><span className="font-medium">Word Connections:</span> Find other words with the same value to discover conceptual relationships.</li>
+              <li><span className="font-medium">Number Symbolism:</span> Certain numbers have traditional meanings (7 for completion, 12 for governance).</li>
+              <li><span className="font-medium">Mathematical Properties:</span> Consider if the number is prime, a perfect square, or has interesting factors.</li>
+              <li><span className="font-medium">Cultural Context:</span> Different traditions (Jewish, Christian, etc.) may interpret the same numbers differently.</li>
+            </ul>
+          </div>
           
           <div className="mt-4 text-xs text-muted-foreground italic">
             Gematria is the ancient practice of assigning numerical values to letters to reveal hidden meanings in words and phrases.

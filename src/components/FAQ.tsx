@@ -35,8 +35,24 @@ const FAQ = () => {
       answer: "This adaptation applies traditional Hebrew letter values to their English counterparts. For example, A=1, B=2, G=3, corresponding roughly to Aleph, Beth, Gimel, etc."
     },
     {
-      question: "What do the numbers mean?",
-      answer: "Different numerical values carry various symbolic meanings. For example, 7 often represents perfection or completion, 13 can represent transformation, and 18 is associated with life in Jewish tradition."
+      question: "How do I interpret Gematria numbers?",
+      answer: "Gematria numbers can be interpreted in various ways: 1) Finding words with the same numerical value to discover hidden connections. 2) Relating to significant biblical or cultural numbers (7 for completion, 18 for life, etc.). 3) Breaking down numbers into their constituent parts (36 can be seen as 3×12 or 6×6). The meaning often depends on cultural and religious context."
+    },
+    {
+      question: "What do some common numbers mean in Gematria?",
+      answer: "Some significant numbers include: 7 (spiritual perfection, divine completion), 8 (new beginnings), 11 (disorder, judgment), 12 (governmental perfection), 13 (rebellion in Western tradition, but unity in Jewish tradition), 18 (life in Jewish tradition), 26 (name of God - YHVH), 666 (typically associated with 'the beast' in Christian tradition)."
+    },
+    {
+      question: "How can I use Gematria in my studies?",
+      answer: "Gematria can be used to find connections between related concepts, explore hidden meanings in sacred texts, enhance meditation and contemplative practices, or discover patterns that might reveal deeper spiritual truths. Many scholars use it as one of many interpretive tools rather than as a standalone method."
+    },
+    {
+      question: "Is Gematria scientific?",
+      answer: "Gematria is not considered scientific in the modern sense. It's a mystical or hermeneutic approach to finding meaning. Due to the many calculation methods available, critics note that desired connections can often be found if one searches long enough. However, many religious scholars value it as part of traditional exegesis."
+    },
+    {
+      question: "Where is Gematria used today?",
+      answer: "Today, Gematria is still used in Jewish mysticism (Kabbalah), some Christian theological studies, occult practices, numerology, and by people interested in finding hidden patterns in language. It continues to be a subject of interest in both religious and esoteric contexts."
     }
   ];
 
