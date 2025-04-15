@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import NumberCard from "./NumberCard";
+import ShareButton from "./ShareButton";
 import type { GematriaResult } from "../utils/gematriaCalculators";
 
 interface ResultsDisplayProps {
@@ -33,21 +34,27 @@ const ResultsDisplay = ({ results, inputText }: ResultsDisplayProps) => {
     >
       <AnimatePresence>
         {displayResults.length > 0 ? (
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            {displayResults.map((result, index) => (
-              <NumberCard
-                key={result.method}
-                value={result.value}
-                method={result.method}
-                explanation={result.explanation}
-              />
-            ))}
-          </motion.div>
+          <>
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {displayResults.map((result, index) => (
+                <NumberCard
+                  key={result.method}
+                  value={result.value}
+                  method={result.method}
+                  explanation={result.explanation}
+                />
+              ))}
+            </motion.div>
+            
+            <div className="flex justify-center mt-6">
+              <ShareButton results={displayResults} inputText={inputText} />
+            </div>
+          </>
         ) : (
           <motion.div 
             className="text-center text-muted-foreground"
