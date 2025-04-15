@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -88,6 +87,40 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "pulse-subtle": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.85" },
+        },
+        "glow-soft": {
+          "0%, 100%": { 
+            boxShadow: "0 0 5px rgba(255, 255, 255, 0.1), 0 0 10px rgba(123, 97, 255, 0.1)",
+            transform: "scale(1)" 
+          },
+          "50%": { 
+            boxShadow: "0 0 15px rgba(255, 255, 255, 0.2), 0 0 20px rgba(123, 97, 255, 0.2)",
+            transform: "scale(1.01)" 
+          },
+        },
+        "shimmer": {
+          "0%": { 
+            backgroundPosition: "-200% 0", 
+            boxShadow: "0 0 5px rgba(123, 97, 255, 0.3)"
+          },
+          "100%": { 
+            backgroundPosition: "200% 0", 
+            boxShadow: "0 0 15px rgba(123, 97, 255, 0.5)"
+          },
+        },
+        "sacred-pulse": {
+          "0%, 100%": { 
+            boxShadow: "0 0 15px rgba(255, 215, 0, 0.3), 0 0 30px rgba(123, 97, 255, 0.4)",
+            transform: "scale(1)" 
+          },
+          "50%": { 
+            boxShadow: "0 0 25px rgba(255, 215, 0, 0.5), 0 0 40px rgba(123, 97, 255, 0.6)",
+            transform: "scale(1.02)" 
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -97,10 +130,17 @@ export default {
         slideDown: "slideDown 0.5s ease-out forwards",
         pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         shimmer: "shimmer 2s linear infinite",
+        "pulse-subtle": "pulse-subtle 3s ease-in-out infinite",
+        "glow-soft": "glow-soft 4s ease-in-out infinite",
+        "shimmer": "shimmer 6s linear infinite",
+        "sacred-pulse": "sacred-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       backdropFilter: {
         none: "none",
         blur: "blur(8px)",
+      },
+      backgroundImage: {
+        "shimmer-gradient": "linear-gradient(to right, transparent, rgba(123, 97, 255, 0.1), transparent)",
       },
     },
   },

@@ -10,6 +10,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { checkSignificance, getAnimationClass } from "@/utils/significantNumbers";
+import { useEffect, useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface NumberCardProps {
   value: number;
@@ -76,16 +79,46 @@ const getNumberMeaning = (num: number): string => {
 
 const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
   const meaning = getNumberMeaning(value);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const { toast } = useToast();
+  
+  // Check if this is a significant number
+  const significance = checkSignificance(value);
+  const animationClass = significance ? getAnimationClass(significance.significance) : "";
+  
+  // Show toast for highly significant numbers
+  useEffect(() => {
+    if (significance && (significance.significance === 'major' || significance.significance === 'profound') && !hasAnimated) {
+      toast({
+        title: "Significant Number Discovered!",
+        description: `${value}: ${significance.description} (${significance.tradition} tradition)`,
+        duration: 5000,
+      });
+      setHasAnimated(true);
+    }
+  }, [value, significance, toast, hasAnimated]);
   
   return (
     <motion.div 
-      className="glass-card rounded-xl p-5 flex flex-col items-center justify-center gap-2"
+      className={`glass-card rounded-xl p-5 flex flex-col items-center justify-center gap-2 relative overflow-hidden ${animationClass}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
+      style={{
+        background: significance?.significance === 'profound' ? 
+          'linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,215,0,0.1), rgba(255,255,255,0.9))' : 
+          undefined,
+        backgroundSize: '200% 100%',
+      }}
     >
+      {significance && (
+        <span className="absolute top-2 right-2 text-xs font-medium text-primary/70 italic">
+          {significance.tradition}
+        </span>
+      )}
+      
       <motion.span 
-        className="text-2xl md:text-3xl font-bold text-primary"
+        className={`text-2xl md:text-3xl font-bold ${significance?.significance === 'profound' ? 'text-primary' : 'text-primary'}`}
         initial={{ scale: 0.9 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.3, delay: 0.2 }}
@@ -104,9 +137,26 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Meaning of {value} in Gematria</DialogTitle>
+            <DialogTitle className="flex items-center gap-2">
+              Meaning of {value} in Gematria
+              {significance && (
+                <span className={`text-xs px-2 py-0.5 rounded-full ${
+                  significance.significance === 'profound' ? 'bg-primary/20 text-primary' :
+                  significance.significance === 'major' ? 'bg-primary/10 text-primary' :
+                  'bg-muted text-muted-foreground'
+                }`}>
+                  {significance.tradition}
+                </span>
+              )}
+            </DialogTitle>
             <DialogDescription>
               <div className="mt-2 space-y-4">
+                {significance && (
+                  <div className="p-3 bg-muted/40 rounded-lg border border-muted">
+                    <p className="font-medium text-sm">{significance.description}</p>
+                  </div>
+                )}
+                
                 <p>{meaning}</p>
                 
                 {/* Factor breakdown */}
