@@ -20,6 +20,12 @@ export interface NumberConnections {
   links: Link[];
 }
 
+export interface NumericalTwin {
+  value: number;
+  methods: string[];
+  count: number;
+}
+
 /**
  * Generate data for visualizing connections between gematria numbers
  */
@@ -59,6 +65,36 @@ export const generateNumberConnections = (text: string): NumberConnections => {
   }
   
   return { nodes, links };
+};
+
+/**
+ * Find numerical twins (same value in different methods)
+ */
+export const findNumericalTwins = (text: string): NumericalTwin[] => {
+  // Calculate gematria values
+  const results = calculateAllGematria(text);
+  
+  // Group by value
+  const valueGroups: Record<number, string[]> = {};
+  
+  results.forEach(result => {
+    if (!valueGroups[result.value]) {
+      valueGroups[result.value] = [];
+    }
+    valueGroups[result.value].push(result.method);
+  });
+  
+  // Create twins array (only values that appear in multiple methods)
+  const twins: NumericalTwin[] = Object.entries(valueGroups)
+    .filter(([_, methods]) => methods.length > 1)
+    .map(([value, methods]) => ({
+      value: parseInt(value),
+      methods,
+      count: methods.length
+    }))
+    .sort((a, b) => b.count - a.count); // Sort by frequency (most common first)
+  
+  return twins;
 };
 
 /**
