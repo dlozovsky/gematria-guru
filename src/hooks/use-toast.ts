@@ -1,4 +1,5 @@
 import * as React from "react"
+import { toastVariants } from "@/components/ui/toast"
 
 import type {
   ToastActionElement,
@@ -155,6 +156,11 @@ function toast({ ...props }: Toast) {
       ...props,
       id,
       open: true,
+      variant: props.variant || (
+        props.title?.toString().includes('Significant Number') 
+          ? 'significant' 
+          : 'default'
+      ),
       onOpenChange: (open) => {
         if (!open) dismiss()
       },

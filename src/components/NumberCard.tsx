@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Info, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,6 @@ interface NumberCardProps {
   explanation: string;
 }
 
-// Helper function to provide number interpretations
 const getNumberMeaning = (num: number): string => {
   const meanings: {[key: number]: string} = {
     1: "Unity, beginnings, leadership, independence",
@@ -47,16 +45,13 @@ const getNumberMeaning = (num: number): string => {
     72: "The 72 names of God in Kabbalistic tradition",
   };
   
-  // Return meaning if it exists directly
   if (meanings[num]) return meanings[num];
   
-  // Check if it's a perfect square
   const sqrt = Math.sqrt(num);
   if (sqrt === Math.floor(sqrt)) {
     return `Perfect square (${sqrt}²), representing completion and manifestation of ${sqrt}.`;
   }
   
-  // Check for factors of spiritual significance
   const factors = [];
   for (let i = 2; i <= Math.floor(num/2); i++) {
     if (num % i === 0) factors.push(i);
@@ -68,13 +63,11 @@ const getNumberMeaning = (num: number): string => {
            `This suggests a combination of these energies.`;
   }
   
-  // Check for reduction
   const reduced = num.toString().split('').reduce((a, b) => a + parseInt(b), 0);
   if (reduced < 10 && meanings[reduced]) {
     return `Reduces to ${reduced} (${meanings[reduced]}), suggesting this as its core energy.`;
   }
   
-  // Default response for numbers without specific meanings
   return "This number's specific meaning may be personal to you or found through further research.";
 };
 
@@ -83,28 +76,24 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const { toast } = useToast();
   
-  // Check if this is a significant number
   const significance = checkSignificance(value);
   const animationClass = significance ? getAnimationClass(significance.significance) : "";
   
-  // Show toast for highly significant numbers
   useEffect(() => {
     if (significance && (significance.significance === 'major' || significance.significance === 'profound') && !hasAnimated) {
       toast({
-        title: (
-          <div className="flex items-center gap-2">
-            <Award className="h-5 w-5 text-yellow-500" />
-            <span>Significant Number Discovered!</span>
-          </div>
-        ),
+        title: "Significant Number Discovered!",
         description: (
-          <div className="pt-1">
-            <span className="font-bold text-lg">{value}:</span> {significance.description} 
-            <Badge variant="outline" className="ml-2 bg-primary/10">{significance.tradition}</Badge>
+          <div className="flex items-center gap-2">
+            <span>{value}:</span> 
+            <span>{significance.description}</span>
+            <Badge variant="outline" className="ml-2 bg-primary/10">
+              {significance.tradition}
+            </Badge>
           </div>
         ),
+        variant: 'significant',
         duration: 8000,
-        className: "significant-number-toast",
       });
       setHasAnimated(true);
     }
@@ -194,7 +183,6 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
                 
                 <p>{meaning}</p>
                 
-                {/* Factor breakdown */}
                 <div>
                   <h4 className="text-sm font-medium">Factor Breakdown:</h4>
                   <ul className="text-sm mt-1">
@@ -207,7 +195,6 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
                   </ul>
                 </div>
                 
-                {/* Digital reduction */}
                 <div>
                   <h4 className="text-sm font-medium">Digital Reduction:</h4>
                   <p className="text-sm">
