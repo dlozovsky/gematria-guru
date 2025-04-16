@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import TextInput from "../components/TextInput";
 import ResultsDisplay from "../components/ResultsDisplay";
 import Header from "../components/Header";
@@ -10,6 +11,8 @@ import FAQ from "../components/FAQ";
 import ExampleCard from "../components/ExampleCard";
 import { calculateAllGematria, type GematriaResult } from "../utils/gematriaCalculators";
 import { useToast } from "@/components/ui/use-toast";
+import { Network } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const [inputText, setInputText] = useState("");
@@ -89,6 +92,22 @@ const Index = () => {
           </motion.div>
         ) : (
           <ResultsDisplay results={results} inputText={inputText} />
+        )}
+        
+        {results.length > 0 && (
+          <motion.div 
+            className="w-full mb-8 flex justify-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Button asChild className="group">
+              <Link to="/number-maps" className="flex items-center gap-2">
+                <Network className="h-4 w-4 group-hover:animate-pulse" />
+                Explore Number Maps
+              </Link>
+            </Button>
+          </motion.div>
         )}
         
         <FAQ />
