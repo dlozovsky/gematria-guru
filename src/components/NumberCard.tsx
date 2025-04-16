@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Info } from "lucide-react";
+import { Info, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,6 +13,7 @@ import {
 import { checkSignificance, getAnimationClass } from "@/utils/significantNumbers";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { Badge } from "@/components/ui/badge";
 
 interface NumberCardProps {
   value: number;
@@ -90,9 +91,20 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
   useEffect(() => {
     if (significance && (significance.significance === 'major' || significance.significance === 'profound') && !hasAnimated) {
       toast({
-        title: "Significant Number Discovered!",
-        description: `${value}: ${significance.description} (${significance.tradition} tradition)`,
-        duration: 5000,
+        title: (
+          <div className="flex items-center gap-2">
+            <Award className="h-5 w-5 text-yellow-500" />
+            <span>Significant Number Discovered!</span>
+          </div>
+        ),
+        description: (
+          <div className="pt-1">
+            <span className="font-bold text-lg">{value}:</span> {significance.description} 
+            <Badge variant="outline" className="ml-2 bg-primary/10">{significance.tradition}</Badge>
+          </div>
+        ),
+        duration: 8000,
+        className: "significant-number-toast",
       });
       setHasAnimated(true);
     }
@@ -112,9 +124,32 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
       }}
     >
       {significance && (
-        <span className="absolute top-2 right-2 text-xs font-medium text-primary/70 italic">
-          {significance.tradition}
-        </span>
+        <motion.div 
+          className="absolute right-2 top-2 flex items-center gap-1"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ 
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+            delay: 0.5 
+          }}
+        >
+          <Award 
+            className={`${
+              significance.significance === 'profound' ? 'text-yellow-500 h-5 w-5' :
+              significance.significance === 'major' ? 'text-amber-400 h-4 w-4' : 
+              'text-muted-foreground h-3.5 w-3.5'
+            }`}
+          />
+          <span className={`text-xs font-medium ${
+            significance.significance === 'profound' ? 'text-yellow-500' :
+            significance.significance === 'major' ? 'text-amber-400' :
+            'text-muted-foreground'
+          }`}>
+            {significance.tradition}
+          </span>
+        </motion.div>
       )}
       
       <motion.span 
@@ -184,6 +219,23 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
           </DialogHeader>
         </DialogContent>
       </Dialog>
+
+      {significance?.significance === 'profound' && (
+        <motion.div 
+          className="absolute inset-0 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: [0, 0.3, 0, 0.3, 0],
+          }}
+          transition={{ 
+            duration: 3, 
+            repeat: Infinity,
+            repeatType: "loop"
+          }}
+        >
+          <div className="absolute inset-0 bg-yellow-300/20 rounded-xl" />
+        </motion.div>
+      )}
     </motion.div>
   );
 };

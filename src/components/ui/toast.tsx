@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -27,7 +28,8 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        default: "border bg-background text-foreground",
+        default:
+          "border bg-background text-foreground",
         destructive:
           "destructive group border-destructive bg-destructive text-destructive-foreground",
       },
@@ -46,7 +48,13 @@ const Toast = React.forwardRef<
   return (
     <ToastPrimitives.Root
       ref={ref}
-      className={cn(toastVariants({ variant }), className)}
+      className={cn(
+        toastVariants({ variant }), 
+        className,
+        // Special styling for significant number toasts
+        className?.includes('significant-number-toast') ? 
+          'bg-gradient-to-r from-background via-primary/5 to-background border-primary/30 shadow-lg shadow-primary/10 animate-sacred-pulse' : ''
+      )}
       {...props}
     />
   )
