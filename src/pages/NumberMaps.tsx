@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button";
 import NumberMapChart from "@/components/NumberMapChart";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
-import { generateNumberConnections } from "@/utils/numberMapUtils";
+import { generateNumberConnections, type NumberConnections } from "@/utils/numberMapUtils";
 import { checkSignificance } from "@/utils/significantNumbers";
 
 const NumberMaps = () => {
   const [inputText, setInputText] = useState("");
-  const [connections, setConnections] = useState<any[]>([]);
+  const [connections, setConnections] = useState<NumberConnections>({ nodes: [], links: [] });
   const navigate = useNavigate();
   const { toast } = useToast();
 

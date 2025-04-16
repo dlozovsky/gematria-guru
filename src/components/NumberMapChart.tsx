@@ -21,9 +21,10 @@ import {
 import { motion } from "framer-motion";
 import { Award } from "lucide-react";
 import { checkSignificance } from "@/utils/significantNumbers";
+import { type NumberConnections } from "@/utils/numberMapUtils";
 
 interface NumberMapChartProps {
-  connections: any;
+  connections: NumberConnections;
   inputText: string;
 }
 

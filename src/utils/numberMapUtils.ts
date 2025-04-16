@@ -1,6 +1,6 @@
 import { calculateAllGematria, type GematriaResult } from "./gematriaCalculators";
 
-interface Node {
+export interface Node {
   id: string;
   value: number;
   method: string;
@@ -9,13 +9,13 @@ interface Node {
   z: number;
 }
 
-interface Link {
+export interface Link {
   source: string;
   target: string;
   strength: number;
 }
 
-interface NumberConnections {
+export interface NumberConnections {
   nodes: Node[];
   links: Link[];
 }
