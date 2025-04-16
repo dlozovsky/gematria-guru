@@ -112,13 +112,13 @@ export default {
           },
         },
         "sacred-pulse": {
-          "0%, 100%": { 
-            boxShadow: "0 0 15px rgba(255, 215, 0, 0.3), 0 0 30px rgba(123, 97, 255, 0.4)",
+          "0%": { 
+            boxShadow: "0 0 15px rgba(255, 215, 0, 0.2), 0 0 30px rgba(123, 97, 255, 0.2)",
             transform: "scale(1)" 
           },
           "50%": { 
-            boxShadow: "0 0 25px rgba(255, 215, 0, 0.5), 0 0 40px rgba(123, 97, 255, 0.6)",
-            transform: "scale(1.02)" 
+            boxShadow: "0 0 20px rgba(255, 215, 0, 0.3), 0 0 35px rgba(123, 97, 255, 0.3)",
+            transform: "scale(1.01)" 
           },
         },
       },
@@ -133,7 +133,7 @@ export default {
         "pulse-subtle": "pulse-subtle 3s ease-in-out infinite",
         "glow-soft": "glow-soft 4s ease-in-out infinite",
         "shimmer": "shimmer 6s linear infinite",
-        "sacred-pulse": "sacred-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "sacred-pulse": "sacred-pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       backdropFilter: {
         none: "none",

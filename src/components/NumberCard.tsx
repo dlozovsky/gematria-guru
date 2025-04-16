@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Info, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -212,15 +213,15 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
           className="absolute inset-0 pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ 
-            opacity: [0, 0.3, 0, 0.3, 0],
+            opacity: [0, 0.2, 0, 0.2, 0],
           }}
           transition={{ 
-            duration: 3, 
+            duration: 8, 
             repeat: Infinity,
             repeatType: "loop"
           }}
         >
-          <div className="absolute inset-0 bg-yellow-300/20 rounded-xl" />
+          <div className="absolute inset-0 bg-yellow-300/10 rounded-xl" />
         </motion.div>
       )}
     </motion.div>
