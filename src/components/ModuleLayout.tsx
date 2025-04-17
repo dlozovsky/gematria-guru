@@ -23,7 +23,7 @@ const ModuleLayout = ({ children, title, description }: ModuleLayoutProps) => {
             Back to Modules
           </Link>
           
-          <Card className="p-6 mb-8">
+          <Card className="p-6 mb-8 border-l-4 border-l-primary">
             <h1 className="text-3xl font-bold mb-4">{title}</h1>
             <p className="text-muted-foreground">{description}</p>
           </Card>
