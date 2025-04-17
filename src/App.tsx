@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,6 +13,9 @@ import Cookies from "./pages/Cookies";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import LearningModules from "./pages/LearningModules";
+import IntroModule from "./pages/modules/IntroModule";
+import SystemsModule from "./pages/modules/SystemsModule";
+import AdvancedModule from "./pages/modules/AdvancedModule";
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -26,6 +30,9 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/number-maps" element={<NumberMaps />} />
             <Route path="/learning" element={<LearningModules />} />
+            <Route path="/learning/intro" element={<IntroModule />} />
+            <Route path="/learning/systems" element={<SystemsModule />} />
+            <Route path="/learning/advanced" element={<AdvancedModule />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/cookies" element={<Cookies />} />
