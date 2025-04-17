@@ -19,7 +19,9 @@ import {
   Legend
 } from "recharts";
 import { motion } from "framer-motion";
-import { Award } from "lucide-react";
+import { Award, ZoomIn, ZoomOut } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { checkSignificance } from "@/utils/significantNumbers";
 import { type NumberConnections } from "@/utils/numberMapUtils";
 
@@ -29,6 +31,8 @@ interface NumberMapChartProps {
 }
 
 const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
+  const [zoomLevel, setZoomLevel] = useState(1);
+  
   // Extract nodes that have significance
   const significantNodes = useMemo(() => {
     if (!connections.nodes) return [];
@@ -38,6 +42,14 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
       return significance && (significance.significance === 'major' || significance.significance === 'profound');
     });
   }, [connections]);
+  
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 0.25, 2.5));
+  };
+  
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 0.25, 0.5));
+  };
   
   const chartConfig = {
     english: { label: "English Gematria", theme: { light: "#3b82f6", dark: "#60a5fa" } },
@@ -57,8 +69,17 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
 
   return (
     <div className="relative">
+      <div className="absolute right-4 top-0 z-10 flex gap-1">
+        <Button size="sm" variant="outline" onClick={handleZoomOut} className="h-8 w-8 p-0">
+          <ZoomOut className="h-4 w-4" />
+        </Button>
+        <Button size="sm" variant="outline" onClick={handleZoomIn} className="h-8 w-8 p-0">
+          <ZoomIn className="h-4 w-4" />
+        </Button>
+      </div>
+    
       {significantNodes.length > 0 && (
-        <div className="absolute right-4 top-4 z-10 flex flex-col gap-1 bg-background/80 backdrop-blur-sm p-2 rounded-lg border">
+        <div className="absolute right-4 top-12 z-10 flex flex-col gap-1 bg-background/80 backdrop-blur-sm p-2 rounded-lg border">
           <p className="text-xs font-medium flex items-center gap-1">
             <Award className="h-3.5 w-3.5 text-yellow-500" />
             Significant Numbers
@@ -85,21 +106,25 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
         className="h-72"
         config={chartConfig}
       >
-        <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+        <ScatterChart 
+          margin={{ top: 20, right: 30, bottom: 40, left: 30 }}
+          style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'center' }}
+        >
           <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
           <XAxis 
             type="number" 
             dataKey="x" 
             name="value" 
             allowDecimals={false}
-            tick={{ fontSize: 12 }}
+            tick={{ fontSize: 11 }}
+            label={{ value: 'Number Value', position: 'bottom', offset: 0, fontSize: 12 }}
           />
           <YAxis 
-            type="number" 
-            dataKey="y" 
-            name="frequency" 
-            allowDecimals={false}
-            tick={{ fontSize: 12 }}
+            type="category"
+            dataKey="method" 
+            name="method"
+            tick={{ fontSize: 11 }}
+            width={120}
           />
           <ZAxis 
             type="number" 
@@ -108,20 +133,22 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
             name="significance" 
           />
           <ChartTooltip
+            cursor={{ strokeDasharray: '3 3' }}
+            wrapperStyle={{ zIndex: 100 }}
             content={
               <ChartTooltipContent
                 formatter={(value, name, item) => {
-                  const node = connections.nodes.find(n => n.x === item.payload.x && n.y === item.payload.y);
+                  const node = connections.nodes.find(n => n.x === item.payload.x && n.method === item.payload.method);
                   if (!node) return null;
                   
                   const significance = checkSignificance(node.value);
                   return (
-                    <div>
-                      <div className="font-medium">{node.value}</div>
+                    <div className="max-w-56">
+                      <div className="font-medium text-sm">{node.value}</div>
                       <div className="text-xs text-muted-foreground mt-1">{node.method}</div>
                       {significance && (
-                        <div className="mt-1 text-xs bg-primary/10 p-1 rounded text-primary">
-                          {significance.tradition}: {significance.description}
+                        <div className="mt-1 text-xs bg-primary/10 p-1 rounded text-primary max-h-24 overflow-y-auto">
+                          <span className="font-semibold">{significance.tradition}:</span> {significance.description}
                         </div>
                       )}
                     </div>
@@ -130,7 +157,12 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
               />
             }
           />
-          <Legend />
+          <Legend 
+            layout="horizontal" 
+            verticalAlign="top" 
+            align="center"
+            wrapperStyle={{ fontSize: '11px', paddingBottom: '10px' }}
+          />
           <Scatter 
             name="English Gematria" 
             data={connections.nodes.filter(node => node.method === "English Gematria")} 
