@@ -16,6 +16,7 @@ import LearningModules from "./pages/LearningModules";
 import IntroModule from "./pages/modules/IntroModule";
 import SystemsModule from "./pages/modules/SystemsModule";
 import AdvancedModule from "./pages/modules/AdvancedModule";
+import HebrewAlphabetModule from "./pages/modules/HebrewAlphabetModule";
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
