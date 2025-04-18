@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, GraduationCap, School } from "lucide-react";
@@ -15,12 +14,12 @@ const modules = [
     path: "/learning/intro"
   },
   {
-    title: "Number Systems",
-    description: "Explore different gematria calculation methods",
+    title: "The Hebrew Alphabet as Numbers",
+    description: "Master the Hebrew alphabet and its numerical values",
     icon: School,
-    level: "Intermediate",
+    level: "Beginner",
     duration: "20 mins",
-    path: "/learning/systems"
+    path: "/learning/hebrew-alphabet"
   },
   {
     title: "Advanced Interpretations",
