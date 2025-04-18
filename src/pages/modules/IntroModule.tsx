@@ -1,10 +1,9 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import ModuleLayout from "@/components/ModuleLayout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { CheckCircle } from "lucide-react";
+import { BookOpen, CheckCircle } from "lucide-react";
 
 const IntroModule = () => {
   return (
@@ -15,7 +14,7 @@ const IntroModule = () => {
       {/* Learning Objectives */}
       <Card>
         <CardContent className="p-6">
-          <h2 className="text-2xl font-semibold mb-4">Learning Objectives</h2>
+          <h2 className="text-2xl font-semibold mb-4">🎯 Learning Objectives</h2>
           <ul className="space-y-2">
             {[
               "Understand what Gematria is and where it comes from",
@@ -50,10 +49,10 @@ const IntroModule = () => {
         </CardContent>
       </Card>
 
-      {/* Origins */}
+      {/* Origins of Gematria */}
       <Card>
         <CardContent className="p-6">
-          <h2 className="text-2xl font-semibold mb-4">Origins of Gematria</h2>
+          <h2 className="text-2xl font-semibold mb-4">📜 Origins of Gematria</h2>
           <p className="mb-4">
             The word "Gematria" likely comes from the Greek word "geōmetriā", meaning "geometry" or 
             "measurement." But its practical and spiritual usage developed primarily in Hebrew culture.
@@ -77,8 +76,8 @@ const IntroModule = () => {
       {/* How Gematria Works */}
       <Card>
         <CardContent className="p-6">
-          <h2 className="text-2xl font-semibold mb-4">How Does Gematria Work?</h2>
-          <div className="overflow-x-auto">
+          <h2 className="text-2xl font-semibold mb-4">🔠 How Does Gematria Work?</h2>
+          <div className="overflow-x-auto mb-6">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -88,26 +87,23 @@ const IntroModule = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell>א</TableCell>
-                  <TableCell>Aleph</TableCell>
-                  <TableCell>1</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>ב</TableCell>
-                  <TableCell>Bet</TableCell>
-                  <TableCell>2</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>י</TableCell>
-                  <TableCell>Yod</TableCell>
-                  <TableCell>10</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>ק</TableCell>
-                  <TableCell>Qof</TableCell>
-                  <TableCell>100</TableCell>
-                </TableRow>
+                {[
+                  { letter: "א", name: "Aleph", value: "1" },
+                  { letter: "ב", name: "Bet", value: "2" },
+                  { letter: "י", name: "Yod", value: "10" },
+                  { letter: "כ", name: "Kaf", value: "20" },
+                  { letter: "ל", name: "Lamed", value: "30" },
+                  { letter: "ק", name: "Qof", value: "100" },
+                  { letter: "ר", name: "Resh", value: "200" },
+                  { letter: "ש", name: "Shin", value: "300" },
+                  { letter: "ת", name: "Tav", value: "400" }
+                ].map((row) => (
+                  <TableRow key={row.letter}>
+                    <TableCell>{row.letter}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.value}</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </div>
@@ -128,7 +124,7 @@ const IntroModule = () => {
       {/* Common Systems */}
       <Card>
         <CardContent className="p-6">
-          <h2 className="text-2xl font-semibold mb-4">Common Gematria Systems</h2>
+          <h2 className="text-2xl font-semibold mb-4">🧮 Common Gematria Systems</h2>
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold mb-2">Mispar Hechrechi (Standard Hebrew Gematria)</h3>
@@ -149,6 +145,27 @@ const IntroModule = () => {
                 <li>ו (6) stays 6</li>
               </ul>
             </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Why Use Gematria */}
+      <Card>
+        <CardContent className="p-6">
+          <h2 className="text-2xl font-semibold mb-4">🧠 Why Use Gematria?</h2>
+          <ul className="space-y-4">
+            <li>• To find connections between words that share the same numerical value</li>
+            <li>• To interpret scripture, especially the Torah, in Jewish mysticism</li>
+            <li>• To deepen spiritual understanding of personal names, places, and concepts</li>
+            <li>• To analyze dreams, prayers, and meditations for symbolic meaning</li>
+            <li>• In modern numerology, to explore hidden traits in names or phrases</li>
+          </ul>
+          <div className="mt-6 p-4 bg-muted rounded-lg">
+            <h3 className="font-semibold mb-2">Example:</h3>
+            <p>The Hebrew word for "life" (חיים) has a value of 68.<br/>
+            The word for "world" (עולם) has a value of 146.</p>
+            <p className="mt-2 italic">Some mystics might explore the connection between these two as a symbolic message: 
+            life and world are deeply intertwined.</p>
           </div>
         </CardContent>
       </Card>
