@@ -5,7 +5,6 @@ import { LearningObjectives } from "@/components/gematria/LearningObjectives";
 import { GematriaSystemsOverview } from "@/components/gematria/GematriaSystemsOverview";
 import { MultiSystemExample } from "@/components/gematria/MultiSystemExample";
 import { PracticeExercise } from "@/components/gematria/PracticeExercise";
-import { Card, CardContent } from "@/components/ui/card";
 
 const AdvancedModule = () => {
   return (
@@ -16,6 +15,7 @@ const AdvancedModule = () => {
       <LearningObjectives />
       <GematriaSystemsOverview />
       <MultiSystemExample />
+      <EnglishGematriaTable />
       <PracticeExercise />
     </ModuleLayout>
   );
