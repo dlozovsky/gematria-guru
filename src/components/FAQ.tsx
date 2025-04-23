@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, Info, BookOpen, Calculator, Search, Divide, Hash } from "lucide-react";
 import { 
   Accordion, 
   AccordionContent, 
@@ -29,10 +28,10 @@ const FAQ = () => {
             <strong>Greek:</strong> 811 → 2
           </p>
           <p>
-            Because these reduced numbers don’t repeat or cluster, we say there’s <strong>no dominant theme</strong>.
+            Because these reduced numbers don't repeat or cluster, we say there's <strong>no dominant theme</strong>.
           </p>
           <p>
-            <span role="img" aria-label="brain">🧠</span> <strong>What does that mean?</strong> It doesn’t mean the word or name is meaningless — in fact, it usually means the person or idea carries a blend of energies:
+            <span role="img" aria-label="brain">🧠</span> <strong>What does that mean?</strong> It doesn't mean the word or name is meaningless — in fact, it usually means the person or idea carries a blend of energies:
           </p>
           <ul className="list-disc ml-6">
             <li>A mix of leadership and compassion</li>
@@ -40,7 +39,7 @@ const FAQ = () => {
             <li>A combination of creativity and spiritual insight</li>
           </ul>
           <p>
-            This kind of result is often interpreted as a <strong>“Complex Soul”</strong> or multifaceted identity — someone who isn’t defined by one archetype but instead draws strength from diverse traits.
+            This kind of result is often interpreted as a <strong>"Complex Soul"</strong> or multifaceted identity — someone who isn't defined by one archetype but instead draws strength from diverse traits.
           </p>
         </div>
       ),
@@ -209,6 +208,92 @@ const FAQ = () => {
         </div>
       ),
     },
+    {
+      question: "How to Use the Gematria Calculator",
+      answer: (
+        <div className="space-y-3">
+          {/* Step 1 */}
+          <div className="flex items-start gap-3">
+            <div className="flex flex-col items-center min-w-[2.2rem]">
+              <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">1</div>
+              <Calculator size={18} className="text-primary mt-1" />
+            </div>
+            <div className="text-sm pt-1">Enter a word or phrase in the input field above.</div>
+          </div>
+          {/* Step 2 */}
+          <div className="flex items-start gap-3">
+            <div className="flex flex-col items-center min-w-[2.2rem]">
+              <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">2</div>
+              <Calculator size={18} className="text-primary mt-1" />
+            </div>
+            <div className="text-sm pt-1">The calculator will automatically compute the gematria values using three different methods.</div>
+          </div>
+          {/* Step 3 */}
+          <div className="flex items-start gap-3">
+            <div className="flex flex-col items-center min-w-[2.2rem]">
+              <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">3</div>
+              <Search size={18} className="text-primary mt-1" />
+            </div>
+            <div className="text-sm pt-1">Examine the results and consider what the numbers might symbolize.</div>
+          </div>
+          {/* Step 4 */}
+          <div className="flex items-start gap-3">
+            <div className="flex flex-col items-center min-w-[2.2rem]">
+              <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">4</div>
+              <Search size={18} className="text-primary mt-1" />
+            </div>
+            <div className="text-sm pt-1">Look for other words with the same numerical values to find hidden connections.</div>
+          </div>
+          {/* Step 5 */}
+          <div className="flex items-start gap-3">
+            <div className="flex flex-col items-center min-w-[2.2rem]">
+              <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">5</div>
+              <Divide size={18} className="text-primary mt-1" />
+            </div>
+            <div className="text-sm pt-1">Consider breaking down the number into factors (e.g., 36 = 6×6 or 4×9) to find additional meanings.</div>
+          </div>
+          {/* Step 6 */}
+          <div className="flex items-start gap-3">
+            <div className="flex flex-col items-center min-w-[2.2rem]">
+              <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">6</div>
+              <HelpCircle size={18} className="text-primary mt-1" />
+            </div>
+            <div className="text-sm pt-1">Reference the FAQ section to learn about common number interpretations.</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: "Interpretation Guide",
+      answer: (
+        <div className="space-y-3">
+          <p>Gematria interpretation is both an art and a science. Numbers reveal connections between seemingly unrelated concepts and can provide deeper spiritual insights.</p>
+          
+          <div className="space-y-2">
+            <h5 className="font-medium">Methods of Interpretation:</h5>
+            <ul className="list-disc pl-5 space-y-1">
+              <li><span className="font-medium">Word Connections:</span> Find other words with the same numerical value to discover conceptual relationships.</li>
+              <li><span className="font-medium">Number Symbolism:</span> Explore traditional meanings of specific numbers across cultures.</li>
+              <li><span className="font-medium">Mathematical Properties:</span> Consider if the number is prime, a perfect square, or has interesting factors.</li>
+              <li><span className="font-medium">Patterns and Repetition:</span> Look for recurring numbers in related words or concepts.</li>
+            </ul>
+          </div>
+          
+          <div className="space-y-2">
+            <h5 className="font-medium">Common Number Meanings:</h5>
+            <ul className="list-disc pl-5 space-y-1">
+              <li><span className="font-medium">1:</span> Unity, beginnings, singularity, God</li>
+              <li><span className="font-medium">3:</span> Divine perfection, heavenly completeness</li>
+              <li><span className="font-medium">7:</span> Spiritual perfection, divine completeness</li>
+              <li><span className="font-medium">8:</span> New beginnings, resurrection</li>
+              <li><span className="font-medium">12:</span> Governmental perfection, divine authority</li>
+              <li><span className="font-medium">18:</span> Life (chai in Hebrew equals 18)</li>
+              <li><span className="font-medium">26:</span> The divine name YHWH (יהוה)</li>
+            </ul>
+          </div>
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -246,15 +331,15 @@ const FAQ = () => {
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground" asChild>
-  <motion.div
-    initial={{ opacity: 0, y: -8 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -8 }}
-    transition={{ duration: 0.25 }}
-  >
-    {faq.answer}
-  </motion.div>
-</AccordionContent>
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="py-2"
+                  >
+                    {faq.answer}
+                  </motion.div>
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
