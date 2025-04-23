@@ -108,14 +108,16 @@ const NumberMaps = () => {
         </div>
       </div>
       {/* Timeline of Usage aligned under chart */}
-      <div className="flex justify-center w-full">
-        <div className="max-w-[900px] w-full">
-          <TimelineReferences
-            gematriaValues={calculateAllGematria(inputText).map(result => result.value)}
-            inputText={inputText}
-          />
+      {inputText.trim() && (
+        <div className="flex justify-center w-full">
+          <div className="max-w-[900px] w-full">
+            <TimelineReferences
+              gematriaValues={calculateAllGematria(inputText).map(result => result.value)}
+              inputText={inputText}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <Footer />
     </div>
   );

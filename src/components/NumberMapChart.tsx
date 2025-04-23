@@ -71,24 +71,35 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
   
   // Zoom functions
   const handleZoomIn = () => {
+    console.log("Zoom In clicked");
     const currentMin = xDomain ? xDomain[0] : minX;
     const currentMax = xDomain ? xDomain[1] : maxX;
     const range = currentMax - currentMin;
-    const newMin = currentMin + range * 0.15;
-    const newMax = currentMax - range * 0.15;
+    const center = (currentMin + currentMax) / 2;
+    const newRange = range * 0.5; // 50% of the current range - much more aggressive
+    const newMin = Math.max(Math.floor(center - newRange / 2), 0); // Ensure positive and round down
+    const newMax = Math.ceil(center + newRange / 2); // Round up
+    console.log(`Zoom In: [${currentMin}, ${currentMax}] -> [${newMin}, ${newMax}]`);
     setXDomain([newMin, newMax]);
   };
   
   const handleZoomOut = () => {
+    console.log("Zoom Out clicked");
     const currentMin = xDomain ? xDomain[0] : minX;
     const currentMax = xDomain ? xDomain[1] : maxX;
     const range = currentMax - currentMin;
-    const newMin = Math.max(currentMin - range * 0.2, 0); // Prevent negative values
-    const newMax = currentMax + range * 0.2;
+    const center = (currentMin + currentMax) / 2;
+    const newRange = range * 2.0; // 200% of the current range - more aggressive
+    const newMin = Math.max(Math.floor(center - newRange / 2), 0); // Prevent negative values and round down
+    const newMax = Math.ceil(center + newRange / 2); // Round up
+    console.log(`Zoom Out: [${currentMin}, ${currentMax}] -> [${newMin}, ${newMax}]`);
     setXDomain([newMin, newMax]);
   };
 
   const handleResetZoom = () => {
+    console.log("Reset Zoom clicked");
+    console.log(`Reset Zoom: [${xDomain?.[0]}, ${xDomain?.[1]}] -> [${minX}, ${maxX}]`);
+    // Force a complete re-render by setting to null first
     setXDomain(null);
   };
   
@@ -109,7 +120,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
 
   if (!inputText.trim() || !connections.nodes || connections.nodes.length === 0) {
     return (
-      <div className="h-96 flex items-center justify-center text-muted-foreground">
+      <div className="h-[450px] flex items-center justify-center text-muted-foreground">
         <p>Enter text above to see number connections</p>
       </div>
     );
@@ -176,7 +187,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
           <ZoomIn className="h-4 w-4" />
         </Button>
         {xDomain && (
-          <Button size="sm" variant="outline" onClick={handleResetZoom} className="h-8 sm:h-10 text-xs">
+          <Button size="sm" variant="default" onClick={handleResetZoom} className="h-8 sm:h-10 text-xs">
             Reset
           </Button>
         )}
@@ -206,10 +217,11 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
         </div>
       )}
     
-      <div className="h-96">
+      <div className="h-[450px]">
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart 
-            margin={{ top: 20, right: 30, bottom: 40, left: 30 }}
+            margin={{ top: 30, right: 30, bottom: 40, left: 30 }}
+            key={xDomain ? `chart-${xDomain[0]}-${xDomain[1]}` : 'auto-domain-chart'}
           >
             <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
             <XAxis 
@@ -217,26 +229,28 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
               dataKey="x" 
               name="value" 
               allowDecimals={false}
-              tick={{ fontSize: 11 }}
-              label={{ value: 'Number Value', position: 'bottom', offset: 0, fontSize: 12 }}
+              tick={{ fontSize: 12 }}
+              label={{ value: 'Number Value', position: 'bottom', offset: 5, fontSize: 13 }}
               domain={xDomain || ['auto', 'auto']}  // Use custom domain when zoomed, otherwise auto
+              key={xDomain ? `domain-${xDomain[0]}-${xDomain[1]}` : 'auto-domain'} // Force re-render on domain change
             />
             <YAxis 
               type="category"
               dataKey="method" 
               name="method"
-              tick={{ fontSize: 11 }}
-              width={120}
+              tick={{ fontSize: 12 }}
+              width={140}
             />
             <ZAxis 
               type="number" 
               dataKey="z" 
-              range={[20, 500]} 
+              range={[30, 600]} 
               name="significance" 
             />
             <ChartTooltip
               cursor={{ strokeDasharray: '3 3' }}
               wrapperStyle={{ zIndex: 100 }}
+              offset={15}
               content={props => {
                 if (!props.active || !props.payload || props.payload.length === 0) {
                   return null;
@@ -268,6 +282,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                 name="English Gematria" 
                 data={connections.nodes.filter(node => node.method === "English Gematria")} 
                 fill="#3b82f6" 
+                key={`english-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
               />
             )}
             {visibleSystems["Simple Gematria"] && (
@@ -275,6 +290,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                 name="Simple Gematria" 
                 data={connections.nodes.filter(node => node.method === "Simple Gematria")} 
                 fill="#10b981" 
+                key={`simple-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
               />
             )}
             {visibleSystems["Jewish Gematria"] && (
@@ -282,6 +298,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                 name="Jewish Gematria" 
                 data={connections.nodes.filter(node => node.method === "Jewish Gematria")} 
                 fill="#8b5cf6" 
+                key={`jewish-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
               />
             )}
             {visibleSystems["Pythagorean Gematria"] && (
@@ -289,6 +306,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                 name="Pythagorean Gematria" 
                 data={connections.nodes.filter(node => node.method === "Pythagorean Gematria")} 
                 fill="#f97316" 
+                key={`pythagorean-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
               />
             )}
             {visibleSystems["Greek Isopsephy"] && (
@@ -296,6 +314,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                 name="Greek Isopsephy" 
                 data={connections.nodes.filter(node => node.method === "Greek Isopsephy")} 
                 fill="#06b6d4" 
+                key={`greek-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
               />
             )}
           </ScatterChart>
