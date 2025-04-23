@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import {
   ChartContainer,
   ChartTooltip,
@@ -36,7 +36,8 @@ interface NumberMapChartProps {
 }
 
 const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
-  const [zoomLevel, setZoomLevel] = useState(1);
+  // Instead of a zoom level, we'll use domain states to control the view
+  const [xDomain, setXDomain] = useState<[number, number] | null>(null);
   const [visibleSystems, setVisibleSystems] = useState({
     "English Gematria": true,
     "Simple Gematria": true,
@@ -55,14 +56,42 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
     });
   }, [connections]);
   
+  // Calculate min and max X values for the domain
+  const { minX, maxX } = useMemo(() => {
+    if (!connections.nodes || connections.nodes.length === 0) {
+      return { minX: 0, maxX: 100 };
+    }
+    
+    const values = connections.nodes.map(node => node.x);
+    return {
+      minX: Math.floor(Math.min(...values) * 0.9),
+      maxX: Math.ceil(Math.max(...values) * 1.1)
+    };
+  }, [connections.nodes]);
+  
+  // Zoom functions
   const handleZoomIn = () => {
-    setZoomLevel(prev => Math.min(prev + 0.25, 2.5));
+    const currentMin = xDomain ? xDomain[0] : minX;
+    const currentMax = xDomain ? xDomain[1] : maxX;
+    const range = currentMax - currentMin;
+    const newMin = currentMin + range * 0.15;
+    const newMax = currentMax - range * 0.15;
+    setXDomain([newMin, newMax]);
   };
   
   const handleZoomOut = () => {
-    setZoomLevel(prev => Math.max(prev - 0.25, 0.5));
+    const currentMin = xDomain ? xDomain[0] : minX;
+    const currentMax = xDomain ? xDomain[1] : maxX;
+    const range = currentMax - currentMin;
+    const newMin = Math.max(currentMin - range * 0.2, 0); // Prevent negative values
+    const newMax = currentMax + range * 0.2;
+    setXDomain([newMin, newMax]);
   };
 
+  const handleResetZoom = () => {
+    setXDomain(null);
+  };
+  
   const toggleSystem = (system: string) => {
     setVisibleSystems(prev => ({
       ...prev,
@@ -130,7 +159,6 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                   <li>Look for vertical alignments - same number in different systems</li>
                   <li>Click dots for detailed information</li>
                   <li>Use zoom buttons to adjust the view</li>
-                  <li>Toggle systems using the buttons below the chart</li>
                 </ul>
               </div>
               <div className="bg-primary/5 p-1.5 rounded text-xs">
@@ -147,6 +175,11 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
         <Button size="sm" variant="outline" onClick={handleZoomIn} className="h-8 w-8 sm:h-10 sm:w-10 p-0">
           <ZoomIn className="h-4 w-4" />
         </Button>
+        {xDomain && (
+          <Button size="sm" variant="outline" onClick={handleResetZoom} className="h-8 sm:h-10 text-xs">
+            Reset
+          </Button>
+        )}
       </div>
     
       {significantNodes.length > 0 && (
@@ -173,102 +206,101 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
         </div>
       )}
     
-      <ChartContainer 
-        className="h-96"
-        config={chartConfig}
-      >
-        <ScatterChart 
-          margin={{ top: 20, right: 30, bottom: 40, left: 30 }}
-          style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'center' }}
-        >
-          <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-          <XAxis 
-            type="number" 
-            dataKey="x" 
-            name="value" 
-            allowDecimals={false}
-            tick={{ fontSize: 11 }}
-            label={{ value: 'Number Value', position: 'bottom', offset: 0, fontSize: 12 }}
-          />
-          <YAxis 
-            type="category"
-            dataKey="method" 
-            name="method"
-            tick={{ fontSize: 11 }}
-            width={120}
-          />
-          <ZAxis 
-            type="number" 
-            dataKey="z" 
-            range={[20, 500]} 
-            name="significance" 
-          />
-          <ChartTooltip
-            cursor={{ strokeDasharray: '3 3' }}
-            wrapperStyle={{ zIndex: 100 }}
-            content={props => {
-              if (!props.active || !props.payload || props.payload.length === 0) {
-                return null;
-              }
-              
-              // Find the node that was hovered
-              const item = props.payload[0];
-              const node = connections.nodes.find(n => n.x === item.payload.x && n.method === item.payload.method);
-              
-              if (!node) return null;
-              
-              const significance = checkSignificance(node.value);
-              
-              return (
-                <div className="min-w-56 rounded-lg border border-border/50 bg-background p-2.5 text-xs shadow-xl">
-                  <div className="font-medium text-sm">{node.value}</div>
-                  <div className="text-xs text-muted-foreground mt-1">{node.method}</div>
-                  {significance && (
-                    <div className="mt-1 text-xs bg-primary/10 p-1 rounded text-primary max-h-24 overflow-y-auto">
-                      <span className="font-semibold">{significance.tradition}:</span> {significance.description}
-                    </div>
-                  )}
-                </div>
-              );
-            }}
-          />
-          {visibleSystems["English Gematria"] && (
-            <Scatter 
-              name="English Gematria" 
-              data={connections.nodes.filter(node => node.method === "English Gematria")} 
-              fill="#3b82f6" 
+      <div className="h-96">
+        <ResponsiveContainer width="100%" height="100%">
+          <ScatterChart 
+            margin={{ top: 20, right: 30, bottom: 40, left: 30 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+            <XAxis 
+              type="number" 
+              dataKey="x" 
+              name="value" 
+              allowDecimals={false}
+              tick={{ fontSize: 11 }}
+              label={{ value: 'Number Value', position: 'bottom', offset: 0, fontSize: 12 }}
+              domain={xDomain || ['auto', 'auto']}  // Use custom domain when zoomed, otherwise auto
             />
-          )}
-          {visibleSystems["Simple Gematria"] && (
-            <Scatter 
-              name="Simple Gematria" 
-              data={connections.nodes.filter(node => node.method === "Simple Gematria")} 
-              fill="#10b981" 
+            <YAxis 
+              type="category"
+              dataKey="method" 
+              name="method"
+              tick={{ fontSize: 11 }}
+              width={120}
             />
-          )}
-          {visibleSystems["Jewish Gematria"] && (
-            <Scatter 
-              name="Jewish Gematria" 
-              data={connections.nodes.filter(node => node.method === "Jewish Gematria")} 
-              fill="#8b5cf6" 
+            <ZAxis 
+              type="number" 
+              dataKey="z" 
+              range={[20, 500]} 
+              name="significance" 
             />
-          )}
-          {visibleSystems["Pythagorean Gematria"] && (
-            <Scatter 
-              name="Pythagorean Gematria" 
-              data={connections.nodes.filter(node => node.method === "Pythagorean Gematria")} 
-              fill="#f97316" 
+            <ChartTooltip
+              cursor={{ strokeDasharray: '3 3' }}
+              wrapperStyle={{ zIndex: 100 }}
+              content={props => {
+                if (!props.active || !props.payload || props.payload.length === 0) {
+                  return null;
+                }
+                
+                // Find the node that was hovered
+                const item = props.payload[0];
+                const node = connections.nodes.find(n => n.x === item.payload.x && n.method === item.payload.method);
+                
+                if (!node) return null;
+                
+                const significance = checkSignificance(node.value);
+                
+                return (
+                  <div className="min-w-56 rounded-lg border border-border/50 bg-background p-2.5 text-xs shadow-xl">
+                    <div className="font-medium text-sm">{node.value}</div>
+                    <div className="text-xs text-muted-foreground mt-1">{node.method}</div>
+                    {significance && (
+                      <div className="mt-1 text-xs bg-primary/10 p-1 rounded text-primary max-h-24 overflow-y-auto">
+                        <span className="font-semibold">{significance.tradition}:</span> {significance.description}
+                      </div>
+                    )}
+                  </div>
+                );
+              }}
             />
-          )}
-          {visibleSystems["Greek Isopsephy"] && (
-            <Scatter 
-              name="Greek Isopsephy" 
-              data={connections.nodes.filter(node => node.method === "Greek Isopsephy")} 
-              fill="#06b6d4" 
-            />
-          )}
-        </ScatterChart>
-      </ChartContainer>
+            {visibleSystems["English Gematria"] && (
+              <Scatter 
+                name="English Gematria" 
+                data={connections.nodes.filter(node => node.method === "English Gematria")} 
+                fill="#3b82f6" 
+              />
+            )}
+            {visibleSystems["Simple Gematria"] && (
+              <Scatter 
+                name="Simple Gematria" 
+                data={connections.nodes.filter(node => node.method === "Simple Gematria")} 
+                fill="#10b981" 
+              />
+            )}
+            {visibleSystems["Jewish Gematria"] && (
+              <Scatter 
+                name="Jewish Gematria" 
+                data={connections.nodes.filter(node => node.method === "Jewish Gematria")} 
+                fill="#8b5cf6" 
+              />
+            )}
+            {visibleSystems["Pythagorean Gematria"] && (
+              <Scatter 
+                name="Pythagorean Gematria" 
+                data={connections.nodes.filter(node => node.method === "Pythagorean Gematria")} 
+                fill="#f97316" 
+              />
+            )}
+            {visibleSystems["Greek Isopsephy"] && (
+              <Scatter 
+                name="Greek Isopsephy" 
+                data={connections.nodes.filter(node => node.method === "Greek Isopsephy")} 
+                fill="#06b6d4" 
+              />
+            )}
+          </ScatterChart>
+        </ResponsiveContainer>
+      </div>
 
       {/* System toggle buttons */}
       <div className="mt-2 flex flex-wrap gap-1 justify-center">
