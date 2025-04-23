@@ -1,4 +1,3 @@
-
 import { useMemo } from "react";
 import {
   ChartContainer,
@@ -135,27 +134,31 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
           <ChartTooltip
             cursor={{ strokeDasharray: '3 3' }}
             wrapperStyle={{ zIndex: 100 }}
-            content={
-              <ChartTooltipContent
-                formatter={(value, name, item) => {
-                  const node = connections.nodes.find(n => n.x === item.payload.x && n.method === item.payload.method);
-                  if (!node) return null;
-                  
-                  const significance = checkSignificance(node.value);
-                  return (
-                    <div className="max-w-56">
-                      <div className="font-medium text-sm">{node.value}</div>
-                      <div className="text-xs text-muted-foreground mt-1">{node.method}</div>
-                      {significance && (
-                        <div className="mt-1 text-xs bg-primary/10 p-1 rounded text-primary max-h-24 overflow-y-auto">
-                          <span className="font-semibold">{significance.tradition}:</span> {significance.description}
-                        </div>
-                      )}
+            content={props => {
+              if (!props.active || !props.payload || props.payload.length === 0) {
+                return null;
+              }
+              
+              // Find the node that was hovered
+              const item = props.payload[0];
+              const node = connections.nodes.find(n => n.x === item.payload.x && n.method === item.payload.method);
+              
+              if (!node) return null;
+              
+              const significance = checkSignificance(node.value);
+              
+              return (
+                <div className="min-w-56 rounded-lg border border-border/50 bg-background p-2.5 text-xs shadow-xl">
+                  <div className="font-medium text-sm">{node.value}</div>
+                  <div className="text-xs text-muted-foreground mt-1">{node.method}</div>
+                  {significance && (
+                    <div className="mt-1 text-xs bg-primary/10 p-1 rounded text-primary max-h-24 overflow-y-auto">
+                      <span className="font-semibold">{significance.tradition}:</span> {significance.description}
                     </div>
-                  );
-                }}
-              />
-            }
+                  )}
+                </div>
+              );
+            }}
           />
           <Legend 
             layout="horizontal" 
