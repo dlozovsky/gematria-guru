@@ -17,6 +17,7 @@ A modern, interactive web application for exploring the ancient art and science 
 - **Symbolic Matches:** Discover matching words, famous numbers, and their spiritual meanings.
 - **Smart Entity Detection:** Automatically distinguishes between names and concepts to provide contextually appropriate interpretations.
 - **Tradition Badges:** Visual indicators showing when a number has special significance in a specific tradition (Jewish, Greek, Biblical, etc.), highlighting cross-cultural connections.
+- **Number Connections Chart:** Interactive visualization showing how values relate across different Gematria systems, with zoom controls and cross-system pattern detection.
 
 ### Personal & Practical Tools
 - **Name Explorer:** Analyze your name's value and discover its symbolic resonance.
@@ -52,7 +53,7 @@ A modern, interactive web application for exploring the ancient art and science 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/dlozob/gematria-guru.git
+   git clone https://github.com/dlozovsky/gematria-guru.git
    cd gematria-guru
    ```
 2. **Install dependencies:**
@@ -83,6 +84,14 @@ A modern, interactive web application for exploring the ancient art and science 
 - **Cultural Connections:** Discover when numbers calculated in one system have significance in other traditions
 - **Enhanced Understanding:** Comprehensive FAQ explaining the badge system and its purpose
 - **Visual Hierarchy:** Clear design that highlights important numbers across cultural boundaries
+
+### Number Connections Chart
+- **Visual Data Exploration:** Interactive scatter plot showing numerical patterns across different Gematria systems
+- **Pattern Recognition:** Easily identify when the same number appears in multiple calculation systems
+- **Significant Number Highlights:** Special badge for numbers with traditional spiritual significance 
+- **Zoom Controls:** Adjust the view to better examine number clusters and patterns
+- **Interactive Legend:** Toggle different Gematria systems on/off for focused analysis
+- **Detailed Tooltips:** Click on any point to see complete information about that calculation
 
 ### Unified Meaning System
 - **Cross-System Pattern Detection:** Identifies repeated numerical patterns across different Gematria systems
@@ -121,6 +130,7 @@ MIT License
 
 ## 📚 Project Highlights
 - Tradition badges that identify cross-cultural number significance
+- Interactive Number Connections chart for visual pattern exploration
 - Consistent summary insights for all results (theme found or not)
 - No modal popups for system meanings—everything is clear and on the card
 - Home navigation is always present

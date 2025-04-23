@@ -330,6 +330,42 @@ const FAQ = () => {
         </div>
       ),
     },
+    {
+      question: "What is the Number Connections chart and how do I use it?",
+      answer: (
+        <div>
+          <p>
+            The <strong>Number Connections</strong> chart is a visual way to explore how your name or word creates patterns across different Gematria systems.
+          </p>
+          
+          <div className="bg-blue-50 p-3 rounded-md mt-2 mb-3">
+            <p className="font-semibold text-blue-800 mb-1">What the chart shows:</p>
+            <ul className="list-disc ml-6">
+              <li><strong>X-axis:</strong> Numerical values (higher numbers appear further right)</li>
+              <li><strong>Y-axis:</strong> Different Gematria systems (English, Simple, Jewish, etc.)</li>
+              <li><strong>Colored dots:</strong> Each dot represents a calculation in a specific system</li>
+              <li><strong>Number Matches:</strong> When the same number appears in multiple systems</li>
+              <li><strong>Significant Numbers:</strong> Values with special meaning in spiritual traditions</li>
+            </ul>
+          </div>
+          
+          <p className="mb-2">
+            <span className="font-medium">How to use this chart:</span>
+          </p>
+          <ul className="list-disc ml-6 space-y-1">
+            <li>Look for <strong>vertical alignments</strong> of dots - these show the same number appearing in different systems</li>
+            <li>Pay attention to <strong>Number Matches</strong> - these highlight meaningful cross-system connections</li>
+            <li>Notice any <strong>Significant Numbers</strong> that appear - these have special traditional meanings</li>
+            <li>Use the buttons below the chart to show/hide specific Gematria systems</li>
+            <li>Click on dots for more detailed information about that specific calculation</li>
+          </ul>
+          
+          <p className="mt-3 text-sm italic">
+            The Number Connections chart helps you discover patterns that might be missed when looking at individual Gematria systems in isolation.
+          </p>
+        </div>
+      ),
+    },
   ];
 
   return (
