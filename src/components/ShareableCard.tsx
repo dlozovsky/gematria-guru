@@ -1,8 +1,8 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { checkSignificance } from "@/utils/significantNumbers";
+import { resolveSystemTraditionConflict } from "@/utils/systemIcons";
 import { type GematriaResult } from "@/utils/gematriaCalculators";
 
 interface ShareableCardProps {
@@ -20,6 +20,10 @@ const ShareableCard = ({ inputText, results }: ShareableCardProps) => {
   ) || results[0];
   
   const significance = checkSignificance(significantResult.value);
+  // Fix system tradition conflicts
+  const displayTradition = significance 
+    ? resolveSystemTraditionConflict(significantResult.method, significance.tradition)
+    : null;
   
   return (
     <Card className="overflow-hidden border-2 border-primary/20 max-w-md mx-auto bg-gradient-to-br from-white to-primary/5">
@@ -46,7 +50,7 @@ const ShareableCard = ({ inputText, results }: ShareableCardProps) => {
         
         {significance && (
           <Badge variant="outline" className="bg-primary/5 text-primary text-xs px-3 py-1">
-            {significance.tradition}: {significance.description}
+            {displayTradition}: {significance.description}
           </Badge>
         )}
         

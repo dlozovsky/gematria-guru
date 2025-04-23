@@ -16,6 +16,7 @@ A modern, interactive web application for exploring the ancient art and science 
 - **Real-Time Analysis:** See results live as you type.
 - **Symbolic Matches:** Discover matching words, famous numbers, and their spiritual meanings.
 - **Smart Entity Detection:** Automatically distinguishes between names and concepts to provide contextually appropriate interpretations.
+- **Tradition Badges:** Visual indicators showing when a number has special significance in a specific tradition (Jewish, Greek, Biblical, etc.), highlighting cross-cultural connections.
 
 ### Personal & Practical Tools
 - **Name Explorer:** Analyze your name's value and discover its symbolic resonance.
@@ -30,6 +31,7 @@ A modern, interactive web application for exploring the ancient art and science 
 - **Expandable Sections:** Inline Gematria Explorer and collapsible FAQ for streamlined navigation.
 - **Accessibility:** Keyboard navigation and readable color schemes.
 - **Contextual Insights:** Different templates and language for names versus conceptual words.
+- **Cross-System Correlations:** Identify and highlight patterns that appear across multiple Gematria systems.
 
 ---
 
@@ -50,7 +52,7 @@ A modern, interactive web application for exploring the ancient art and science 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/gematria-guru.git
+   git clone https://github.com/dlozob/gematria-guru.git
    cd gematria-guru
    ```
 2. **Install dependencies:**
@@ -60,8 +62,6 @@ A modern, interactive web application for exploring the ancient art and science 
 3. **Start the development server:**
    ```bash
    npm run dev
-   # or
-   npm start
    ```
 4. **Build for production:**
    ```bash
@@ -76,21 +76,25 @@ A modern, interactive web application for exploring the ancient art and science 
 
 ---
 
-## ✨ New: Entity Type Detection System
+## ✨ Latest Features (v1.2)
 
-Gematria Guru now features an intelligent entity type detection system that distinguishes between names and conceptual words to provide more natural and contextually appropriate interpretations:
+### Tradition Badges
+- **Cross-Tradition Indicators:** Visual badges showing when a number has special significance in a specific tradition
+- **Cultural Connections:** Discover when numbers calculated in one system have significance in other traditions
+- **Enhanced Understanding:** Comprehensive FAQ explaining the badge system and its purpose
+- **Visual Hierarchy:** Clear design that highlights important numbers across cultural boundaries
 
-### Key Features:
+### Unified Meaning System
+- **Cross-System Pattern Detection:** Identifies repeated numerical patterns across different Gematria systems
+- **Theme Highlighting:** Emphasizes the most dominant numerical theme in your search results
+- **Smart Contextual Language:** Adapts descriptions based on whether the input is a name or concept
+- **Comprehensive Interpretations:** Provides both individual system insights and unified meanings
+
+### Entity Type Detection System
 - **Heuristic Detection:** Uses multiple rule-based approaches to determine if input is a name or concept
 - **Contextual Templates:** Dynamically changes the interpretation text based on entity type
 - **Improved Readability:** "This name reflects..." for names vs "The word carries..." for concepts
 - **Expanded Dictionary:** Pre-loaded with common names and spiritual/philosophical concepts
-
-### Technical Implementation:
-- Custom TypeScript utility with rule-based detection algorithms
-- Pre-defined sets of known names and conceptual words
-- Pattern matching for common name formats
-- Length-based heuristics as fallback detection
 
 ---
 
@@ -111,11 +115,12 @@ If you encounter bugs or have suggestions, please use the GitHub Issues tab.
 
 ## 📝 License
 
-[Specify license here, e.g., MIT, Apache 2.0, etc.]
+MIT License
 
 ---
 
 ## 📚 Project Highlights
+- Tradition badges that identify cross-cultural number significance
 - Consistent summary insights for all results (theme found or not)
 - No modal popups for system meanings—everything is clear and on the card
 - Home navigation is always present
@@ -136,18 +141,6 @@ If you encounter bugs or have suggestions, please use the GitHub Issues tab.
 | 6 | Calculating and Interpreting Your Own Name in Gematria          | 20–25 min    |
 | 7 | Symbolism, Synchronicity, and Number Mysticism                  | 15–20 min    |
 | 8 | Pulling It All Together – Practical Applications                | 20–30 min    |
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change or add.
-
----
-
-## 📄 License
-
-[MIT](LICENSE)
 
 ---
 

@@ -294,6 +294,42 @@ const FAQ = () => {
         </div>
       ),
     },
+    {
+      question: "What are the tradition badges that sometimes appear in the results?",
+      answer: (
+        <div>
+          <p>
+            You might notice badges like <span className="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">Jewish</span> or <span className="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">Greek</span> appearing on some Gematria cards. These badges serve an important purpose:
+          </p>
+          
+          <ul className="list-disc ml-6 space-y-2 mt-2">
+            <li>
+              <strong>Cross-Tradition Significance:</strong> When a calculation produces a number with special significance in a particular tradition, a badge appears to highlight this connection.
+            </li>
+            <li>
+              <strong>Example:</strong> If English Gematria gives you 26, you'll see a "Jewish" badge because 26 represents YHWH (יהוה), the divine name in Jewish tradition.
+            </li>
+            <li>
+              <strong>Cultural Bridge:</strong> These badges show how sacred numbers transcend cultural boundaries - the same meaningful numbers often appear across different traditions and calculation methods.
+            </li>
+          </ul>
+          
+          <div className="bg-blue-50 p-3 rounded-md mt-3">
+            <p className="font-semibold text-blue-800 mb-1">Common badges you might see:</p>
+            <ul className="list-disc ml-6">
+              <li><strong>Jewish/Hebrew:</strong> For numbers like 18 (life), 26 (divine name), or 613 (commandments)</li>
+              <li><strong>Biblical:</strong> For numbers like 7 (completion), 12 (perfection), or 40 (testing)</li>
+              <li><strong>Greek:</strong> For numbers with significance in Greek isopsephy</li>
+              <li><strong>Pythagorean:</strong> For numbers important in Pythagorean numerology</li>
+            </ul>
+          </div>
+          
+          <p className="mt-3">
+            These badges help you discover deeper connections between your search term and various spiritual traditions, even when using different calculation methods.
+          </p>
+        </div>
+      ),
+    },
   ];
 
   return (

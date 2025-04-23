@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Info, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { checkSignificance, getAnimationClass } from "@/utils/significantNumbers";
+import { getSystemTradition, resolveSystemTraditionConflict } from "@/utils/systemIcons";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 
@@ -78,6 +78,12 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
   const [hasAnimated, setHasAnimated] = useState(false);
   
   const significance = checkSignificance(value);
+  
+  // Fix system tradition conflicts
+  const displayTradition = significance 
+    ? resolveSystemTraditionConflict(method, significance.tradition)
+    : getSystemTradition(method);
+  
   const animationClass = significance ? getAnimationClass(significance.significance) : "";
   
   return (
@@ -117,7 +123,7 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
             significance.significance === 'major' ? 'text-amber-400' :
             'text-muted-foreground'
           }`}>
-            {significance.tradition}
+            {displayTradition}
           </span>
         </motion.div>
       )}

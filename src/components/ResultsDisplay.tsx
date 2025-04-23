@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import NumberCard from "./NumberCard";
@@ -6,6 +5,7 @@ import ShareButton from "./ShareButton";
 import type { GematriaResult } from "../utils/gematriaCalculators";
 import { UnifiedMeaningCard } from "./UnifiedMeaningCard";
 import { checkSignificance } from "@/utils/significantNumbers";
+import { getSystemTradition, resolveSystemTraditionConflict } from "@/utils/systemIcons";
 import { Award } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
@@ -17,7 +17,7 @@ interface ResultsDisplayProps {
 const ResultsDisplay = ({ results, inputText }: ResultsDisplayProps) => {
   const [displayResults, setDisplayResults] = useState<GematriaResult[]>([]);
   const [showBanner, setShowBanner] = useState(false);
-  const [significantResult, setSignificantResult] = useState<{value: number, description: string, tradition: string} | null>(null);
+  const [significantResult, setSignificantResult] = useState<{value: number, description: string, tradition: string, method: string} | null>(null);
   
   useEffect(() => {
     if (results.length > 0) {
@@ -36,7 +36,8 @@ const ResultsDisplay = ({ results, inputText }: ResultsDisplayProps) => {
           setSignificantResult({
             value: firstSignificant.value,
             description: significance.description,
-            tradition: significance.tradition
+            tradition: resolveSystemTraditionConflict(firstSignificant.method, significance.tradition),
+            method: firstSignificant.method
           });
           setShowBanner(true);
           

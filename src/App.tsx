@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,6 +16,10 @@ import IntroModule from "./pages/modules/IntroModule";
 import SystemsModule from "./pages/modules/SystemsModule";
 import AdvancedModule from "./pages/modules/AdvancedModule";
 import HebrewAlphabetModule from "./pages/modules/HebrewAlphabetModule";
+import TorahGematriaModule from "./pages/modules/TorahGematriaModule";
+import NameGematriaModule from "./pages/modules/NameGematriaModule";
+import NumberMysticismModule from "./pages/modules/NumberMysticismModule";
+import PracticalApplicationsModule from "./pages/modules/PracticalApplicationsModule";
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -35,6 +38,10 @@ const App = () => {
             <Route path="/learning/hebrew-alphabet" element={<HebrewAlphabetModule />} />
             <Route path="/learning/systems" element={<SystemsModule />} />
             <Route path="/learning/advanced" element={<AdvancedModule />} />
+            <Route path="/learning/torah-gematria" element={<TorahGematriaModule />} />
+            <Route path="/learning/name-gematria" element={<NameGematriaModule />} />
+            <Route path="/learning/number-mysticism" element={<NumberMysticismModule />} />
+            <Route path="/learning/practical-applications" element={<PracticalApplicationsModule />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/cookies" element={<Cookies />} />
