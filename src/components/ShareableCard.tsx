@@ -66,7 +66,7 @@ const ShareableCard = ({ inputText, results }: ShareableCardProps) => {
       
       <CardFooter className="flex justify-center pt-0 pb-4">
         <div className="text-xs text-center text-muted-foreground">
-          Generated with Gematria Calculator • lovable.app
+          Generated with Gematria Calculator
         </div>
       </CardFooter>
     </Card>

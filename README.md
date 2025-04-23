@@ -79,6 +79,13 @@ A modern, interactive web application for exploring the ancient art and science 
 
 ## ✨ Latest Features (v1.2)
 
+### Enhanced Sharing Functionality
+- **Rich Content Sharing:** Share the complete Gematria card with detailed numerical information, not just a link
+- **Native Sharing Support:** Leverages Web Share API for seamless sharing on mobile and desktop devices
+- **Social Media Integration:** Optimized sharing for Facebook, Twitter, and LinkedIn with rich previews
+- **Image Generation:** Download or share your Gematria results as an image
+- **Improved Metadata:** Dynamic meta tags ensure proper social media previews with images and descriptions
+
 ### Tradition Badges
 - **Cross-Tradition Indicators:** Visual badges showing when a number has special significance in a specific tradition
 - **Cultural Connections:** Discover when numbers calculated in one system have significance in other traditions
