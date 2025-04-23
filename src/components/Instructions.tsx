@@ -23,7 +23,7 @@ const Instructions = () => {
       <Button 
         variant="outline" 
         onClick={() => setIsOpen(!isOpen)}
-        className="mb-2 gap-2 text-muted-foreground hover:text-foreground transition-colors"
+        className="mb-2 gap-2 text-muted-foreground hover:text-primary transition duration-150 hover:bg-primary/10 active:scale-95 focus:ring-2 focus:ring-primary"
       >
         {isOpen ? <BookOpen size={16} /> : <Info size={16} />}
         {isOpen ? "Hide Instructions" : "Show Instructions"}
@@ -41,14 +41,56 @@ const Instructions = () => {
             How to Use the Gematria Calculator
           </h3>
           
-          <ol className="list-decimal pl-5 space-y-2 text-sm">
-            <li>Enter a word or phrase in the input field above.</li>
-            <li>The calculator will automatically compute the gematria values using three different methods.</li>
-            <li>Examine the results and consider what the numbers might symbolize.</li>
-            <li>Look for other words with the same numerical values to find hidden connections.</li>
-            <li>Consider breaking down the number into factors (e.g., 36 = 6×6 or 4×9) to find additional meanings.</li>
-            <li>Reference the FAQ section to learn about common number interpretations.</li>
-          </ol>
+          <div className="space-y-3">
+  {/* Step 1 */}
+  <div className="flex items-start gap-3">
+    <div className="flex flex-col items-center min-w-[2.2rem]">
+      <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">1</div>
+      <Info size={18} className="text-primary mt-1" />
+    </div>
+    <div className="text-sm pt-1">Enter a word or phrase in the input field above.</div>
+  </div>
+  {/* Step 2 */}
+  <div className="flex items-start gap-3">
+    <div className="flex flex-col items-center min-w-[2.2rem]">
+      <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">2</div>
+      <Plus size={18} className="text-primary mt-1" />
+    </div>
+    <div className="text-sm pt-1">The calculator will automatically compute the gematria values using three different methods.</div>
+  </div>
+  {/* Step 3 */}
+  <div className="flex items-start gap-3">
+    <div className="flex flex-col items-center min-w-[2.2rem]">
+      <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">3</div>
+      <BookOpen size={18} className="text-primary mt-1" />
+    </div>
+    <div className="text-sm pt-1">Examine the results and consider what the numbers might symbolize.</div>
+  </div>
+  {/* Step 4 */}
+  <div className="flex items-start gap-3">
+    <div className="flex flex-col items-center min-w-[2.2rem]">
+      <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">4</div>
+      <Minus size={18} className="text-primary mt-1" />
+    </div>
+    <div className="text-sm pt-1">Look for other words with the same numerical values to find hidden connections.</div>
+  </div>
+  {/* Step 5 */}
+  <div className="flex items-start gap-3">
+    <div className="flex flex-col items-center min-w-[2.2rem]">
+      <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">5</div>
+      <HelpCircle size={18} className="text-primary mt-1" />
+    </div>
+    <div className="text-sm pt-1">Consider breaking down the number into factors (e.g., 36 = 6×6 or 4×9) to find additional meanings.</div>
+  </div>
+  {/* Step 6 */}
+  <div className="flex items-start gap-3">
+    <div className="flex flex-col items-center min-w-[2.2rem]">
+      <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-sm">6</div>
+      <BookOpen size={18} className="text-primary mt-1" />
+    </div>
+    <div className="text-sm pt-1">Reference the FAQ section to learn about common number interpretations.</div>
+  </div>
+</div>
           
           <Accordion type="single" collapsible className="mt-4">
             <AccordionItem value="interpretation">

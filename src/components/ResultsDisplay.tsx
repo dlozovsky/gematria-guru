@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import NumberCard from "./NumberCard";
 import ShareButton from "./ShareButton";
 import type { GematriaResult } from "../utils/gematriaCalculators";
+import { UnifiedMeaningCard } from "./UnifiedMeaningCard";
 import { checkSignificance } from "@/utils/significantNumbers";
 import { Award } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -61,13 +62,51 @@ const ResultsDisplay = ({ results, inputText }: ResultsDisplayProps) => {
     return null;
   }
 
+  // UnifiedMeaningCard breakdown and summary logic
+  let breakdown: any[] = [];
+  let summary = "";
+  if (displayResults.length > 0 && inputText.trim()) {
+    breakdown = displayResults.map(r => {
+      const reducedMatch = r.explanation.match(/reduces to (Master Number )?(\d+)[^,]*,? ([^.]+)\./i);
+      if (reducedMatch) {
+        const reduced = Number(reducedMatch[2]);
+        const meaning = reducedMatch[3];
+        return { system: r.method, value: r.value, reduced, meaning };
+      }
+      return { system: r.method, value: r.value, reduced: undefined, meaning: "" };
+    });
+    // Count occurrences of each reduced value
+    const reducedCounts: Record<number, number> = {};
+    breakdown.forEach(item => {
+      if (item.reduced !== undefined) reducedCounts[item.reduced] = (reducedCounts[item.reduced] || 0) + 1;
+    });
+    // Find most common reduced value(s)
+    const mostCommon = Object.entries(reducedCounts).sort((a, b) => b[1] - a[1])[0];
+    // Build summary
+    summary = breakdown
+      .map(s =>
+        s.reduced !== undefined ? `${s.system} reduces to ${s.reduced} (${s.meaning.trim()})` : `${s.system}`
+      )
+      .join('; ') + '. ';
+    if (mostCommon && mostCommon[1] > 1) {
+      summary += `The repeated presence of ${mostCommon[0]} across systems suggests a strong emphasis on its qualities.`;
+    }
+  }
+
   return (
     <motion.div
-      className="w-full max-w-3xl mx-auto py-8"
+      className="w-full max-w-3xl mx-auto py-4 px-2 sm:py-8 sm:px-0"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      {breakdown.length > 0 && inputText.trim() && (
+        <UnifiedMeaningCard
+          name={inputText}
+          breakdown={breakdown}
+          summary={summary}
+        />
+      )}
       <AnimatePresence>
         {showBanner && significantResult && (
           <motion.div 
@@ -97,24 +136,37 @@ const ResultsDisplay = ({ results, inputText }: ResultsDisplayProps) => {
         {displayResults.length > 0 ? (
           <>
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-rows-fr w-full"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              {displayResults.map((result, index) => (
-                <NumberCard
-                  key={result.method}
-                  value={result.value}
-                  method={result.method}
-                  explanation={result.explanation}
-                />
-              ))}
+              {(() => {
+  // Guarantee unique keys even if method/value are duplicated or empty
+  const seen = new Set<string>();
+  return displayResults.map((result, index) => {
+    let baseKey = (typeof result.method === 'string' && result.method.trim() !== '' && typeof result.value === 'number' && !isNaN(result.value))
+      ? `${result.method.trim()}-${result.value}`
+      : `item-${index}`;
+    let key = baseKey;
+    let suffix = 1;
+    while (seen.has(key)) {
+      key = `${baseKey}-${suffix++}`;
+    }
+    seen.add(key);
+    return (
+      <NumberCard
+        key={key}
+        value={result.value}
+        method={result.method}
+        explanation={result.explanation}
+      />
+    );
+  });
+})()}
             </motion.div>
             
-            <div className="flex justify-center mt-6">
-              <ShareButton results={displayResults} inputText={inputText} />
-            </div>
+
           </>
         ) : (
           <motion.div 

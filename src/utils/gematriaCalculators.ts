@@ -1,9 +1,45 @@
 
+import { REDUCED_TEMPLATES, FACTOR_TEMPLATES } from "../data/numerologyTemplates";
+
 export interface GematriaResult {
   method: string;
   value: number;
   explanation: string;
 }
+
+function reduceValue(value: number): number {
+  while (value > 9 && value !== 11 && value !== 22 && value !== 33) {
+    value = value
+      .toString()
+      .split("")
+      .reduce((sum, digit) => sum + Number(digit), 0);
+  }
+  return value;
+}
+
+function getFactors(value: number): number[] {
+  const factors = [];
+  for (let i = 1; i <= value; i++) {
+    if (value % i === 0) factors.push(i);
+  }
+  return factors;
+}
+
+function generateInterpretation(reducedValue: number | undefined, factors: number[]): string {
+  let reducedText = reducedValue && REDUCED_TEMPLATES[reducedValue] ? REDUCED_TEMPLATES[reducedValue] : '';
+  const factorTexts = factors
+    .filter(f => FACTOR_TEMPLATES[f])
+    .map(f => FACTOR_TEMPLATES[f]);
+  let factorSummary = '';
+  if (factorTexts.length) {
+    factorSummary = `The presence of ${factorTexts.join(', ')} suggests a combination of ${factorTexts.join(', ')}.`;
+  }
+  if (reducedText && factorSummary) {
+    return `${reducedText} ${factorSummary} Together, these energies imply a name or word that carries great potential for balanced power, creative insight, and emotional intelligence.`;
+  }
+  return reducedText || factorSummary || '';
+}
+
 
 // English Gematria (A=1, B=2, etc.)
 export const calculateEnglishGematria = (text: string): GematriaResult => {
@@ -17,10 +53,12 @@ export const calculateEnglishGematria = (text: string): GematriaResult => {
     }
   }
   
+  const reduced = reduceValue(total);
+  const factors = getFactors(total);
   return {
     method: "English Gematria",
     value: total,
-    explanation: "A=1, B=2, C=3, ... Z=26"
+    explanation: generateInterpretation(reduced, factors)
   };
 };
 
@@ -36,10 +74,12 @@ export const calculateSimpleGematria = (text: string): GematriaResult => {
     }
   }
   
+  const reduced = reduceValue(total);
+  const factors = getFactors(total);
   return {
     method: "Simple Gematria",
     value: total,
-    explanation: "A=1, B=2, ... I=9, J=1, K=2 (cycles 1-9)"
+    explanation: generateInterpretation(reduced, factors)
   };
 };
 
@@ -62,10 +102,12 @@ export const calculateJewishGematria = (text: string): GematriaResult => {
     }
   }
   
+  const reduced = reduceValue(total);
+  const factors = getFactors(total);
   return {
     method: "Jewish Gematria",
     value: total,
-    explanation: "Based on Hebrew letter values"
+    explanation: generateInterpretation(reduced, factors)
   };
 };
 
@@ -82,10 +124,12 @@ export const calculatePythagoreanGematria = (text: string): GematriaResult => {
     }
   }
   
+  const reduced = reduceValue(total);
+  const factors = getFactors(total);
   return {
     method: "Pythagorean Gematria",
     value: total,
-    explanation: "Numerology system using reduced values (1-9)"
+    explanation: generateInterpretation(reduced, factors)
   };
 };
 
@@ -108,10 +152,12 @@ export const calculateGreekGematria = (text: string): GematriaResult => {
     }
   }
   
+  const reduced = reduceValue(total);
+  const factors = getFactors(total);
   return {
     method: "Greek Isopsephy",
     value: total,
-    explanation: "Based on Classical Greek number values"
+    explanation: generateInterpretation(reduced, factors)
   };
 };
 

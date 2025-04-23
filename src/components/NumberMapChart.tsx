@@ -61,7 +61,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
 
   if (!inputText.trim() || !connections.nodes || connections.nodes.length === 0) {
     return (
-      <div className="h-72 flex items-center justify-center text-muted-foreground">
+      <div className="h-96 flex items-center justify-center text-muted-foreground">
         <p>Enter text above to see number connections</p>
       </div>
     );
@@ -70,17 +70,17 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
   return (
     <div className="relative">
       <div className="absolute right-4 top-0 z-10 flex gap-1">
-        <Button size="sm" variant="outline" onClick={handleZoomOut} className="h-8 w-8 p-0">
+        <Button size="sm" variant="outline" onClick={handleZoomOut} className="h-8 w-8 sm:h-10 sm:w-10 p-0">
           <ZoomOut className="h-4 w-4" />
         </Button>
-        <Button size="sm" variant="outline" onClick={handleZoomIn} className="h-8 w-8 p-0">
+        <Button size="sm" variant="outline" onClick={handleZoomIn} className="h-8 w-8 sm:h-10 sm:w-10 p-0">
           <ZoomIn className="h-4 w-4" />
         </Button>
       </div>
     
       {significantNodes.length > 0 && (
         <div className="absolute right-4 top-12 z-10 flex flex-col gap-1 bg-background/80 backdrop-blur-sm p-2 rounded-lg border">
-          <p className="text-xs font-medium flex items-center gap-1">
+          <p className="text-xs sm:text-sm font-medium flex items-center gap-1">
             <Award className="h-3.5 w-3.5 text-yellow-500" />
             Significant Numbers
           </p>
@@ -103,7 +103,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
       )}
     
       <ChartContainer 
-        className="h-72"
+        className="h-96"
         config={chartConfig}
       >
         <ScatterChart 

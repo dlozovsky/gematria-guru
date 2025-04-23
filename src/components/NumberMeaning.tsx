@@ -22,6 +22,10 @@ const NumberMeaning = ({ number }: NumberMeaningProps) => {
       { meaning: "Unity, divine oneness", tradition: "Universal" },
       { meaning: "The first cause, beginnings", tradition: "Kabbalah" }
     ],
+    2: [
+      { meaning: "Duality, partnership, balance", tradition: "Universal" },
+      { meaning: "Division, contrast", tradition: "Biblical" }
+    ],
     3: [
       { meaning: "Divine perfection, trinity", tradition: "Christian" },
       { meaning: "Balance and harmony", tradition: "Universal" }
@@ -66,26 +70,195 @@ const NumberMeaning = ({ number }: NumberMeaningProps) => {
       { meaning: "Rebellion, apostasy", tradition: "Biblical" },
       { meaning: "Transformation, renewal", tradition: "Esoteric" }
     ],
+    14: [
+      { meaning: "Deliverance, salvation", tradition: "Biblical" },
+      { meaning: "Movement, change", tradition: "Universal" }
+    ],
+    15: [
+      { meaning: "Rest, mercy", tradition: "Biblical" },
+      { meaning: "Spiritual ascension", tradition: "Kabbalah" }
+    ],
+    17: [
+      { meaning: "Victory, overcoming the enemy", tradition: "Biblical" },
+      { meaning: "Spiritual transformation", tradition: "Universal" }
+    ],
     18: [
       { meaning: "Life (חי/chai)", tradition: "Jewish" },
       { meaning: "Long life, prosperity", tradition: "Kabbalah" }
+    ],
+    19: [
+      { meaning: "Faith, hearing", tradition: "Biblical" },
+      { meaning: "Cycles, sun and moon", tradition: "Universal" }
+    ],
+    20: [
+      { meaning: "Redemption, expectancy", tradition: "Biblical" },
+      { meaning: "Completion, waiting", tradition: "Universal" }
+    ],
+    21: [
+      { meaning: "Exceeding sinfulness of sin", tradition: "Biblical" },
+      { meaning: "Maturity, responsibility", tradition: "Universal" }
     ],
     22: [
       { meaning: "Light, Hebrew alphabet letters", tradition: "Kabbalah" },
       { meaning: "Master builder number", tradition: "Esoteric" }
     ],
+    23: [
+      { meaning: "Death, change", tradition: "Biblical" },
+      { meaning: "Personal transformation", tradition: "Universal" }
+    ],
     26: [
       { meaning: "YHWH (יהוה), the divine name", tradition: "Jewish" },
       { meaning: "Compassion, divine love", tradition: "Kabbalah" }
+    ],
+    27: [
+      { meaning: "Preaching of the Gospel", tradition: "Biblical" },
+      { meaning: "Spiritual service", tradition: "Universal" }
+    ],
+    30: [
+      { meaning: "Dedication to a calling", tradition: "Biblical" },
+      { meaning: "Maturity, responsibility", tradition: "Universal" }
+    ],
+    33: [
+      { meaning: "Master Teacher", tradition: "Esoteric" },
+      { meaning: "Significant spiritual growth", tradition: "Universal" }
     ],
     36: [
       { meaning: "Double life (2×18)", tradition: "Jewish" },
       { meaning: "The 36 righteous ones (Lamedvavniks)", tradition: "Jewish" }
     ],
+    40: [
+      { meaning: "Testing, trial, probation", tradition: "Biblical" },
+      { meaning: "Completion of a period", tradition: "Universal" }
+    ],
+    42: [
+      { meaning: "God's revelation", tradition: "Kabbalah" },
+      { meaning: "Spiritual journey", tradition: "Universal" }
+    ],
+    44: [
+      { meaning: "Chosen people, generations", tradition: "Jewish" },
+      { meaning: "Cycles of change", tradition: "Universal" }
+    ],
+    49: [
+      { meaning: "Completion of counting (Omer)", tradition: "Jewish" },
+      { meaning: "Attainment of wisdom", tradition: "Kabbalah" }
+    ],
+    50: [
+      { meaning: "Jubilee, freedom", tradition: "Biblical" },
+      { meaning: "Completion of a cycle", tradition: "Universal" }
+    ],
+    54: [
+      { meaning: "Universal communication", tradition: "Universal" },
+      { meaning: "Divine messages", tradition: "Esoteric" }
+    ],
+    60: [
+      { meaning: "Support, help", tradition: "Biblical" },
+      { meaning: "Harmony, family", tradition: "Universal" }
+    ],
+    63: [
+      { meaning: "Understanding, wisdom", tradition: "Kabbalah" },
+      { meaning: "Completion of a cycle", tradition: "Universal" }
+    ],
+    66: [
+      { meaning: "Idolatry, apostasy", tradition: "Biblical" },
+      { meaning: "Duality, balance", tradition: "Universal" }
+    ],
+    70: [
+      { meaning: "Universality, nations of the world", tradition: "Jewish" },
+      { meaning: "Completion, fullness", tradition: "Biblical" }
+    ],
     72: [
       { meaning: "The 72 names of God", tradition: "Kabbalah" },
       { meaning: "Divine connection, mystical power", tradition: "Esoteric" }
-    ]
+    ],
+    77: [
+      { meaning: "Forgiveness, spiritual insight", tradition: "Biblical" },
+      { meaning: "Spiritual awakening", tradition: "Universal" }
+    ],
+    100: [
+      { meaning: "Fullness, a generation", tradition: "Biblical" },
+      { meaning: "Wholeness, completion", tradition: "Universal" }
+    ],
+    108: [
+      { meaning: "Spiritual completion (Buddhism, Hinduism)", tradition: "Eastern" },
+      { meaning: "Cosmic wholeness", tradition: "Universal" }
+    ],
+    120: [
+      { meaning: "Long life (Moses)", tradition: "Biblical" },
+      { meaning: "Full measure, completion", tradition: "Universal" }
+    ],
+    137: [
+      { meaning: "Mystical number (fine-structure constant)", tradition: "Science/Esoteric" },
+      { meaning: "Hidden wisdom", tradition: "Kabbalah" }
+    ],
+    153: [
+      { meaning: "Miraculous catch of fish", tradition: "Christian" },
+      { meaning: "Abundance, overflow", tradition: "Universal" }
+    ],
+    200: [
+      { meaning: "Insufficiency, lack", tradition: "Biblical" },
+      { meaning: "Potential for growth", tradition: "Universal" }
+    ],
+    216: [
+      { meaning: "The 216-letter name of God", tradition: "Kabbalah" },
+      { meaning: "Spiritual power", tradition: "Esoteric" }
+    ],
+    222: [
+      { meaning: "Balance, harmony", tradition: "Numerology" },
+      { meaning: "Partnerships, relationships", tradition: "Universal" }
+    ],
+    248: [
+      { meaning: "Positive commandments (mitzvot)", tradition: "Jewish" },
+      { meaning: "Spiritual action", tradition: "Kabbalah" }
+    ],
+    300: [
+      { meaning: "Divine deliverance", tradition: "Biblical" },
+      { meaning: "Victory over adversity", tradition: "Universal" }
+    ],
+    318: [
+      { meaning: "Abraham's trained men", tradition: "Biblical" },
+      { meaning: "Preparedness, readiness", tradition: "Universal" }
+    ],
+    360: [
+      { meaning: "Full circle, cycles", tradition: "Universal" },
+      { meaning: "Wholeness, unity", tradition: "Esoteric" }
+    ],
+    400: [
+      { meaning: "Trial, testing", tradition: "Biblical" },
+      { meaning: "End of a cycle", tradition: "Universal" }
+    ],
+    432: [
+      { meaning: "Cosmic harmony (Hz)", tradition: "Esoteric" },
+      { meaning: "Cycles, resonance", tradition: "Universal" }
+    ],
+    444: [
+      { meaning: "Protection, encouragement", tradition: "Numerology" },
+      { meaning: "Stability, foundation", tradition: "Universal" }
+    ],
+    613: [
+      { meaning: "Total commandments in Torah", tradition: "Jewish" },
+      { meaning: "Spiritual completeness", tradition: "Kabbalah" }
+    ],
+    666: [
+      { meaning: "Number of the beast", tradition: "Christian" },
+      { meaning: "Materialism, temptation", tradition: "Esoteric" }
+    ],
+    700: [
+      { meaning: "Completion, rest", tradition: "Biblical" },
+      { meaning: "Spiritual fulfillment", tradition: "Universal" }
+    ],
+    713: [
+      { meaning: "Compassion, idealism", tradition: "Kabbalah" },
+      { meaning: "Spiritual wisdom", tradition: "Universal" }
+    ],
+    888: [
+      { meaning: "Jesus, resurrection", tradition: "Christian" },
+      { meaning: "Abundance, new beginnings", tradition: "Numerology" }
+    ],
+    1000: [
+      { meaning: "Ultimate completeness, millennium", tradition: "Biblical" },
+      { meaning: "Infinity, cosmic cycle", tradition: "Universal" }
+    ],
+
   };
 
   // Get mathematical properties of the number

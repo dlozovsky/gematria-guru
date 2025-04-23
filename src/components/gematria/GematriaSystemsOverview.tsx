@@ -14,7 +14,7 @@ export const GematriaSystemsOverview = () => {
             <h3 className="text-xl font-semibold mb-3">1️⃣ English Ordinal Gematria</h3>
             <p className="mb-4">A = 1, B = 2, ..., Z = 26</p>
             <div className="bg-muted p-4 rounded-lg mb-4">
-              <p className="font-semibold">Word Example – LOVE</p>
+              <div className="font-semibold mb-1">Word Example – LOVE</div>
               <ul className="list-none space-y-1">
                 <li>L = 12</li>
                 <li>O = 15</li>
@@ -30,7 +30,7 @@ export const GematriaSystemsOverview = () => {
             <h3 className="text-xl font-semibold mb-3">2️⃣ English Sumerian Gematria</h3>
             <p className="mb-4">Take the ordinal value of each letter and multiply it by 6</p>
             <div className="bg-muted p-4 rounded-lg mb-4">
-              <p className="font-semibold">LOVE again:</p>
+              <div className="font-semibold mb-1">LOVE again:</div>
               <ul className="list-none space-y-1">
                 <li>L = 12 × 6 = 72</li>
                 <li>O = 15 × 6 = 90</li>
@@ -46,7 +46,7 @@ export const GematriaSystemsOverview = () => {
             <h3 className="text-xl font-semibold mb-3">3️⃣ Simple (Pythagorean) Gematria</h3>
             <p className="mb-4">Cycles through 1-9: A=1, B=2, ..., I=9, J=1, K=2, etc.</p>
             <div className="bg-muted p-4 rounded-lg mb-4">
-              <p className="font-semibold">LOVE again:</p>
+              <div className="font-semibold mb-1">LOVE again:</div>
               <ul className="list-none space-y-1">
                 <li>L = 3</li>
                 <li>O = 6</li>

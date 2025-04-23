@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Info, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import FormattedSummary from "./FormattedSummary";
 import {
   Dialog,
   DialogContent,
@@ -11,9 +12,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { checkSignificance, getAnimationClass } from "@/utils/significantNumbers";
-import { useEffect, useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+
 
 interface NumberCardProps {
   value: number;
@@ -75,34 +76,13 @@ const getNumberMeaning = (num: number): string => {
 const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
   const meaning = getNumberMeaning(value);
   const [hasAnimated, setHasAnimated] = useState(false);
-  const { toast } = useToast();
   
   const significance = checkSignificance(value);
   const animationClass = significance ? getAnimationClass(significance.significance) : "";
   
-  useEffect(() => {
-    if (significance && (significance.significance === 'major' || significance.significance === 'profound') && !hasAnimated) {
-      toast({
-        title: "Significant Number Discovered!",
-        description: (
-          <div className="flex items-center gap-2">
-            <span>{value}:</span> 
-            <span>{significance.description}</span>
-            <Badge variant="outline" className="ml-2 bg-primary/10">
-              {significance.tradition}
-            </Badge>
-          </div>
-        ),
-        variant: 'significant',
-        duration: 8000,
-      });
-      setHasAnimated(true);
-    }
-  }, [value, significance, toast, hasAnimated]);
-  
   return (
     <motion.div 
-      className={`glass-card rounded-xl p-5 flex flex-col items-center justify-center gap-2 relative overflow-hidden ${animationClass}`}
+      className={`glass-card rounded-xl p-3 sm:p-5 flex flex-col items-center justify-center gap-2 relative overflow-hidden ${animationClass}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
@@ -143,19 +123,21 @@ const NumberCard = ({ value, method, explanation }: NumberCardProps) => {
       )}
       
       <motion.span 
-        className={`text-2xl md:text-3xl font-bold ${significance?.significance === 'profound' ? 'text-primary' : 'text-primary'}`}
+        className={`text-xl sm:text-2xl md:text-3xl font-bold ${significance?.significance === 'profound' ? 'text-primary' : 'text-primary'}`}
         initial={{ scale: 0.9 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.3, delay: 0.2 }}
       >
         {value}
       </motion.span>
-      <h3 className="text-sm font-medium text-foreground">{method}</h3>
-      <p className="text-xs text-muted-foreground text-center">{explanation}</p>
+      <h3 className="text-sm font-medium text-foreground flex items-center gap-1">
+        {method}
+      </h3>
+      <FormattedSummary summary={explanation} />
       
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="ghost" size="sm" className="mt-2 text-xs gap-1">
+          <Button variant="ghost" size="sm" className="mt-2 text-xs gap-1 transition duration-150 hover:bg-primary/10 hover:text-primary active:scale-95 focus:ring-2 focus:ring-primary">
             <Info size={12} />
             Meaning
           </Button>

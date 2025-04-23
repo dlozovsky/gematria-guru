@@ -20,7 +20,7 @@ const NumericalTwins = ({ inputText }: NumericalTwinsProps) => {
   if (!inputText.trim()) {
     return (
       <div className="text-center text-muted-foreground p-6">
-        <p>Enter text above to find numerical twins</p>
+        <p>Enter text above to find number matches</p>
       </div>
     );
   }
@@ -29,7 +29,7 @@ const NumericalTwins = ({ inputText }: NumericalTwinsProps) => {
     return (
       <Card className="border-dashed">
         <CardContent className="pt-6 text-center text-muted-foreground">
-          <p>No numerical twins found for this text</p>
+          <p>No number matches found for this text</p>
         </CardContent>
       </Card>
     );
@@ -40,7 +40,7 @@ const NumericalTwins = ({ inputText }: NumericalTwinsProps) => {
       <div className="flex items-center gap-2">
         <CheckCircle2 className="h-5 w-5 text-primary" />
         <h3 className="text-lg font-medium">
-          Found {twins.length} Numerical Twin{twins.length !== 1 ? "s" : ""}
+          Found {twins.length} Number Match{twins.length !== 1 ? "es" : ""}
         </h3>
       </div>
 

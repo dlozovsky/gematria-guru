@@ -12,9 +12,12 @@ interface ModuleCardProps {
   level: string;
   duration: string;
   path: string;
+  objectives?: string[];
+  highlights?: string[];
+  quote?: { text: string; source?: string };
 }
 
-const ModuleCard = ({ title, description, icon: Icon, level, duration, path }: ModuleCardProps) => {
+const ModuleCard = ({ title, description, icon: Icon, level, duration, path, objectives, highlights, quote }: ModuleCardProps) => {
   const navigate = useNavigate();
 
   return (
@@ -28,10 +31,13 @@ const ModuleCard = ({ title, description, icon: Icon, level, duration, path }: M
             <Icon className="h-6 w-6 text-primary" />
           </div>
           <div className="flex-1">
-            <h3 className="text-xl font-semibold">{title}</h3>
+            <h3 className="text-xl font-semibold flex items-center gap-2">
+  {title.includes('Calculator') ? '🧮' : title.includes('Map') || title.includes('Chart') || title.includes('Stats') ? '📊' : '📘'}
+  {title}
+</h3>
             <p className="text-sm text-muted-foreground">{description}</p>
           </div>
-          <Button variant="outline">Start</Button>
+          <Button variant="outline" className="transition duration-150 hover:bg-primary/10 hover:text-primary active:scale-95 focus:ring-2 focus:ring-primary">Start</Button>
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -42,6 +48,32 @@ const ModuleCard = ({ title, description, icon: Icon, level, duration, path }: M
             <span className="flex items-center gap-1">Level: {level}</span>
           </div>
         </CardContent>
+        {(objectives || highlights || quote) && (
+          <div className="px-6 pb-4 pt-2">
+            {quote && (
+              <blockquote className="border-l-4 border-primary pl-4 italic text-primary text-base mb-3">
+                “{quote.text}”
+                {quote.source && <span className="block text-xs text-muted-foreground mt-1">— {quote.source}</span>}
+              </blockquote>
+            )}
+            {objectives && (
+              <div className="mb-2">
+                <div className="font-semibold text-sm text-blue-800 mb-1">🎯 Learning Objectives</div>
+                <ul className="list-disc pl-6 space-y-1 text-[15px] text-blue-900">
+                  {objectives.map((obj, i) => <li key={i}>{obj}</li>)}
+                </ul>
+              </div>
+            )}
+            {highlights && (
+              <div className="mb-2">
+                <div className="font-semibold text-sm text-blue-800 mb-1">✨ Module Highlights</div>
+                <ul className="list-disc pl-6 space-y-1 text-[15px] text-blue-900">
+                  {highlights.map((h, i) => <li key={i}>{h}</li>)}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </Card>
     </motion.div>
   );

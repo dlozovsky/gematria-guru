@@ -9,7 +9,7 @@ interface TextInputProps {
   placeholder?: string;
 }
 
-const TextInput = ({ value, onChange, onSubmit, placeholder = "Enter text..." }: TextInputProps) => {
+const TextInput = ({ value, onChange, onSubmit, placeholder = "Enter a phrase (e.g. 'truth')..." }: TextInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +41,7 @@ const TextInput = ({ value, onChange, onSubmit, placeholder = "Enter text..." }:
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder={placeholder}
-        className="glass-input w-full px-4 py-3 text-lg rounded-xl focus:placeholder-transparent"
+        className="glass-input w-full px-4 py-3 text-lg rounded-2xl border border-neutral-200 shadow-md focus:shadow-lg transition-shadow duration-200 bg-white/80 backdrop-blur-md focus:placeholder-transparent placeholder:italic placeholder:text-neutral-400"
         aria-label="Enter text to calculate gematria value"
       />
       <motion.div 

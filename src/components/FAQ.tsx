@@ -15,45 +15,200 @@ const FAQ = () => {
   
   const faqs = [
     {
+      question: "Why do some names or words show 'no dominant theme' in the results?",
+      answer: (
+        <div>
+          <p>
+            Great question! Sometimes when you enter a word or name — especially full names — the numerical values across different Gematria systems (English, Simple, Jewish, Pythagorean, Greek) don't reduce to the same number.
+          </p>
+          <p>
+            Instead, you might get a variety of different reduced values like:<br />
+            <strong>English:</strong> 153 → 1<br />
+            <strong>Simple:</strong> 63 → 9<br />
+            <strong>Jewish:</strong> 742 → 4<br />
+            <strong>Greek:</strong> 811 → 2
+          </p>
+          <p>
+            Because these reduced numbers don’t repeat or cluster, we say there’s <strong>no dominant theme</strong>.
+          </p>
+          <p>
+            <span role="img" aria-label="brain">🧠</span> <strong>What does that mean?</strong> It doesn’t mean the word or name is meaningless — in fact, it usually means the person or idea carries a blend of energies:
+          </p>
+          <ul className="list-disc ml-6">
+            <li>A mix of leadership and compassion</li>
+            <li>A blend of intuition and structure</li>
+            <li>A combination of creativity and spiritual insight</li>
+          </ul>
+          <p>
+            This kind of result is often interpreted as a <strong>“Complex Soul”</strong> or multifaceted identity — someone who isn’t defined by one archetype but instead draws strength from diverse traits.
+          </p>
+        </div>
+      ),
+    },
+    {
+      question: "What is the Recent Lookups feature?",
+      answer: (
+        <div>
+          <p>
+            The <strong>Recent Lookups</strong> card appears below the input bar and displays your last 7 searches with their key numbers. You can click any entry to instantly rerun that search.
+          </p>
+          <ul className="list-disc ml-6">
+            <li>Your recent lookups are saved in your browser (<strong>localStorage</strong>) and will persist between visits.</li>
+            <li>Only the 7 most recent lookups are shown; older ones are automatically removed.</li>
+            <li>There is no scroll bar for this card to keep the interface clean.</li>
+          </ul>
+        </div>
+      ),
+    },
+    {
+      question: "Why is there no scroll bar in the Recent Lookups?",
+      answer: (
+        <div>
+          <p>
+            To keep the interface tidy and user-friendly, the <strong>Recent Lookups</strong> card only displays the 7 most recent entries.
+          </p>
+          <ul className="list-disc ml-6">
+            <li>If you perform more searches, the oldest entries are automatically removed from the list.</li>
+            <li>This ensures the card remains compact and easy to use.</li>
+          </ul>
+        </div>
+      ),
+    },
+    {
+      question: "What are the latest enhancements to Gematria Guru?",
+      answer: (
+        <div>
+          <p>Recent updates include:</p>
+          <ul className="list-disc ml-6">
+            <li>Bullet-point summaries for Gematria card interpretations for better readability</li>
+            <li>A Learning Modules page with interactive lessons</li>
+            <li>The Recent Lookups card for quick access to your latest searches</li>
+            <li>A cleaner, more mobile-friendly interface</li>
+          </ul>
+        </div>
+      ),
+    },
+    {
       question: "What is Gematria?",
-      answer: "Gematria is a system of assigning numerical values to letters in alphabets. It has been used in various cultures, particularly in Jewish mysticism, to find hidden meanings and connections between words and phrases that share the same numerical value."
+      answer: (
+        <p>
+          Gematria is a system of assigning numerical values to letters in alphabets. It has been used in various cultures, particularly in Jewish mysticism, to find hidden meanings and connections between words and phrases that share the same numerical value.
+        </p>
+      ),
     },
     {
       question: "What are the different types of Gematria?",
-      answer: "This calculator offers three main types: English Gematria (A=1, B=2, etc.), Simple Gematria (which cycles values 1-9), and Jewish Gematria (based on traditional Hebrew letter values applied to English)."
+      answer: (
+        <div>
+          <p>This calculator offers three main types:</p>
+          <ul className="list-disc ml-6">
+            <li><strong>English Gematria</strong> (A=1, B=2, etc.)</li>
+            <li><strong>Simple Gematria</strong> (cycles values 1-9)</li>
+            <li><strong>Jewish Gematria</strong> (based on traditional Hebrew letter values applied to English)</li>
+          </ul>
+        </div>
+      ),
     },
     {
       question: "How is English Gematria calculated?",
-      answer: "In English Gematria, each letter is assigned a value based on its position in the alphabet: A=1, B=2, C=3, and so on up to Z=26."
+      answer: (
+        <p>
+          In <strong>English Gematria</strong>, each letter is assigned a value based on its position in the alphabet: A=1, B=2, C=3, and so on up to Z=26.
+        </p>
+      ),
     },
     {
       question: "What is Simple Gematria?",
-      answer: "Simple Gematria assigns values from 1-9 in a repeating pattern: A=1, B=2... I=9, J=1, K=2, etc. This method is also known as the 'digital root' system."
+      answer: (
+        <p>
+          <strong>Simple Gematria</strong> assigns values from 1-9 in a repeating pattern: A=1, B=2... I=9, J=1, K=2, etc. This method is also known as the 'digital root' system.
+        </p>
+      ),
     },
     {
       question: "How is Jewish Gematria applied to English?",
-      answer: "This adaptation applies traditional Hebrew letter values to their English counterparts. For example, A=1, B=2, G=3, corresponding roughly to Aleph, Beth, Gimel, etc."
+      answer: (
+        <p>
+          This adaptation applies traditional Hebrew letter values to their English counterparts. For example, A=1, B=2, G=3, corresponding roughly to Aleph, Beth, Gimel, etc.
+        </p>
+      ),
     },
     {
       question: "How do I interpret Gematria numbers?",
-      answer: "Gematria numbers can be interpreted in various ways: 1) Finding words with the same numerical value to discover hidden connections. 2) Relating to significant biblical or cultural numbers (7 for completion, 18 for life, etc.). 3) Breaking down numbers into their constituent parts (36 can be seen as 3×12 or 6×6). The meaning often depends on cultural and religious context."
+      answer: (
+        <div>
+          <p>Gematria numbers can be interpreted in various ways:</p>
+          <ul className="list-disc ml-6">
+            <li>Finding words with the same numerical value to discover hidden connections</li>
+            <li>Relating to significant biblical or cultural numbers (7 for completion, 18 for life, etc.)</li>
+            <li>Breaking down numbers into their constituent parts (e.g., 36 can be seen as 3×12 or 6×6)</li>
+          </ul>
+          <p>The meaning often depends on cultural and religious context.</p>
+        </div>
+      ),
     },
     {
       question: "What do some common numbers mean in Gematria?",
-      answer: "Some significant numbers include: 7 (spiritual perfection, divine completion), 8 (new beginnings), 11 (disorder, judgment), 12 (governmental perfection), 13 (rebellion in Western tradition, but unity in Jewish tradition), 18 (life in Jewish tradition), 26 (name of God - YHVH), 666 (typically associated with 'the beast' in Christian tradition)."
+      answer: (
+        <div>
+          <p>Some significant numbers include:</p>
+          <ul className="list-disc ml-6">
+            <li>7 (spiritual perfection, divine completion)</li>
+            <li>8 (new beginnings)</li>
+            <li>11 (disorder, judgment)</li>
+            <li>12 (governmental perfection)</li>
+            <li>13 (rebellion in Western tradition, but unity in Jewish tradition)</li>
+            <li>18 (life in Jewish tradition)</li>
+            <li>26 (name of God - YHVH)</li>
+            <li>666 (typically associated with 'the beast' in Christian tradition)</li>
+          </ul>
+        </div>
+      ),
     },
     {
       question: "How can I use Gematria in my studies?",
-      answer: "Gematria can be used to find connections between related concepts, explore hidden meanings in sacred texts, enhance meditation and contemplative practices, or discover patterns that might reveal deeper spiritual truths. Many scholars use it as one of many interpretive tools rather than as a standalone method."
+      answer: (
+        <div>
+          <p>Gematria can be used to:</p>
+          <ul className="list-disc ml-6">
+            <li>Find connections between related concepts</li>
+            <li>Explore hidden meanings in sacred texts</li>
+            <li>Enhance meditation and contemplative practices</li>
+            <li>Discover patterns that might reveal deeper spiritual truths</li>
+          </ul>
+          <p>Many scholars use it as one of many interpretive tools rather than as a standalone method.</p>
+        </div>
+      ),
     },
     {
       question: "Is Gematria scientific?",
-      answer: "Gematria is not considered scientific in the modern sense. It's a mystical or hermeneutic approach to finding meaning. Due to the many calculation methods available, critics note that desired connections can often be found if one searches long enough. However, many religious scholars value it as part of traditional exegesis."
+      answer: (
+        <div>
+          <p>
+            Gematria is <strong>not considered scientific</strong> in the modern sense. It's a mystical or hermeneutic approach to finding meaning.
+          </p>
+          <ul className="list-disc ml-6">
+            <li>Due to the many calculation methods available, critics note that desired connections can often be found if one searches long enough.</li>
+            <li>However, many religious scholars value it as part of traditional exegesis.</li>
+          </ul>
+        </div>
+      ),
     },
     {
       question: "Where is Gematria used today?",
-      answer: "Today, Gematria is still used in Jewish mysticism (Kabbalah), some Christian theological studies, occult practices, numerology, and by people interested in finding hidden patterns in language. It continues to be a subject of interest in both religious and esoteric contexts."
-    }
+      answer: (
+        <div>
+          <p>Today, Gematria is still used in:</p>
+          <ul className="list-disc ml-6">
+            <li>Jewish mysticism (Kabbalah)</li>
+            <li>Some Christian theological studies</li>
+            <li>Occult practices and numerology</li>
+            <li>By people interested in finding hidden patterns in language</li>
+          </ul>
+          <p>It continues to be a subject of interest in both religious and esoteric contexts.</p>
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -90,9 +245,16 @@ const FAQ = () => {
                 <AccordionTrigger className="text-sm font-medium">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground">
-                  {faq.answer}
-                </AccordionContent>
+                <AccordionContent className="text-sm text-muted-foreground" asChild>
+  <motion.div
+    initial={{ opacity: 0, y: -8 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -8 }}
+    transition={{ duration: 0.25 }}
+  >
+    {faq.answer}
+  </motion.div>
+</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>

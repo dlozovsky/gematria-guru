@@ -1,0 +1,30 @@
+[
+  {
+    "value": 613,
+    "phrase": "613 commandments",
+    "year": -1300,
+    "source": "Torah",
+    "context": "Jewish tradition holds there are 613 commandments in the Torah."
+  },
+  {
+    "value": 42,
+    "phrase": "Answer to the Ultimate Question",
+    "year": 1979,
+    "source": "Hitchhiker's Guide to the Galaxy",
+    "context": "Douglas Adams' famous novel."
+  },
+  {
+    "value": 7,
+    "phrase": "Seven days of Creation",
+    "year": -1300,
+    "source": "Genesis",
+    "context": "The world was created in seven days according to the Book of Genesis."
+  },
+  {
+    "value": 666,
+    "phrase": "Number of the Beast",
+    "year": 95,
+    "source": "Book of Revelation",
+    "context": "666 is described as the number of the beast in Christian eschatology."
+  }
+]

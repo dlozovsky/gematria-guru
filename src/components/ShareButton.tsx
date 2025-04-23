@@ -10,7 +10,13 @@ interface ShareButtonProps {
   inputText: string;
 }
 
-const ShareButton = ({ results, inputText }: ShareButtonProps) => {
+interface ShareButtonProps {
+  results: GematriaResult[];
+  inputText: string;
+  className?: string;
+}
+
+const ShareButton = ({ results, inputText, className }: ShareButtonProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   // Only show share button if there are results
@@ -20,8 +26,8 @@ const ShareButton = ({ results, inputText }: ShareButtonProps) => {
     <>
       <Button 
         onClick={() => setIsModalOpen(true)}
-        variant="outline"
-        className="gap-2 mt-4 bg-primary/10 border-primary/20 hover:bg-primary/20 transition-colors"
+        variant="secondary"
+        className={`gap-2 bg-gray-100 text-gray-700 hover:bg-gray-200 shadow-none border border-gray-300 ${className || ''}`.trim()}
       >
         <Share2 className="h-4 w-4" />
         Share Results

@@ -17,8 +17,8 @@ export const PracticeExercise = () => {
           <li>Sumerian</li>
         </ul>
         <div className="bg-muted p-4 rounded-lg">
-          <p className="font-semibold">Bonus Challenge:</p>
-          <p>Try calculating your own first name using all three systems!</p>
+          <div className="font-semibold mb-1">Bonus Challenge:</div>
+          <div>Try calculating your own first name using all three systems!</div>
         </div>
       </CardContent>
     </Card>
