@@ -114,6 +114,23 @@ A modern, interactive web application for exploring the ancient art and science 
 
 ---
 
+## 🔍 SEO Improvements
+
+### Dynamic Sitemap
+- **Comprehensive XML Sitemap:** All app routes properly indexed at /sitemap.xml
+- **Priority Structure:** Homepage given priority 1.0, all other pages 0.7
+- **Consistent Frequency:** Weekly update frequency for all pages
+- **Proper Content Type:** Served with application/xml content type
+
+### Search Engine Optimization
+- **Robots.txt Configuration:** Updated with sitemap reference for better crawling
+- **Vercel Deployment Setup:** Configured rewrites for direct URL access
+- **SPA Routing Support:** All routes like /learning and /number-maps directly accessible
+- **Enhanced Meta Tags:** Dynamic meta descriptions and titles for better search results
+- **Social Media Preview:** Rich metadata for sharing on social platforms
+
+---
+
 ## 🤝 Contributing
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change or improve.
