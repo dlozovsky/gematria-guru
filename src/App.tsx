@@ -10,6 +10,8 @@ import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import Cookies from "./pages/Cookies";
 import Terms from "./pages/Terms";
+import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 import LearningModules from "./pages/LearningModules";
 import IntroModule from "./pages/modules/IntroModule";
@@ -43,6 +45,8 @@ const App = () => {
             <Route path="/learning/number-mysticism" element={<NumberMysticismModule />} />
             <Route path="/learning/practical-applications" element={<PracticalApplicationsModule />} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/terms" element={<Terms />} />
