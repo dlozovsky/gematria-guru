@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import TextInput from "@/components/TextInput";
 import ResultsDisplay from "@/components/ResultsDisplay";
@@ -8,12 +8,21 @@ import ShareButton from "@/components/ShareButton";
 import Instructions from "@/components/Instructions";
 import FAQ from "@/components/FAQ";
 import ExampleCard from "@/components/ExampleCard";
-import { calculateAllGematria, type GematriaResult } from "@/utils/gematriaCalculators";
+import ScriptIndicator from "@/components/ScriptIndicator";
+import ModeToggle from "@/components/ModeToggle";
+import {
+  calculateAllGematria,
+  detectScript,
+  type GematriaResult,
+  type CalculationMode,
+  type DetectedScript,
+} from "@/utils/gematriaCalculators";
+import { latinToHebrew, latinToGreek } from "@/utils/transliteration";
 import { useToast } from "@/components/ui/use-toast";
 import { Network } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HistoryPanel, { addToHistory } from "@/components/HistoryPanel";
-import RecentLookups, { RecentLookup } from "@/components/RecentLookups";
+import RecentLookups, { type RecentLookup } from "@/components/RecentLookups";
 
 const RECENT_LOOKUPS_KEY = "recent_lookups";
 const MAX_LOOKUPS = 7;
@@ -23,6 +32,10 @@ export default function GematriaCalculatorClient() {
   const [results, setResults] = useState<GematriaResult[]>([]);
   const [isCalculating, setIsCalculating] = useState(false);
   const [recentLookups, setRecentLookups] = useState<RecentLookup[]>([]);
+  const [calculationMode, setCalculationMode] = useState<CalculationMode>("strict");
+  const [detectedScript, setDetectedScript] = useState<DetectedScript>("Unknown");
+  const [hebrewOverride, setHebrewOverride] = useState<string | undefined>(undefined);
+  const [greekOverride, setGreekOverride] = useState<string | undefined>(undefined);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -35,36 +48,85 @@ export default function GematriaCalculatorClient() {
     localStorage.setItem(RECENT_LOOKUPS_KEY, JSON.stringify(recentLookups));
   }, [recentLookups]);
 
-  const handleCalculate = () => {
-    if (!inputText.trim()) {
-      toast({
-        title: "Please enter some text",
-        description: "Enter words or phrases to calculate their gematria values",
-      });
-      return;
-    }
-    setIsCalculating(true);
-    setTimeout(() => {
-      const newResults = calculateAllGematria(inputText);
-      setResults(newResults);
-      setIsCalculating(false);
-      if (inputText.trim()) {
-        const numbers = newResults.map((r) => r.value).filter(Boolean);
-        let updated = recentLookups.filter((l) => l.input !== inputText.trim());
-        updated.unshift({ input: inputText.trim(), numbers });
+  useEffect(() => {
+    setDetectedScript(detectScript(inputText));
+    setHebrewOverride(undefined);
+    setGreekOverride(undefined);
+  }, [inputText]);
+
+  const runCalculation = useCallback(
+    (text: string, mode: CalculationMode, hOverride?: string, gOverride?: string) => {
+      if (!text.trim()) {
+        setResults([]);
+        return;
+      }
+      setIsCalculating(true);
+      setTimeout(() => {
+        const newResults = calculateAllGematria(text, {
+          mode,
+          hebrewOverride: hOverride,
+          greekOverride: gOverride,
+          transliterateLatinToHebrew: latinToHebrew,
+          transliterateLatinToGreek: latinToGreek,
+        });
+        setResults(newResults);
+        setIsCalculating(false);
+
+        const numbers = newResults
+          .filter((r) => r.status !== "blocked")
+          .map((r) => r.value)
+          .filter(Boolean);
+
+        const hebrewResult = newResults.find(
+          (r) => r.requiresScript === "hebrew" && r.isAssistedEstimate
+        );
+        const greekResult = newResults.find(
+          (r) => r.requiresScript === "greek" && r.isAssistedEstimate
+        );
+
+        let updated = recentLookups.filter((l) => l.input !== text.trim());
+        updated.unshift({
+          input: text.trim(),
+          numbers,
+          detectedScript: detectScript(text),
+          mode,
+          hebrewStringUsed: hebrewResult?.scriptUsed,
+          greekStringUsed: greekResult?.scriptUsed,
+        });
         if (updated.length > MAX_LOOKUPS) updated = updated.slice(0, MAX_LOOKUPS);
         setRecentLookups(updated);
-        addToHistory(inputText.trim());
-      }
-    }, 300);
-  };
+        addToHistory(text.trim());
+      }, 300);
+    },
+    [recentLookups]
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (inputText.trim()) handleCalculate();
+      if (inputText.trim()) {
+        runCalculation(inputText, calculationMode, hebrewOverride, greekOverride);
+      } else {
+        setResults([]);
+      }
     }, 500);
     return () => clearTimeout(timer);
-  }, [inputText]);
+  }, [inputText, calculationMode]);
+
+  const handleHebrewOverrideChange = (val: string) => {
+    setHebrewOverride(val);
+    runCalculation(inputText, calculationMode, val, greekOverride);
+  };
+
+  const handleGreekOverrideChange = (val: string) => {
+    setGreekOverride(val);
+    runCalculation(inputText, calculationMode, hebrewOverride, val);
+  };
+
+  const handleModeChange = (mode: CalculationMode) => {
+    setCalculationMode(mode);
+    setHebrewOverride(undefined);
+    setGreekOverride(undefined);
+  };
 
   const handleExploreNumberMaps = () => {
     router.push(`/number-maps?q=${encodeURIComponent(inputText)}`);
@@ -78,9 +140,15 @@ export default function GematriaCalculatorClient() {
         <TextInput
           value={inputText}
           onChange={setInputText}
-          onSubmit={handleCalculate}
+          onSubmit={() =>
+            runCalculation(inputText, calculationMode, hebrewOverride, greekOverride)
+          }
           placeholder="Enter words or phrases..."
         />
+      </div>
+      <div className="w-full flex flex-wrap items-center gap-3 mb-4 px-1">
+        <ScriptIndicator script={detectedScript} />
+        <ModeToggle mode={calculationMode} onChange={handleModeChange} />
       </div>
       {recentLookups.length > 0 && (
         <div className="w-full mb-6 flex justify-center">
@@ -100,7 +168,12 @@ export default function GematriaCalculatorClient() {
           </div>
         </div>
       ) : (
-        <ResultsDisplay results={results} inputText={inputText} />
+        <ResultsDisplay
+          results={results}
+          inputText={inputText}
+          onHebrewOverrideChange={handleHebrewOverrideChange}
+          onGreekOverrideChange={handleGreekOverrideChange}
+        />
       )}
       <FAQ />
       <HistoryPanel />

@@ -1,20 +1,26 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import NumberCard from "./NumberCard";
-import ShareButton from "./ShareButton";
+import SystemCard from "./SystemCard";
 import type { GematriaResult } from "../utils/gematriaCalculators";
 import { UnifiedMeaningCard } from "./UnifiedMeaningCard";
 import { checkSignificance } from "@/utils/significantNumbers";
-import { getSystemTradition, resolveSystemTraditionConflict } from "@/utils/systemIcons";
+import { resolveSystemTraditionConflict } from "@/utils/systemIcons";
 import { Award } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface ResultsDisplayProps {
   results: GematriaResult[];
   inputText: string;
+  onHebrewOverrideChange?: (val: string) => void;
+  onGreekOverrideChange?: (val: string) => void;
 }
 
-const ResultsDisplay = ({ results, inputText }: ResultsDisplayProps) => {
+const ResultsDisplay = ({
+  results,
+  inputText,
+  onHebrewOverrideChange,
+  onGreekOverrideChange,
+}: ResultsDisplayProps) => {
   const [displayResults, setDisplayResults] = useState<GematriaResult[]>([]);
   const [showBanner, setShowBanner] = useState(false);
   const [significantResult, setSignificantResult] = useState<{
@@ -28,7 +34,7 @@ const ResultsDisplay = ({ results, inputText }: ResultsDisplayProps) => {
     if (results.length > 0) {
       setDisplayResults(results);
 
-      const activeResults = results.filter((r) => !r.scriptMissing);
+      const activeResults = results.filter((r) => r.status !== "blocked");
       const profoundResults = activeResults.filter((r) => {
         const sig = checkSignificance(r.value);
         return sig && (sig.significance === "profound" || sig.significance === "major");
@@ -60,8 +66,6 @@ const ResultsDisplay = ({ results, inputText }: ResultsDisplayProps) => {
   }, [results]);
 
   if (!inputText.trim()) return null;
-
-  const activeResults = displayResults.filter((r) => !r.scriptMissing);
 
   return (
     <motion.div
@@ -101,21 +105,25 @@ const ResultsDisplay = ({ results, inputText }: ResultsDisplayProps) => {
           </motion.div>
         )}
 
-        {activeResults.length > 0 ? (
+        {displayResults.length > 0 ? (
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-rows-fr w-full"
+            className="flex flex-col gap-3 w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {activeResults.map((result, index) => (
-              <NumberCard
-                key={`${result.method}-${result.value}-${index}`}
-                value={result.value}
-                reducedValue={result.reducedValue}
-                reductionSteps={result.reductionSteps}
-                method={result.method}
-                letterBreakdown={result.letterBreakdown}
+            <h3 className="text-sm font-semibold text-gray-700">Systems Panel</h3>
+            {displayResults.map((result, index) => (
+              <SystemCard
+                key={`${result.method}-${index}`}
+                result={result}
+                onScriptOverrideChange={
+                  result.requiresScript === "hebrew"
+                    ? onHebrewOverrideChange
+                    : result.requiresScript === "greek"
+                    ? onGreekOverrideChange
+                    : undefined
+                }
               />
             ))}
           </motion.div>

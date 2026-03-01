@@ -1,12 +1,40 @@
+export type DetectedScript = "Latin" | "Hebrew" | "Greek" | "Mixed" | "Unknown";
+export type CalculationMode = "strict" | "assisted";
+export type ResultStatus = "calculated-strict" | "calculated-assisted" | "blocked";
+
+export interface WordBreakdown {
+  word: string;
+  letters: { char: string; value: number }[];
+  wordSum: number;
+}
+
 export interface GematriaResult {
   method: string;
   value: number;
   reducedValue: number;
   reductionSteps: string;
   letterBreakdown: { char: string; value: number }[];
+  wordBreakdown: WordBreakdown[];
   explanation: string;
   requiresScript?: "hebrew" | "greek";
   scriptMissing?: boolean;
+  status: ResultStatus;
+  mode: CalculationMode;
+  scriptUsed?: string;
+  isAssistedEstimate?: boolean;
+}
+
+export function detectScript(text: string): DetectedScript {
+  const hasLatin = /[A-Za-z]/.test(text);
+  const hasHebrew = /[\u0590-\u05FF]/.test(text);
+  const hasGreek = /[\u0370-\u03FF\u1F00-\u1FFF]/.test(text);
+
+  const scriptCount = [hasLatin, hasHebrew, hasGreek].filter(Boolean).length;
+  if (scriptCount > 1) return "Mixed";
+  if (hasHebrew) return "Hebrew";
+  if (hasGreek) return "Greek";
+  if (hasLatin) return "Latin";
+  return "Unknown";
 }
 
 export function reduceToSingleDigit(value: number): number {
@@ -33,7 +61,7 @@ export function buildReductionSteps(value: number): string {
   return `${value} → ${steps.join(" → ")}`;
 }
 
-const ENGLISH_MAP: Record<string, number> = (() => {
+export const ENGLISH_MAP: Record<string, number> = (() => {
   const map: Record<string, number> = {};
   for (let i = 0; i < 26; i++) {
     map[String.fromCharCode(97 + i)] = i + 1;
@@ -41,7 +69,7 @@ const ENGLISH_MAP: Record<string, number> = (() => {
   return map;
 })();
 
-const SIMPLE_MAP: Record<string, number> = (() => {
+export const SIMPLE_MAP: Record<string, number> = (() => {
   const map: Record<string, number> = {};
   for (let i = 0; i < 26; i++) {
     map[String.fromCharCode(97 + i)] = (i % 9) + 1;
@@ -49,7 +77,7 @@ const SIMPLE_MAP: Record<string, number> = (() => {
   return map;
 })();
 
-const HEBREW_MAP: Record<string, number> = {
+export const HEBREW_MAP: Record<string, number> = {
   "\u05D0": 1,
   "\u05D1": 2,
   "\u05D2": 3,
@@ -79,12 +107,13 @@ const HEBREW_MAP: Record<string, number> = {
   "\u05E5": 90,
 };
 
-const GREEK_MAP: Record<string, number> = {
+export const GREEK_MAP: Record<string, number> = {
   "\u03B1": 1,
   "\u03B2": 2,
   "\u03B3": 3,
   "\u03B4": 4,
   "\u03B5": 5,
+  "\u03DB": 6,
   "\u03B6": 7,
   "\u03B7": 8,
   "\u03B8": 9,
@@ -96,44 +125,65 @@ const GREEK_MAP: Record<string, number> = {
   "\u03BE": 60,
   "\u03BF": 70,
   "\u03C0": 80,
+  "\u03DF": 90,
   "\u03C1": 100,
   "\u03C3": 200,
+  "\u03C2": 200,
   "\u03C4": 300,
   "\u03C5": 400,
   "\u03C6": 500,
   "\u03C7": 600,
   "\u03C8": 700,
   "\u03C9": 800,
-  "\u03C2": 200,
+  "\u03E1": 900,
 };
 
-function hasHebrewChars(text: string): boolean {
-  return /[\u05D0-\u05EA]/.test(text);
+function stripHebrewNiqqud(text: string): string {
+  return text.replace(/[\u05B0-\u05C7\u0591-\u05AF]/g, "");
 }
 
-function hasGreekChars(text: string): boolean {
-  return /[\u0391-\u03C9]/.test(text);
+function normalizeGreekDiacritics(text: string): string {
+  return text.normalize("NFD").replace(/[\u0300-\u036F]/g, "").normalize("NFC");
 }
 
-function sumWithBreakdown(
-  chars: string[],
+function applyFinalSigma(word: string): string {
+  if (word.endsWith("\u03C3")) {
+    return word.slice(0, -1) + "\u03C2";
+  }
+  return word;
+}
+
+function buildWordBreakdown(
+  words: string[],
   map: Record<string, number>
-): { total: number; breakdown: { char: string; value: number }[] } {
+): { wordBreakdown: WordBreakdown[]; total: number; allLetters: { char: string; value: number }[] } {
   let total = 0;
-  const breakdown: { char: string; value: number }[] = [];
-  for (const char of chars) {
-    const val = map[char] ?? 0;
-    if (val > 0) {
-      total += val;
-      breakdown.push({ char, value: val });
+  const wordBreakdown: WordBreakdown[] = [];
+  const allLetters: { char: string; value: number }[] = [];
+
+  for (const word of words) {
+    const letters: { char: string; value: number }[] = [];
+    let wordSum = 0;
+    for (const char of word.split("")) {
+      const val = map[char];
+      if (val !== undefined && val > 0) {
+        letters.push({ char, value: val });
+        allLetters.push({ char, value: val });
+        wordSum += val;
+        total += val;
+      }
+    }
+    if (letters.length > 0) {
+      wordBreakdown.push({ word, letters, wordSum });
     }
   }
-  return { total, breakdown };
+
+  return { wordBreakdown, total, allLetters };
 }
 
-export const calculateEnglishGematria = (text: string): GematriaResult => {
-  const chars = text.toLowerCase().replace(/[^a-z]/g, "").split("");
-  const { total, breakdown } = sumWithBreakdown(chars, ENGLISH_MAP);
+export function calculateEnglishGematria(text: string, mode: CalculationMode = "strict"): GematriaResult {
+  const words = text.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z]/g, "")).filter(Boolean);
+  const { wordBreakdown, total, allLetters } = buildWordBreakdown(words, ENGLISH_MAP);
   const reducedValue = reduceToSingleDigit(total);
   const reductionSteps = buildReductionSteps(total);
   return {
@@ -141,14 +191,17 @@ export const calculateEnglishGematria = (text: string): GematriaResult => {
     value: total,
     reducedValue,
     reductionSteps,
-    letterBreakdown: breakdown,
+    letterBreakdown: allLetters,
+    wordBreakdown,
     explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
+    status: "calculated-strict",
+    mode,
   };
-};
+}
 
-export const calculateSimpleGematria = (text: string): GematriaResult => {
-  const chars = text.toLowerCase().replace(/[^a-z]/g, "").split("");
-  const { total, breakdown } = sumWithBreakdown(chars, SIMPLE_MAP);
+export function calculateSimpleGematria(text: string, mode: CalculationMode = "strict"): GematriaResult {
+  const words = text.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z]/g, "")).filter(Boolean);
+  const { wordBreakdown, total, allLetters } = buildWordBreakdown(words, SIMPLE_MAP);
   const reducedValue = reduceToSingleDigit(total);
   const reductionSteps = buildReductionSteps(total);
   return {
@@ -156,14 +209,17 @@ export const calculateSimpleGematria = (text: string): GematriaResult => {
     value: total,
     reducedValue,
     reductionSteps,
-    letterBreakdown: breakdown,
+    letterBreakdown: allLetters,
+    wordBreakdown,
     explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
+    status: "calculated-strict",
+    mode,
   };
-};
+}
 
-export const calculatePythagoreanGematria = (text: string): GematriaResult => {
-  const chars = text.toLowerCase().replace(/[^a-z]/g, "").split("");
-  const { total, breakdown } = sumWithBreakdown(chars, SIMPLE_MAP);
+export function calculatePythagoreanGematria(text: string, mode: CalculationMode = "strict"): GematriaResult {
+  const words = text.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z]/g, "")).filter(Boolean);
+  const { wordBreakdown, total, allLetters } = buildWordBreakdown(words, SIMPLE_MAP);
   const reducedValue = reduceToSingleDigit(total);
   const reductionSteps = buildReductionSteps(total);
   return {
@@ -171,76 +227,159 @@ export const calculatePythagoreanGematria = (text: string): GematriaResult => {
     value: total,
     reducedValue,
     reductionSteps,
-    letterBreakdown: breakdown,
+    letterBreakdown: allLetters,
+    wordBreakdown,
     explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
+    status: "calculated-strict",
+    mode,
   };
-};
+}
 
-export const calculateJewishGematria = (text: string): GematriaResult => {
-  if (!hasHebrewChars(text)) {
+export function calculateJewishGematria(
+  text: string,
+  mode: CalculationMode = "strict",
+  transliterateLatinToHebrew: (t: string) => string,
+  hebrewOverride?: string
+): GematriaResult {
+  const hasHebrew = /[\u0590-\u05FF]/.test(text);
+
+  if (mode === "strict" && !hasHebrew) {
     return {
       method: "Jewish Gematria",
       value: 0,
       reducedValue: 0,
       reductionSteps: "",
       letterBreakdown: [],
+      wordBreakdown: [],
       explanation:
-        "Accurate Jewish Gematria requires Hebrew spelling. Please provide Hebrew characters.",
+        "Strict mode: Jewish Gematria requires Hebrew letters. Paste the name in Hebrew, or switch to Assisted mode to generate an estimate.",
       requiresScript: "hebrew",
       scriptMissing: true,
+      status: "blocked",
+      mode,
     };
   }
-  const chars = text.split("").filter((c) => HEBREW_MAP[c] !== undefined);
-  const { total, breakdown } = sumWithBreakdown(chars, HEBREW_MAP);
+
+  let sourceText: string;
+  let isAssistedEstimate = false;
+
+  if (hasHebrew) {
+    sourceText = stripHebrewNiqqud(text);
+  } else {
+    sourceText = hebrewOverride !== undefined ? hebrewOverride : transliterateLatinToHebrew(text);
+    isAssistedEstimate = true;
+  }
+
+  const words = sourceText.split(/\s+/).filter(Boolean);
+  const { wordBreakdown, total, allLetters } = buildWordBreakdown(words, HEBREW_MAP);
   const reducedValue = reduceToSingleDigit(total);
   const reductionSteps = buildReductionSteps(total);
+
   return {
     method: "Jewish Gematria",
     value: total,
     reducedValue,
     reductionSteps,
-    letterBreakdown: breakdown,
-    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
+    letterBreakdown: allLetters,
+    wordBreakdown,
+    explanation: isAssistedEstimate
+      ? `Transliteration-assisted estimate (depends on spelling).\nTotal: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`
+      : `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
     requiresScript: "hebrew",
+    scriptMissing: false,
+    status: isAssistedEstimate ? "calculated-assisted" : "calculated-strict",
+    mode,
+    scriptUsed: sourceText,
+    isAssistedEstimate,
   };
-};
+}
 
-export const calculateGreekGematria = (text: string): GematriaResult => {
-  if (!hasGreekChars(text)) {
+export function calculateGreekGematria(
+  text: string,
+  mode: CalculationMode = "strict",
+  transliterateLatinToGreek: (t: string) => string,
+  greekOverride?: string
+): GematriaResult {
+  const hasGreek = /[\u0370-\u03FF\u1F00-\u1FFF]/.test(text);
+
+  if (mode === "strict" && !hasGreek) {
     return {
       method: "Greek Isopsephy",
       value: 0,
       reducedValue: 0,
       reductionSteps: "",
       letterBreakdown: [],
+      wordBreakdown: [],
       explanation:
-        "Accurate Greek Isopsephy requires Greek spelling. Please provide Greek characters.",
+        "Strict mode: Greek Isopsephy requires Greek letters. Paste the name in Greek, or switch to Assisted mode to generate an estimate.",
       requiresScript: "greek",
       scriptMissing: true,
+      status: "blocked",
+      mode,
     };
   }
-  const lowerText = text.toLowerCase();
-  const chars = lowerText.split("").filter((c) => GREEK_MAP[c] !== undefined);
-  const { total, breakdown } = sumWithBreakdown(chars, GREEK_MAP);
+
+  let sourceText: string;
+  let isAssistedEstimate = false;
+
+  if (hasGreek) {
+    sourceText = normalizeGreekDiacritics(text).toLowerCase();
+  } else {
+    sourceText = greekOverride !== undefined ? greekOverride : transliterateLatinToGreek(text);
+    isAssistedEstimate = true;
+  }
+
+  const wordsRaw = sourceText.split(/\s+/).filter(Boolean);
+  const words = wordsRaw.map(applyFinalSigma);
+  const { wordBreakdown, total, allLetters } = buildWordBreakdown(words, GREEK_MAP);
   const reducedValue = reduceToSingleDigit(total);
   const reductionSteps = buildReductionSteps(total);
+
   return {
     method: "Greek Isopsephy",
     value: total,
     reducedValue,
     reductionSteps,
-    letterBreakdown: breakdown,
-    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
+    letterBreakdown: allLetters,
+    wordBreakdown,
+    explanation: isAssistedEstimate
+      ? `Transliteration-assisted estimate (depends on spelling).\nTotal: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`
+      : `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
     requiresScript: "greek",
+    scriptMissing: false,
+    status: isAssistedEstimate ? "calculated-assisted" : "calculated-strict",
+    mode,
+    scriptUsed: words.join(" "),
+    isAssistedEstimate,
   };
-};
+}
 
-export const calculateAllGematria = (text: string): GematriaResult[] => {
+export interface CalculateAllOptions {
+  mode?: CalculationMode;
+  hebrewOverride?: string;
+  greekOverride?: string;
+  transliterateLatinToHebrew?: (t: string) => string;
+  transliterateLatinToGreek?: (t: string) => string;
+}
+
+const noopTransliterate = (_t: string): string => "";
+
+export function calculateAllGematria(
+  text: string,
+  options: CalculateAllOptions = {}
+): GematriaResult[] {
+  const {
+    mode = "strict",
+    hebrewOverride,
+    greekOverride,
+    transliterateLatinToHebrew = noopTransliterate,
+    transliterateLatinToGreek = noopTransliterate,
+  } = options;
   return [
-    calculateEnglishGematria(text),
-    calculateSimpleGematria(text),
-    calculatePythagoreanGematria(text),
-    calculateJewishGematria(text),
-    calculateGreekGematria(text),
+    calculateEnglishGematria(text, mode),
+    calculateSimpleGematria(text, mode),
+    calculatePythagoreanGematria(text, mode),
+    calculateJewishGematria(text, mode, transliterateLatinToHebrew, hebrewOverride),
+    calculateGreekGematria(text, mode, transliterateLatinToGreek, greekOverride),
   ];
-};
+}

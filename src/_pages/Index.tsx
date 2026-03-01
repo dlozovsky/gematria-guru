@@ -50,7 +50,7 @@ const Index = () => {
     }
     setIsCalculating(true);
     setTimeout(() => {
-      const newResults = calculateAllGematria(inputText);
+      const newResults = calculateAllGematria(inputText, { mode: "strict" });
       setResults(newResults);
       setIsCalculating(false);
       if (inputText.trim()) {

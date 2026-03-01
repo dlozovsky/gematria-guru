@@ -31,8 +31,8 @@ export interface NumericalTwin {
  */
 export const generateNumberConnections = (text: string): NumberConnections => {
   // Calculate gematria values
-  const results = calculateAllGematria(text);
-  
+  const results = calculateAllGematria(text, { mode: "strict" });
+
   // Create nodes (one per gematria method)
   const nodes: Node[] = results.map((result, index) => {
     // Create x/y coordinates based on value and frequency
@@ -72,8 +72,8 @@ export const generateNumberConnections = (text: string): NumberConnections => {
  */
 export const findNumericalTwins = (text: string): NumericalTwin[] => {
   // Calculate gematria values
-  const results = calculateAllGematria(text);
-  
+  const results = calculateAllGematria(text, { mode: "strict" });
+
   // Group by value
   const valueGroups: Record<number, string[]> = {};
   

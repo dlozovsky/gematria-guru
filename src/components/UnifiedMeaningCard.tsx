@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import type { GematriaResult } from "../utils/gematriaCalculators";
 
 const REDUCED_MEANINGS: Record<number, string> = {
@@ -18,46 +18,17 @@ interface UnifiedMeaningCardProps {
   results: GematriaResult[];
 }
 
-const LetterBreakdown: React.FC<{ result: GematriaResult }> = ({ result }) => {
-  const [open, setOpen] = useState(false);
-  if (result.scriptMissing) return null;
-  return (
-    <div className="w-full mt-1">
-      <button
-        className="text-xs text-blue-600 underline hover:text-blue-800 transition"
-        onClick={() => setOpen((v) => !v)}
-      >
-        {open ? "Hide" : "Show"} letter breakdown
-      </button>
-      {open && (
-        <div className="mt-1 text-xs text-gray-600 font-mono bg-gray-50 rounded p-2 border border-gray-200 flex flex-wrap gap-1">
-          {result.letterBreakdown.map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-0.5">
-              <span className="font-bold">{item.char}</span>
-              <span className="text-gray-400">=</span>
-              <span>{item.value}</span>
-              {i < result.letterBreakdown.length - 1 && (
-                <span className="text-gray-400 ml-0.5">+</span>
-              )}
-            </span>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
 export const UnifiedMeaningCard: React.FC<UnifiedMeaningCardProps> = ({
   name,
   results,
 }) => {
-  const active = results.filter((r) => !r.scriptMissing);
-  const missing = results.filter((r) => r.scriptMissing);
+  const active = results.filter((r) => r.status !== "blocked");
+  const blocked = results.filter((r) => r.status === "blocked");
+  const hasAssistedResults = active.some((r) => r.isAssistedEstimate);
 
   const reducedCounts: Record<number, number> = {};
   active.forEach((r) => {
-    reducedCounts[r.reducedValue] =
-      (reducedCounts[r.reducedValue] || 0) + 1;
+    reducedCounts[r.reducedValue] = (reducedCounts[r.reducedValue] || 0) + 1;
   });
 
   const sortedReduced = Object.entries(reducedCounts).sort(
@@ -93,9 +64,16 @@ export const UnifiedMeaningCard: React.FC<UnifiedMeaningCardProps> = ({
               key={r.method}
               className="flex flex-col bg-white rounded-lg p-4 border border-gray-200 gap-1"
             >
-              <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-semibold w-fit">
-                {r.method}
-              </span>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-semibold">
+                  {r.method}
+                </span>
+                {r.isAssistedEstimate && (
+                  <span className="bg-amber-100 text-amber-700 text-xs px-2 py-0.5 rounded-full font-medium">
+                    Assisted estimate
+                  </span>
+                )}
+              </div>
               <div className="flex items-center gap-2 mt-1">
                 <span className="text-xl font-bold text-primary">{r.value}</span>
                 <span className="text-gray-400 text-sm">→</span>
@@ -116,12 +94,11 @@ export const UnifiedMeaningCard: React.FC<UnifiedMeaningCardProps> = ({
                   {r.reducedValue}: {REDUCED_MEANINGS[r.reducedValue]}
                 </p>
               )}
-              <LetterBreakdown result={r} />
             </div>
           );
         })}
 
-        {missing.map((r) => (
+        {blocked.map((r) => (
           <div
             key={r.method}
             className="flex flex-col bg-gray-50 rounded-lg p-4 border border-dashed border-gray-300 gap-1 opacity-70"
@@ -143,7 +120,7 @@ export const UnifiedMeaningCard: React.FC<UnifiedMeaningCardProps> = ({
 
       <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-2">
         <div className="text-sm text-gray-700 font-medium mb-1">
-          Reduced values across active systems:
+          Reduced values across computed systems:
         </div>
         <ul className="text-sm text-gray-700 space-y-1">
           {active.map((r) => (
@@ -156,6 +133,11 @@ export const UnifiedMeaningCard: React.FC<UnifiedMeaningCardProps> = ({
                 {REDUCED_MEANINGS[r.reducedValue]
                   ? ` — ${REDUCED_MEANINGS[r.reducedValue]}`
                   : ""}
+                {r.isAssistedEstimate && (
+                  <span className="ml-1 text-amber-600 text-xs italic">
+                    (assisted estimate)
+                  </span>
+                )}
               </span>
             </li>
           ))}
@@ -166,13 +148,12 @@ export const UnifiedMeaningCard: React.FC<UnifiedMeaningCardProps> = ({
         {dominantNumber !== null && dominantCount !== null ? (
           <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r p-3">
             <p className="text-sm font-semibold text-blue-800">
-              Dominant number: <strong>{dominantNumber}</strong> — appears in{" "}
-              {dominantCount} of {active.length} active systems.
+              Dominant reduced number: <strong>{dominantNumber}</strong> — appears in{" "}
+              {dominantCount} of {active.length} computed systems.
             </p>
             {REDUCED_MEANINGS[dominantNumber] && (
               <p className="text-sm text-blue-700 mt-1">
-                The repeated presence of{" "}
-                <strong>{dominantNumber}</strong> emphasizes{" "}
+                The repeated presence of <strong>{dominantNumber}</strong> emphasizes{" "}
                 {REDUCED_MEANINGS[dominantNumber]}.
               </p>
             )}
@@ -180,9 +161,15 @@ export const UnifiedMeaningCard: React.FC<UnifiedMeaningCardProps> = ({
         ) : (
           <div className="bg-gray-50 border-l-4 border-gray-300 rounded-r p-3">
             <p className="text-sm text-gray-600 italic">
-              No dominant reduction across systems. Reduced values vary:{" "}
+              No dominant reduction across computed systems. Reduced values vary:{" "}
               {Object.keys(reducedCounts).join(", ")}.
             </p>
+          </div>
+        )}
+
+        {hasAssistedResults && (
+          <div className="mt-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded px-3 py-2">
+            Hebrew/Greek results depend on transliteration; changing spelling changes value.
           </div>
         )}
       </div>
