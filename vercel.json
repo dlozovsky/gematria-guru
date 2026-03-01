@@ -1,4 +1,6 @@
 {
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
   "rewrites": [
     {
       "source": "/((?!api|_next|favicon\\.ico|robots\\.txt|sitemap\\.xml|static|assets).*)",
@@ -10,14 +12,6 @@
         }
       ],
       "destination": "/api/prerender?path=/$1"
-    },
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
     }
   ],
   "functions": {
@@ -25,8 +19,5 @@
       "memory": 128,
       "maxDuration": 10
     }
-  },
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite"
+  }
 }
