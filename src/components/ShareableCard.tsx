@@ -45,7 +45,7 @@ const ShareableCard = ({ inputText, results }: ShareableCardProps) => {
         </motion.div>
         
         <div className="text-sm text-center text-muted-foreground mb-4">
-          {significantResult.method} • {significantResult.explanation}
+          {significantResult.method} • reduced to {significantResult.reducedValue}
         </div>
         
         {significance && (

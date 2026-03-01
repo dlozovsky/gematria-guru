@@ -1,173 +1,246 @@
-
-import { REDUCED_TEMPLATES, FACTOR_TEMPLATES } from "../data/numerologyTemplates";
-
 export interface GematriaResult {
   method: string;
   value: number;
+  reducedValue: number;
+  reductionSteps: string;
+  letterBreakdown: { char: string; value: number }[];
   explanation: string;
+  requiresScript?: "hebrew" | "greek";
+  scriptMissing?: boolean;
 }
 
-function reduceValue(value: number): number {
-  while (value > 9 && value !== 11 && value !== 22 && value !== 33) {
-    value = value
+export function reduceToSingleDigit(value: number): number {
+  let n = value;
+  while (n > 9) {
+    n = n
       .toString()
       .split("")
-      .reduce((sum, digit) => sum + Number(digit), 0);
+      .reduce((sum, d) => sum + Number(d), 0);
   }
-  return value;
+  return n;
 }
 
-function getFactors(value: number): number[] {
-  const factors = [];
-  for (let i = 1; i <= value; i++) {
-    if (value % i === 0) factors.push(i);
+export function buildReductionSteps(value: number): string {
+  if (value <= 9) return `${value} (already single digit)`;
+  const steps: string[] = [];
+  let current = value;
+  while (current > 9) {
+    const digits = current.toString().split("");
+    const next = digits.reduce((sum, d) => sum + Number(d), 0);
+    steps.push(`${digits.join(" + ")} = ${next}`);
+    current = next;
   }
-  return factors;
+  return `${value} → ${steps.join(" → ")}`;
 }
 
-function generateInterpretation(reducedValue: number | undefined, factors: number[]): string {
-  let reducedText = reducedValue && REDUCED_TEMPLATES[reducedValue] ? REDUCED_TEMPLATES[reducedValue] : '';
-  const factorTexts = factors
-    .filter(f => FACTOR_TEMPLATES[f])
-    .map(f => FACTOR_TEMPLATES[f]);
-  let factorSummary = '';
-  if (factorTexts.length) {
-    factorSummary = `The presence of ${factorTexts.join(', ')} suggests a combination of ${factorTexts.join(', ')}.`;
+const ENGLISH_MAP: Record<string, number> = (() => {
+  const map: Record<string, number> = {};
+  for (let i = 0; i < 26; i++) {
+    map[String.fromCharCode(97 + i)] = i + 1;
   }
-  if (reducedText && factorSummary) {
-    return `${reducedText} ${factorSummary} Together, these energies imply a name or word that carries great potential for balanced power, creative insight, and emotional intelligence.`;
+  return map;
+})();
+
+const SIMPLE_MAP: Record<string, number> = (() => {
+  const map: Record<string, number> = {};
+  for (let i = 0; i < 26; i++) {
+    map[String.fromCharCode(97 + i)] = (i % 9) + 1;
   }
-  return reducedText || factorSummary || '';
+  return map;
+})();
+
+const HEBREW_MAP: Record<string, number> = {
+  "\u05D0": 1,
+  "\u05D1": 2,
+  "\u05D2": 3,
+  "\u05D3": 4,
+  "\u05D4": 5,
+  "\u05D5": 6,
+  "\u05D6": 7,
+  "\u05D7": 8,
+  "\u05D8": 9,
+  "\u05D9": 10,
+  "\u05DB": 20,
+  "\u05DC": 30,
+  "\u05DE": 40,
+  "\u05E0": 50,
+  "\u05E1": 60,
+  "\u05E2": 70,
+  "\u05E4": 80,
+  "\u05E6": 90,
+  "\u05E7": 100,
+  "\u05E8": 200,
+  "\u05E9": 300,
+  "\u05EA": 400,
+  "\u05DA": 20,
+  "\u05DD": 40,
+  "\u05DF": 50,
+  "\u05E3": 80,
+  "\u05E5": 90,
+};
+
+const GREEK_MAP: Record<string, number> = {
+  "\u03B1": 1,
+  "\u03B2": 2,
+  "\u03B3": 3,
+  "\u03B4": 4,
+  "\u03B5": 5,
+  "\u03B6": 7,
+  "\u03B7": 8,
+  "\u03B8": 9,
+  "\u03B9": 10,
+  "\u03BA": 20,
+  "\u03BB": 30,
+  "\u03BC": 40,
+  "\u03BD": 50,
+  "\u03BE": 60,
+  "\u03BF": 70,
+  "\u03C0": 80,
+  "\u03C1": 100,
+  "\u03C3": 200,
+  "\u03C4": 300,
+  "\u03C5": 400,
+  "\u03C6": 500,
+  "\u03C7": 600,
+  "\u03C8": 700,
+  "\u03C9": 800,
+  "\u03C2": 200,
+};
+
+function hasHebrewChars(text: string): boolean {
+  return /[\u05D0-\u05EA]/.test(text);
 }
 
+function hasGreekChars(text: string): boolean {
+  return /[\u0391-\u03C9]/.test(text);
+}
 
-// English Gematria (A=1, B=2, etc.)
-export const calculateEnglishGematria = (text: string): GematriaResult => {
-  const normalizedText = text.toLowerCase().replace(/[^a-z]/g, '');
+function sumWithBreakdown(
+  chars: string[],
+  map: Record<string, number>
+): { total: number; breakdown: { char: string; value: number }[] } {
   let total = 0;
-  
-  for (let i = 0; i < normalizedText.length; i++) {
-    const charCode = normalizedText.charCodeAt(i);
-    if (charCode >= 97 && charCode <= 122) {
-      total += (charCode - 96); // 'a' is 97 in ASCII, so we subtract 96 to get 1
+  const breakdown: { char: string; value: number }[] = [];
+  for (const char of chars) {
+    const val = map[char] ?? 0;
+    if (val > 0) {
+      total += val;
+      breakdown.push({ char, value: val });
     }
   }
-  
-  const reduced = reduceValue(total);
-  const factors = getFactors(total);
+  return { total, breakdown };
+}
+
+export const calculateEnglishGematria = (text: string): GematriaResult => {
+  const chars = text.toLowerCase().replace(/[^a-z]/g, "").split("");
+  const { total, breakdown } = sumWithBreakdown(chars, ENGLISH_MAP);
+  const reducedValue = reduceToSingleDigit(total);
+  const reductionSteps = buildReductionSteps(total);
   return {
     method: "English Gematria",
     value: total,
-    explanation: generateInterpretation(reduced, factors)
+    reducedValue,
+    reductionSteps,
+    letterBreakdown: breakdown,
+    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
   };
 };
 
-// Simple Gematria (A=1, B=2, ... I=9, J=1, K=2, etc.)
 export const calculateSimpleGematria = (text: string): GematriaResult => {
-  const normalizedText = text.toLowerCase().replace(/[^a-z]/g, '');
-  let total = 0;
-  
-  for (let i = 0; i < normalizedText.length; i++) {
-    const charCode = normalizedText.charCodeAt(i);
-    if (charCode >= 97 && charCode <= 122) {
-      total += ((charCode - 97) % 9) + 1; // Cycle from 1-9
-    }
-  }
-  
-  const reduced = reduceValue(total);
-  const factors = getFactors(total);
+  const chars = text.toLowerCase().replace(/[^a-z]/g, "").split("");
+  const { total, breakdown } = sumWithBreakdown(chars, SIMPLE_MAP);
+  const reducedValue = reduceToSingleDigit(total);
+  const reductionSteps = buildReductionSteps(total);
   return {
     method: "Simple Gematria",
     value: total,
-    explanation: generateInterpretation(reduced, factors)
+    reducedValue,
+    reductionSteps,
+    letterBreakdown: breakdown,
+    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
   };
 };
 
-// Jewish Gematria (specific values for each letter)
-export const calculateJewishGematria = (text: string): GematriaResult => {
-  const hebrewValues: {[key: string]: number} = {
-    'a': 1, 'b': 2, 'g': 3, 'd': 4, 'h': 5, 'v': 6, 'z': 7, 'c': 8,
-    't': 9, 'i': 10, 'k': 20, 'l': 30, 'm': 40, 'n': 50, 's': 60,
-    'o': 70, 'p': 80, 'q': 90, 'r': 100, 'w': 200, 'x': 300, 'y': 400,
-    'e': 5, 'f': 80, 'j': 600, 'u': 6
-  };
-  
-  const normalizedText = text.toLowerCase().replace(/[^a-z]/g, '');
-  let total = 0;
-  
-  for (let i = 0; i < normalizedText.length; i++) {
-    const char = normalizedText[i];
-    if (hebrewValues[char]) {
-      total += hebrewValues[char];
-    }
-  }
-  
-  const reduced = reduceValue(total);
-  const factors = getFactors(total);
-  return {
-    method: "Jewish Gematria",
-    value: total,
-    explanation: generateInterpretation(reduced, factors)
-  };
-};
-
-// Pythagorean Gematria (reduced values, A=1, B=2, ... I=9, J=1, etc.)
 export const calculatePythagoreanGematria = (text: string): GematriaResult => {
-  const normalizedText = text.toLowerCase().replace(/[^a-z]/g, '');
-  let total = 0;
-  
-  for (let i = 0; i < normalizedText.length; i++) {
-    const charCode = normalizedText.charCodeAt(i);
-    if (charCode >= 97 && charCode <= 122) {
-      // Map A-I to 1-9, J-R to 1-9, S-Z to 1-8
-      total += ((charCode - 97) % 9) + 1;
-    }
-  }
-  
-  const reduced = reduceValue(total);
-  const factors = getFactors(total);
+  const chars = text.toLowerCase().replace(/[^a-z]/g, "").split("");
+  const { total, breakdown } = sumWithBreakdown(chars, SIMPLE_MAP);
+  const reducedValue = reduceToSingleDigit(total);
+  const reductionSteps = buildReductionSteps(total);
   return {
     method: "Pythagorean Gematria",
     value: total,
-    explanation: generateInterpretation(reduced, factors)
+    reducedValue,
+    reductionSteps,
+    letterBreakdown: breakdown,
+    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
   };
 };
 
-// Greek Isopsephy (approximation for English letters)
-export const calculateGreekGematria = (text: string): GematriaResult => {
-  // This is a simplified mapping for demonstration
-  const greekValues: {[key: string]: number} = {
-    'a': 1, 'b': 2, 'g': 3, 'd': 4, 'e': 5, 'z': 7, 'h': 8, 'q': 9,
-    'i': 10, 'k': 20, 'l': 30, 'm': 40, 'n': 50, 'x': 60, 'o': 70, 'p': 80, 'r': 100,
-    's': 200, 't': 300, 'u': 400, 'f': 500, 'c': 600, 'y': 700, 'w': 800
-  };
-  
-  const normalizedText = text.toLowerCase().replace(/[^a-z]/g, '');
-  let total = 0;
-  
-  for (let i = 0; i < normalizedText.length; i++) {
-    const char = normalizedText[i];
-    if (greekValues[char]) {
-      total += greekValues[char];
-    }
+export const calculateJewishGematria = (text: string): GematriaResult => {
+  if (!hasHebrewChars(text)) {
+    return {
+      method: "Jewish Gematria",
+      value: 0,
+      reducedValue: 0,
+      reductionSteps: "",
+      letterBreakdown: [],
+      explanation:
+        "Accurate Jewish Gematria requires Hebrew spelling. Please provide Hebrew characters.",
+      requiresScript: "hebrew",
+      scriptMissing: true,
+    };
   }
-  
-  const reduced = reduceValue(total);
-  const factors = getFactors(total);
+  const chars = text.split("").filter((c) => HEBREW_MAP[c] !== undefined);
+  const { total, breakdown } = sumWithBreakdown(chars, HEBREW_MAP);
+  const reducedValue = reduceToSingleDigit(total);
+  const reductionSteps = buildReductionSteps(total);
+  return {
+    method: "Jewish Gematria",
+    value: total,
+    reducedValue,
+    reductionSteps,
+    letterBreakdown: breakdown,
+    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
+    requiresScript: "hebrew",
+  };
+};
+
+export const calculateGreekGematria = (text: string): GematriaResult => {
+  if (!hasGreekChars(text)) {
+    return {
+      method: "Greek Isopsephy",
+      value: 0,
+      reducedValue: 0,
+      reductionSteps: "",
+      letterBreakdown: [],
+      explanation:
+        "Accurate Greek Isopsephy requires Greek spelling. Please provide Greek characters.",
+      requiresScript: "greek",
+      scriptMissing: true,
+    };
+  }
+  const lowerText = text.toLowerCase();
+  const chars = lowerText.split("").filter((c) => GREEK_MAP[c] !== undefined);
+  const { total, breakdown } = sumWithBreakdown(chars, GREEK_MAP);
+  const reducedValue = reduceToSingleDigit(total);
+  const reductionSteps = buildReductionSteps(total);
   return {
     method: "Greek Isopsephy",
     value: total,
-    explanation: generateInterpretation(reduced, factors)
+    reducedValue,
+    reductionSteps,
+    letterBreakdown: breakdown,
+    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
+    requiresScript: "greek",
   };
 };
 
-// Calculate all methods
 export const calculateAllGematria = (text: string): GematriaResult[] => {
   return [
     calculateEnglishGematria(text),
     calculateSimpleGematria(text),
-    calculateJewishGematria(text),
     calculatePythagoreanGematria(text),
-    calculateGreekGematria(text)
+    calculateJewishGematria(text),
+    calculateGreekGematria(text),
   ];
 };

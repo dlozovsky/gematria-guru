@@ -43,7 +43,7 @@ const ShareModal = ({ isOpen, onClose, inputText, results }: ShareModalProps) =>
   // Create more detailed share text that includes card content
   const shareText = `I discovered the gematria values of "${inputText}" using the Gematria Calculator!
 Value: ${significantResult?.value} (${significantResult?.method})
-${significantResult?.explanation || ''}
+${significantResult ? `Reduced to: ${significantResult.reducedValue}` : ''}
 ${significance ? `Significance: ${significance.description}` : ''}
 ${results.length > 1 ? `Also appears as: ${results.filter(r => r.method !== significantResult?.method).slice(0, 3).map(r => `${r.value} (${r.method})`).join(', ')}` : ''}`;
 
