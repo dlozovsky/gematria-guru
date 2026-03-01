@@ -83,10 +83,7 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.5" },
         },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
+        
         "pulse-subtle": {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.85" },
@@ -129,8 +126,7 @@ export default {
         slideUp: "slideUp 0.5s ease-out forwards",
         slideDown: "slideDown 0.5s ease-out forwards",
         pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        shimmer: "shimmer 2s linear infinite",
-        "pulse-subtle": "pulse-subtle 3s ease-in-out infinite",
+                "pulse-subtle": "pulse-subtle 3s ease-in-out infinite",
         "glow-soft": "glow-soft 4s ease-in-out infinite",
         "shimmer": "shimmer 6s linear infinite",
         "sacred-pulse": "sacred-pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite",
