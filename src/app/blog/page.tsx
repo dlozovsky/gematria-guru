@@ -27,10 +27,15 @@ const jsonLd = {
 };
 
 async function getPosts(category?: string): Promise<BlogPost[]> {
-  let query = supabase.from("blog_posts").select("*").order("published_at", { ascending: false });
-  if (category) query = query.eq("category", category);
-  const { data } = await query;
-  return data ?? [];
+  if (!supabase) return [];
+  try {
+    let query = supabase.from("blog_posts").select("*").order("published_at", { ascending: false });
+    if (category) query = query.eq("category", category);
+    const { data } = await query;
+    return data ?? [];
+  } catch {
+    return [];
+  }
 }
 
 const categories = ["All", "Beginner", "Advanced", "Reference", "Spiritual", "Modern", "Mystical"];

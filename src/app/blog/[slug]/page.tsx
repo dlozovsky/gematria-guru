@@ -7,13 +7,23 @@ import NavFooter from "@/components/NavFooter";
 import { supabase, type BlogPost } from "@/lib/supabase";
 
 async function getPost(slug: string): Promise<BlogPost | null> {
-  const { data } = await supabase.from("blog_posts").select("*").eq("slug", slug).maybeSingle();
-  return data ?? null;
+  if (!supabase) return null;
+  try {
+    const { data } = await supabase.from("blog_posts").select("*").eq("slug", slug).maybeSingle();
+    return data ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export async function generateStaticParams() {
-  const { data } = await supabase.from("blog_posts").select("slug");
-  return (data ?? []).map((p) => ({ slug: p.slug }));
+  if (!supabase) return [];
+  try {
+    const { data } = await supabase.from("blog_posts").select("slug");
+    return (data ?? []).map((p) => ({ slug: p.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
