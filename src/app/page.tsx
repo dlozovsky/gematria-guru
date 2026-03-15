@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "./GematriaCalculatorClient";
@@ -80,7 +81,9 @@ export default function HomePage() {
       <div className="min-h-screen flex flex-col">
         <NavHeader />
         <main className="flex-1 w-full max-w-3xl mx-auto flex flex-col items-center justify-start px-4 py-8">
-          <GematriaCalculatorClient />
+          <Suspense fallback={<div className="w-full h-40" />}>
+            <GematriaCalculatorClient />
+          </Suspense>
 
           <section className="w-full mt-12 mb-6">
             <h2 className="text-2xl font-bold mb-4">About This Gematria Calculator</h2>
