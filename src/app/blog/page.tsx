@@ -4,6 +4,7 @@ import { Calendar, Clock, User, Tag } from "lucide-react";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import { supabase, type BlogPost } from "@/lib/supabase";
+import { blogFallbackPosts } from "@/lib/blogFallbackPosts";
 import NewsletterSignup from "./NewsletterSignup";
 
 export const metadata: Metadata = {
@@ -23,14 +24,21 @@ const jsonLd = {
 };
 
 async function getPosts(category?: string): Promise<BlogPost[]> {
-  if (!supabase) return [];
+  const fallbackPosts = category
+    ? blogFallbackPosts.filter((post) => post.category === category)
+    : blogFallbackPosts;
+
+  if (!supabase) return fallbackPosts;
+
   try {
     let query = supabase.from("blog_posts").select("*").order("published_at", { ascending: false });
     if (category) query = query.eq("category", category);
     const { data } = await query;
-    return data ?? [];
+
+    if (!data || data.length === 0) return fallbackPosts;
+    return data;
   } catch {
-    return [];
+    return fallbackPosts;
   }
 }
 

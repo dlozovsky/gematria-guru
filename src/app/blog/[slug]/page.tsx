@@ -5,24 +5,28 @@ import Link from "next/link";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import { supabase, type BlogPost } from "@/lib/supabase";
+import { blogFallbackPosts } from "@/lib/blogFallbackPosts";
 
 async function getPost(slug: string): Promise<BlogPost | null> {
-  if (!supabase) return null;
+  const fallbackPost = blogFallbackPosts.find((post) => post.slug === slug) ?? null;
+
+  if (!supabase) return fallbackPost;
   try {
     const { data } = await supabase.from("blog_posts").select("*").eq("slug", slug).maybeSingle();
-    return data ?? null;
+    return data ?? fallbackPost;
   } catch {
-    return null;
+    return fallbackPost;
   }
 }
 
 export async function generateStaticParams() {
-  if (!supabase) return [];
+  if (!supabase) return blogFallbackPosts.map((post) => ({ slug: post.slug }));
   try {
     const { data } = await supabase.from("blog_posts").select("slug");
-    return (data ?? []).map((p) => ({ slug: p.slug }));
+    if (!data || data.length === 0) return blogFallbackPosts.map((post) => ({ slug: post.slug }));
+    return data.map((p) => ({ slug: p.slug }));
   } catch {
-    return [];
+    return blogFallbackPosts.map((post) => ({ slug: post.slug }));
   }
 }
 
