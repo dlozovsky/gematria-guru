@@ -4,23 +4,35 @@ import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "./GematriaCalculatorClient";
 
 export const metadata: Metadata = {
-  title: "Free Online Gematria Calculator — Hebrew, English & More",
+  title: "Free Gematria Calculator | Hebrew & English Gematria Online",
   description:
-    "Calculate gematria values instantly for any word or phrase. Supports Hebrew gematria (Standard, Mispar Gadol), English, Simple, Reverse, and more. Free gematria calculator tool.",
-  keywords: [
-    "gematria calculator",
-    "free gematria",
-    "Hebrew gematria calculator",
-    "English gematria",
-    "numerology calculator",
-    "kabbalah gematria",
-    "online gematria tool",
-  ],
+    "Free online gematria calculator for Hebrew and English. Calculate gematria values instantly — supports standard, ordinal, and reverse cipher methods. No signup required.",
   openGraph: {
-    title: "Free Online Gematria Calculator",
-    description: "Calculate gematria values for Hebrew, English, and multiple systems.",
-    url: "https://gematriaguru.com",
+    title: "Free Gematria Calculator | Hebrew & English Gematria Online",
+    description:
+      "Free online gematria calculator for Hebrew and English. Calculate gematria values instantly — supports standard, ordinal, and reverse cipher methods. No signup required.",
+    url: "https://www.gematriaguru.com",
   },
+  alternates: {
+    canonical: "https://www.gematriaguru.com",
+  },
+};
+
+
+
+const webApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Gematria Guru",
+  url: "https://www.gematriaguru.com",
+  applicationCategory: "UtilitiesApplication",
+  description: "Free online gematria calculator for Hebrew and English with multiple cipher methods",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  operatingSystem: "Web",
 };
 
 const faqSchema = {
@@ -57,6 +69,10 @@ const faqSchema = {
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

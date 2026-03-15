@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import TextInput from "@/components/TextInput";
 import ResultsDisplay from "@/components/ResultsDisplay";
 import ShareButton from "@/components/ShareButton";
@@ -38,6 +38,7 @@ export default function GematriaCalculatorClient() {
   const [greekOverride, setGreekOverride] = useState<string | undefined>(undefined);
   const { toast } = useToast();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const saved = localStorage.getItem(RECENT_LOOKUPS_KEY);
@@ -53,6 +54,18 @@ export default function GematriaCalculatorClient() {
     setHebrewOverride(undefined);
     setGreekOverride(undefined);
   }, [inputText]);
+  useEffect(() => {
+    const preset = searchParams.get("preset");
+    if (preset === "english") {
+      setInputText((current) => current || "gematria");
+      setCalculationMode("strict");
+    }
+    if (preset === "hebrew") {
+      setInputText((current) => current || "אבג");
+      setCalculationMode("strict");
+    }
+  }, [searchParams]);
+
 
   const runCalculation = useCallback(
     (text: string, mode: CalculationMode, hOverride?: string, gOverride?: string) => {
