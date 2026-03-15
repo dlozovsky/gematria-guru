@@ -3,9 +3,9 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
 export const metadata: Metadata = {
-  title: "About Gematria Guru",
-  description: "Learn about Gematria Guru — our mission to make gematria accessible, our tools, and the technology behind our free gematria calculator.",
-  openGraph: { title: "About Gematria Guru", url: "https://gematriaguru.com/about" },
+  title: "About Gematria Guru | Free Hebrew & English Calculator",
+  description: "Learn about Gematria Guru — a free online tool for calculating Hebrew and English gematria values with multiple cipher methods.",
+  openGraph: { title: "About Gematria Guru | Free Hebrew & English Calculator", description: "Learn about Gematria Guru — a free online tool for calculating Hebrew and English gematria values with multiple cipher methods.", url: "https://www.gematriaguru.com/about" },
 };
 
 export default function AboutPage() {

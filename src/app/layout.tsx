@@ -3,7 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://gematriaguru.com"),
+  metadataBase: new URL("https://www.gematriaguru.com"),
   title: {
     default: "Gematria Guru — Free Online Gematria Calculator",
     template: "%s | Gematria Guru",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://gematriaguru.com",
+    url: "https://www.gematriaguru.com",
     siteName: "Gematria Guru",
     title: "Gematria Guru — Free Online Gematria Calculator",
     description: "Calculate gematria values for Hebrew, English, and other systems.",
@@ -41,26 +41,10 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "Gematria Guru",
-  url: "https://gematriaguru.com",
-  description: "Free online gematria calculator for Hebrew, English, and multiple numerical systems.",
-  applicationCategory: "UtilityApplication",
-  operatingSystem: "Web Browser",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
+      <head />
       <body>
         <Providers>{children}</Providers>
       </body>
