@@ -27,7 +27,7 @@ import RecentLookups, { type RecentLookup } from "@/components/RecentLookups";
 const RECENT_LOOKUPS_KEY = "recent_lookups";
 const MAX_LOOKUPS = 7;
 
-export default function GematriaCalculatorClient() {
+export default function GematriaCalculatorClient({ initialPreset }: { initialPreset?: "english" | "hebrew" }) {
   const [inputText, setInputText] = useState("");
   const [results, setResults] = useState<GematriaResult[]>([]);
   const [isCalculating, setIsCalculating] = useState(false);
@@ -53,6 +53,17 @@ export default function GematriaCalculatorClient() {
     setHebrewOverride(undefined);
     setGreekOverride(undefined);
   }, [inputText]);
+  useEffect(() => {
+    if (initialPreset === "english") {
+      setInputText((current) => current || "gematria");
+      setCalculationMode("strict");
+    }
+    if (initialPreset === "hebrew") {
+      setInputText((current) => current || "אבג");
+      setCalculationMode("strict");
+    }
+  }, [initialPreset]);
+
 
   const runCalculation = useCallback(
     (text: string, mode: CalculationMode, hOverride?: string, gOverride?: string) => {

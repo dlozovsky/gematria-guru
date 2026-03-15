@@ -4,23 +4,35 @@ import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "./GematriaCalculatorClient";
 
 export const metadata: Metadata = {
-  title: "Free Online Gematria Calculator — Hebrew, English & More",
+  title: "Free Gematria Calculator | Hebrew & English Gematria Online",
   description:
-    "Calculate gematria values instantly for any word or phrase. Supports Hebrew gematria (Standard, Mispar Gadol), English, Simple, Reverse, and more. Free gematria calculator tool.",
-  keywords: [
-    "gematria calculator",
-    "free gematria",
-    "Hebrew gematria calculator",
-    "English gematria",
-    "numerology calculator",
-    "kabbalah gematria",
-    "online gematria tool",
-  ],
+    "Free online gematria calculator for Hebrew and English. Calculate gematria values instantly — supports standard, ordinal, and reverse cipher methods. No signup required.",
   openGraph: {
-    title: "Free Online Gematria Calculator",
-    description: "Calculate gematria values for Hebrew, English, and multiple systems.",
-    url: "https://gematriaguru.com",
+    title: "Free Gematria Calculator | Hebrew & English Gematria Online",
+    description:
+      "Free online gematria calculator for Hebrew and English. Calculate gematria values instantly — supports standard, ordinal, and reverse cipher methods. No signup required.",
+    url: "https://www.gematriaguru.com",
   },
+  alternates: {
+    canonical: "https://www.gematriaguru.com",
+  },
+};
+
+
+
+const webApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Gematria Guru",
+  url: "https://www.gematriaguru.com",
+  applicationCategory: "UtilitiesApplication",
+  description: "Free online gematria calculator for Hebrew and English with multiple cipher methods",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  operatingSystem: "Web",
 };
 
 const faqSchema = {
@@ -54,9 +66,21 @@ const faqSchema = {
   ],
 };
 
-export default function HomePage() {
+export default function HomePage({
+  searchParams,
+}: {
+  searchParams?: { preset?: string };
+}) {
+  const initialPreset =
+    searchParams?.preset === "english" || searchParams?.preset === "hebrew"
+      ? searchParams.preset
+      : undefined;
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -64,7 +88,7 @@ export default function HomePage() {
       <div className="min-h-screen flex flex-col">
         <NavHeader />
         <main className="flex-1 w-full max-w-3xl mx-auto flex flex-col items-center justify-start px-4 py-8">
-          <GematriaCalculatorClient />
+          <GematriaCalculatorClient initialPreset={initialPreset} />
 
           <section className="w-full mt-12 mb-6">
             <h2 className="text-2xl font-bold mb-4">About This Gematria Calculator</h2>

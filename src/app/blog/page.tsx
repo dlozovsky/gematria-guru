@@ -7,15 +7,11 @@ import { supabase, type BlogPost } from "@/lib/supabase";
 import NewsletterSignup from "./NewsletterSignup";
 
 export const metadata: Metadata = {
-  title: "Gematria Knowledge Center — Articles & Guides",
+  title: "Gematria Blog | Guides, Meanings & Calculator Tips",
   description:
-    "Explore articles, guides, and insights about gematria, numerology, kabbalah, and biblical numerology.",
+    "Explore gematria guides, number meanings, and tips for using our free Hebrew and English gematria calculator.",
   keywords: ["gematria articles", "numerology blog", "kabbalah guide", "biblical numerology"],
-  openGraph: {
-    title: "Gematria Knowledge Center",
-    description: "Articles and guides about gematria, numerology, and kabbalah.",
-    url: "https://gematriaguru.com/blog",
-  },
+  openGraph: { title: "Gematria Blog | Guides, Meanings & Calculator Tips", description: "Explore gematria guides, number meanings, and tips for using our free Hebrew and English gematria calculator.", url: "https://www.gematriaguru.com/blog" },
 };
 
 const jsonLd = {
