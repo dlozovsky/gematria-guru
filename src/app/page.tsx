@@ -66,15 +66,20 @@ const faqSchema = {
   ],
 };
 
+type HomePageProps = {
+  searchParams?: { preset?: string | string[] };
+};
+
+function normalizePreset(preset: string | string[] | undefined): "english" | "hebrew" | undefined {
+  const value = Array.isArray(preset) ? preset[0] : preset;
+  if (value === "english" || value === "hebrew") return value;
+  return undefined;
+}
+
 export default function HomePage({
   searchParams,
-}: {
-  searchParams?: { preset?: string };
-}) {
-  const initialPreset =
-    searchParams?.preset === "english" || searchParams?.preset === "hebrew"
-      ? searchParams.preset
-      : undefined;
+}: HomePageProps) {
+  const initialPreset = normalizePreset(searchParams?.preset);
   return (
     <>
       <script

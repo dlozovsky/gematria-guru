@@ -59,6 +59,7 @@ export default function GematriaCalculatorClient({
     setHebrewOverride(undefined);
     setGreekOverride(undefined);
   }, [inputText]);
+  // Keep preset handling prop-based to avoid useSearchParams CSR bailout on the home page.
   useEffect(() => {
     if (initialPreset === "english") {
       setInputText((current) => current || "gematria");
