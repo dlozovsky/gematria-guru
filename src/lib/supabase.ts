@@ -8,7 +8,7 @@ export const supabase = supabaseUrl && supabaseAnonKey
   : null as unknown as ReturnType<typeof createClient>;
 
 export type BlogPost = {
-  id: number;
+  id: string;
   title: string;
   slug: string;
   excerpt: string;

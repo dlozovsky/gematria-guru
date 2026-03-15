@@ -1,0 +1,88 @@
+import type { BlogPost } from "@/lib/supabase";
+
+export const blogFallbackPosts: BlogPost[] = [
+  {
+    id: "fallback-1",
+    title: "Understanding the Basics of Gematria: A Beginner's Guide",
+    slug: "understanding-basics-gematria-beginners-guide",
+    excerpt:
+      "Discover the ancient art of Gematria and learn how numerical values reveal hidden meanings in words and texts. Perfect for beginners starting their journey.",
+    content: "",
+    author: "Gematria Guru Team",
+    published_at: "2025-01-04T00:00:00.000Z",
+    read_time: "8 min read",
+    category: "Beginner",
+    image_url: null,
+    created_at: "2025-01-04T00:00:00.000Z",
+  },
+  {
+    id: "fallback-2",
+    title: "Hebrew Alphabet and Numerical Values: Complete Reference",
+    slug: "hebrew-alphabet-numerical-values-complete-reference",
+    excerpt:
+      "A comprehensive guide to Hebrew letter values and their significance in traditional Gematria calculations. Includes pronunciation guides and examples.",
+    content: "",
+    author: "Sarah Cohen",
+    published_at: "2025-01-03T00:00:00.000Z",
+    read_time: "12 min read",
+    category: "Reference",
+    image_url: null,
+    created_at: "2025-01-03T00:00:00.000Z",
+  },
+  {
+    id: "fallback-3",
+    title: "English Gematria Systems: Exploring Different Methods",
+    slug: "english-gematria-systems-different-methods",
+    excerpt:
+      "Learn about various English Gematria systems including Simple, Reverse, and Jewish ordinal methods. Compare results and understand applications.",
+    content: "",
+    author: "Michael David",
+    published_at: "2025-01-02T00:00:00.000Z",
+    read_time: "10 min read",
+    category: "Advanced",
+    image_url: null,
+    created_at: "2025-01-02T00:00:00.000Z",
+  },
+  {
+    id: "fallback-4",
+    title: "Biblical Numerology and Sacred Numbers in Scripture",
+    slug: "biblical-numerology-sacred-numbers-scripture",
+    excerpt:
+      "Explore the significance of numbers in biblical texts and how Gematria reveals deeper spiritual meanings in religious literature.",
+    content: "",
+    author: "Rabbi Jonathan Stone",
+    published_at: "2025-01-01T00:00:00.000Z",
+    read_time: "15 min read",
+    category: "Spiritual",
+    image_url: null,
+    created_at: "2025-01-01T00:00:00.000Z",
+  },
+  {
+    id: "fallback-5",
+    title: "Modern Applications of Gematria in Digital Age",
+    slug: "modern-applications-gematria-digital-age",
+    excerpt:
+      "How ancient Gematria principles apply to modern contexts, from name analysis to digital communications and contemporary interpretations.",
+    content: "",
+    author: "Dr. Lisa Roberts",
+    published_at: "2024-12-30T00:00:00.000Z",
+    read_time: "7 min read",
+    category: "Modern",
+    image_url: null,
+    created_at: "2024-12-30T00:00:00.000Z",
+  },
+  {
+    id: "fallback-6",
+    title: "Kabbalah and Gematria: The Mystical Connection",
+    slug: "kabbalah-gematria-mystical-connection",
+    excerpt:
+      "Understand the deep relationship between Kabbalistic teachings and Gematria, exploring how numbers reveal divine wisdom and cosmic truths.",
+    content: "",
+    author: "Benjamin Wolf",
+    published_at: "2024-12-28T00:00:00.000Z",
+    read_time: "13 min read",
+    category: "Mystical",
+    image_url: null,
+    created_at: "2024-12-28T00:00:00.000Z",
+  },
+];
