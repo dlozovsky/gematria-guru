@@ -5,7 +5,7 @@ import NavFooter from "@/components/NavFooter";
 import NumberMapsClient from "./NumberMapsClient";
 
 export const metadata: Metadata = {
-  title: "Gematria Number Maps | Value Reference Charts",
+  title: { absolute: "Gematria Number Maps | Value Reference Charts" },
   description: "Browse gematria number maps and reference charts for Hebrew and English values. A visual companion to the free calculator.",
   openGraph: { title: "Gematria Number Maps | Value Reference Charts", description: "Browse gematria number maps and reference charts for Hebrew and English values. A visual companion to the free calculator.", url: "https://www.gematriaguru.com/number-maps" },
 };
