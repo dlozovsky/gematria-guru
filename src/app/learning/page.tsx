@@ -5,7 +5,7 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
 export const metadata: Metadata = {
-  title: "Learn Gematria | Hebrew Numerology Explained",
+  title: { absolute: "Learn Gematria | Hebrew Numerology Explained" },
   description: "New to gematria? Learn how Hebrew and English gematria works, what the numbers mean, and how to use a gematria calculator.",
   keywords: ["learn gematria", "gematria course", "Hebrew numerology tutorial"],
   openGraph: { title: "Learn Gematria | Hebrew Numerology Explained", description: "New to gematria? Learn how Hebrew and English gematria works, what the numbers mean, and how to use a gematria calculator.", url: "https://www.gematriaguru.com/learning" },

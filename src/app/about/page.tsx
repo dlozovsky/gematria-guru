@@ -3,7 +3,7 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
 export const metadata: Metadata = {
-  title: "About Gematria Guru | Free Hebrew & English Calculator",
+  title: { absolute: "About Gematria Guru | Free Hebrew & English Calculator" },
   description: "Learn about Gematria Guru — a free online tool for calculating Hebrew and English gematria values with multiple cipher methods.",
   openGraph: { title: "About Gematria Guru | Free Hebrew & English Calculator", description: "Learn about Gematria Guru — a free online tool for calculating Hebrew and English gematria values with multiple cipher methods.", url: "https://www.gematriaguru.com/about" },
 };

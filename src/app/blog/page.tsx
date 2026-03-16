@@ -8,7 +8,7 @@ import { blogFallbackPosts } from "@/lib/blogFallbackPosts";
 import NewsletterSignup from "./NewsletterSignup";
 
 export const metadata: Metadata = {
-  title: "Gematria Blog | Guides, Meanings & Calculator Tips",
+  title: { absolute: "Gematria Blog | Guides, Meanings & Calculator Tips" },
   description:
     "Explore gematria guides, number meanings, and tips for using our free Hebrew and English gematria calculator.",
   keywords: ["gematria articles", "numerology blog", "kabbalah guide", "biblical numerology"],
