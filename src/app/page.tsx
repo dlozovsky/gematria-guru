@@ -4,18 +4,22 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "./GematriaCalculatorClient";
 
+const HOMEPAGE_TITLE = "Free Gematria Calculator | Hebrew & English Gematria Online";
+const HOMEPAGE_DESCRIPTION =
+  "Free online gematria calculator for Hebrew and English. Calculate gematria values instantly — supports standard, ordinal, and reverse cipher methods. No signup required.";
+const HOMEPAGE_CANONICAL_URL = "https://www.gematriaguru.com";
+
 export const metadata: Metadata = {
-  title: "Free Gematria Calculator | Hebrew & English Gematria Online",
-  description:
-    "Free online gematria calculator for Hebrew and English. Calculate gematria values instantly — supports standard, ordinal, and reverse cipher methods. No signup required.",
+  title: HOMEPAGE_TITLE,
+  description: HOMEPAGE_DESCRIPTION,
   openGraph: {
-    title: "Free Gematria Calculator | Hebrew & English Gematria Online",
-    description:
-      "Free online gematria calculator for Hebrew and English. Calculate gematria values instantly — supports standard, ordinal, and reverse cipher methods. No signup required.",
-    url: "https://www.gematriaguru.com",
+    title: HOMEPAGE_TITLE,
+    description: HOMEPAGE_DESCRIPTION,
+    url: HOMEPAGE_CANONICAL_URL,
+    type: "website",
   },
   alternates: {
-    canonical: "https://www.gematriaguru.com",
+    canonical: HOMEPAGE_CANONICAL_URL,
   },
 };
 
