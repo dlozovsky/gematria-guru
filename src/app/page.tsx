@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Link from "next/link";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "./GematriaCalculatorClient";
@@ -68,7 +69,50 @@ export default function HomePage() {
             <GematriaCalculatorClient />
           </Suspense>
 
-          <section className="w-full mt-12 mb-6">
+          <section className="w-full mt-10 mb-6">
+            <h2 className="text-2xl font-bold mb-6">Explore Gematria</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                {
+                  title: "Learn Gematria",
+                  href: "/learning",
+                  description:
+                    "New to gematria? Start with the basics of Hebrew and English cipher methods.",
+                },
+                {
+                  title: "Number Reference Maps",
+                  href: "/number-maps",
+                  description:
+                    "Browse visual charts of gematria values for Hebrew and English alphabets.",
+                },
+                {
+                  title: "Gematria Blog",
+                  href: "/blog",
+                  description:
+                    "Guides, number meanings, and tips for getting more from your calculations.",
+                },
+                {
+                  title: "About Gematria Guru",
+                  href: "/about",
+                  description:
+                    "How this calculator works and what cipher methods are supported.",
+                },
+              ].map(({ title, href, description }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="group block border border-border rounded-lg p-5 hover:border-primary hover:bg-accent transition-colors"
+                >
+                  <h3 className="font-semibold text-base mb-1 group-hover:text-primary transition-colors">
+                    {title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">{description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <section className="w-full mt-6 mb-6">
             <h2 className="text-2xl font-bold mb-4">About This Gematria Calculator</h2>
             <div className="space-y-4 text-muted-foreground">
               <p>
