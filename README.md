@@ -191,5 +191,3 @@ Simply open [Lovable](https://lovable.dev/projects/3e6acd4e-cc3b-415f-a8f2-adf57
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
 
-#Checking Vercel with this comment
-#checking vercel 
