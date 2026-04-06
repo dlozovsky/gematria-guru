@@ -7,6 +7,8 @@ import NavFooter from "@/components/NavFooter";
 import { supabase, type BlogPost } from "@/lib/supabase";
 import { blogFallbackPosts } from "@/lib/blogFallbackPosts";
 
+export const revalidate = 60;
+
 async function getPost(slug: string): Promise<BlogPost | null> {
   const fallbackPost = blogFallbackPosts.find((post) => post.slug === slug) ?? null;
 

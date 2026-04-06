@@ -7,6 +7,8 @@ import { supabase, type BlogPost } from "@/lib/supabase";
 import { blogFallbackPosts } from "@/lib/blogFallbackPosts";
 import NewsletterSignup from "./NewsletterSignup";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: { absolute: "Gematria Blog | Guides, Meanings & Calculator Tips" },
   description:
