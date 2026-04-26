@@ -5,7 +5,7 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "./GematriaCalculatorClient";
 
-const HOMEPAGE_TITLE = "Free Gematria Calculator | Hebrew & English Gematria Online";
+const HOMEPAGE_TITLE = "Free Online Gematria Calculator | Hebrew & English Gematria";
 const HOMEPAGE_DESCRIPTION =
   "Free online gematria calculator for Hebrew and English. Calculate gematria values instantly — supports standard, ordinal, and reverse cipher methods. No signup required.";
 const HOMEPAGE_CANONICAL_URL = "https://www.gematriaguru.com";

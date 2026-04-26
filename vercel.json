@@ -1,19 +1,6 @@
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "rewrites": [
-    {
-      "source": "/((?!api|_next|favicon\\.ico|robots\\.txt|sitemap\\.xml|static|assets).*)",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": ".*[Gg]ooglebot.*"
-        }
-      ],
-      "destination": "/api/prerender?path=/$1"
-    }
-  ],
   "functions": {
     "api/**/*.js": {
       "memory": 128,

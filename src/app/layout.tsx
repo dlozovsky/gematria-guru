@@ -5,7 +5,7 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gematriaguru.com"),
   title: {
-    default: "Gematria Guru — Free Online Gematria Calculator",
+    default: "Free Online Gematria Calculator | Gematria Guru",
     template: "%s | Gematria Guru",
   },
   description:
@@ -31,20 +31,36 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.gematriaguru.com",
     siteName: "Gematria Guru",
-    title: "Gematria Guru — Free Online Gematria Calculator",
+    title: "Free Online Gematria Calculator | Gematria Guru",
     description: "Calculate gematria values for Hebrew, English, and other systems.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gematria Guru — Free Online Gematria Calculator",
+    title: "Free Online Gematria Calculator | Gematria Guru",
     description: "Calculate gematria values for Hebrew, English, and other systems.",
   },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Gematria Guru",
+  url: "https://www.gematriaguru.com",
+  logo: "https://www.gematriaguru.com/logo.png",
+  sameAs: [],
+  description:
+    "Free online gematria calculator and educational resource for Hebrew, English, and other gematria systems.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>
