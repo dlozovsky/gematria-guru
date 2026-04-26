@@ -44,6 +44,17 @@ async function getPosts(category?: string): Promise<BlogPost[]> {
   }
 }
 
+const STARTER_SLUGS = [
+  "kabbalah-gematria-mystical-connection",
+  "biblical-numerology-sacred-numbers-scripture",
+  "understanding-basics-gematria-beginners-guide",
+];
+
+function pickStarterPosts(allPosts: BlogPost[]): BlogPost[] {
+  const bySlug = new Map(allPosts.map((p) => [p.slug, p]));
+  return STARTER_SLUGS.map((slug) => bySlug.get(slug)).filter((p): p is BlogPost => Boolean(p));
+}
+
 const categories = ["All", "Beginner", "Advanced", "Reference", "Spiritual", "Modern", "Mystical"];
 
 export default async function BlogPage({
@@ -53,6 +64,7 @@ export default async function BlogPage({
 }) {
   const activeCategory = searchParams.category ?? "";
   const posts = await getPosts(activeCategory || undefined);
+  const starterPosts = activeCategory ? [] : pickStarterPosts(posts);
 
   return (
     <>
@@ -66,6 +78,27 @@ export default async function BlogPage({
               Explore articles, guides, and insights about gematria, numerology, and the mystical significance of numbers.
             </p>
           </div>
+
+          {starterPosts.length > 0 && (
+            <section className="mb-12">
+              <h2 className="text-lg font-semibold mb-4 text-center">Start Here</h2>
+              <div className="grid md:grid-cols-3 gap-4">
+                {starterPosts.map((post) => (
+                  <Link
+                    key={post.id}
+                    href={`/blog/${post.slug}`}
+                    className="border border-primary/30 bg-primary/5 rounded-xl p-4 hover:border-primary/60 transition-colors flex flex-col"
+                  >
+                    <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-medium self-start mb-2">
+                      {post.category}
+                    </span>
+                    <h3 className="text-sm font-semibold leading-snug mb-2 line-clamp-2">{post.title}</h3>
+                    <p className="text-xs text-muted-foreground line-clamp-3">{post.excerpt}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           <div className="flex flex-wrap justify-center gap-2 mb-10">
             {categories.map((cat) => (
