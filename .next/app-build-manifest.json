@@ -1,30 +1,201 @@
 {
   "pages": {
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+    "/not-found": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/not-found-f4f53eaf8adf9289.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/app/_not-found/page-887a6b78f334643d.js"
     ],
     "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/css/804361b85a83bcce.css",
+      "static/chunks/388-45d22123ca1a14a3.js",
+      "static/chunks/961-8f97e11b42d464c3.js",
+      "static/chunks/900-33f99f8ffcd23cf8.js",
+      "static/chunks/app/layout-9afa26826d0ccaad.js"
     ],
-    "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+    "/about/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/about/page-10a2c0d3e3d7c78c.js"
     ],
-    "/blog/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/blog/page.js"
+    "/english-gematria-calculator/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/english-gematria-calculator/page-a8f587e83f678ab1.js"
+    ],
+    "/cookies/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/cookies/page-049bb1ea3fda6b4c.js"
+    ],
+    "/hebrew-gematria-calculator/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/hebrew-gematria-calculator/page-317a4491ad7cb5b1.js"
+    ],
+    "/learning/intro/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/learning/intro/page-319a7ef98de4f9b1.js"
+    ],
+    "/learning/advanced/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/learning/advanced/page-554db512a9a7fed2.js"
+    ],
+    "/learning/number-mysticism/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/learning/number-mysticism/page-418998a72fb91f05.js"
+    ],
+    "/contact/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/735-6bc622a6f2eedff5.js",
+      "static/chunks/app/contact/page-665b526593f71302.js"
+    ],
+    "/learning/name-gematria/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/learning/name-gematria/page-68727dc54bb26092.js"
+    ],
+    "/learning/systems/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/learning/systems/page-04975f92a6a1b8af.js"
+    ],
+    "/learning/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/learning/page-cb5c19bd78039305.js"
+    ],
+    "/learning/practical-applications/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/learning/practical-applications/page-02227c0e9866e872.js"
+    ],
+    "/learning/torah-gematria/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/learning/torah-gematria/page-b7cd11eba34f7550.js"
+    ],
+    "/blog/[slug]/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/blog/[slug]/page-ac483419901206a1.js"
+    ],
+    "/privacy/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/privacy/page-e87f7afc99894219.js"
     ],
     "/number-maps/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/number-maps/page.js"
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/388-45d22123ca1a14a3.js",
+      "static/chunks/454-9cfac6b100080f99.js",
+      "static/chunks/961-8f97e11b42d464c3.js",
+      "static/chunks/731-7974f2e0b73c8285.js",
+      "static/chunks/544-4799e16f4f63c60f.js",
+      "static/chunks/app/number-maps/page-fd711ca030d2dcdc.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/388-45d22123ca1a14a3.js",
+      "static/chunks/454-9cfac6b100080f99.js",
+      "static/chunks/40-a5d9e5d36c2624dd.js",
+      "static/chunks/544-4799e16f4f63c60f.js",
+      "static/chunks/app/page-690cb73448456339.js"
+    ],
+    "/terms/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/terms/page-00e987862b8f769f.js"
+    ],
+    "/blog/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/735-6bc622a6f2eedff5.js",
+      "static/chunks/app/blog/page-c0ec1660aaa00687.js"
+    ],
+    "/learning/hebrew-alphabet/page": [
+      "static/chunks/webpack-a3ed9831dbeb8e25.js",
+      "static/chunks/fd9d1056-d01e9804f4c81514.js",
+      "static/chunks/117-5c245abd96e5cd13.js",
+      "static/chunks/main-app-6b3c5230a585b70c.js",
+      "static/chunks/288-c7eff7f21f39c96d.js",
+      "static/chunks/app/learning/hebrew-alphabet/page-be238c8d25252a96.js"
     ]
   }
 }

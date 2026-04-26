@@ -1,4 +1,4 @@
-// File: /home/project/src/app/number-maps/page.tsx
+// File: /home/user/gematria-guru/src/app/number-maps/page.tsx
 import * as entry from '../../../../src/app/number-maps/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

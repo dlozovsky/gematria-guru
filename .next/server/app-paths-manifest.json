@@ -1,4 +1,25 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/about/page": "app/about/page.js",
+  "/english-gematria-calculator/page": "app/english-gematria-calculator/page.js",
+  "/cookies/page": "app/cookies/page.js",
+  "/hebrew-gematria-calculator/page": "app/hebrew-gematria-calculator/page.js",
+  "/learning/intro/page": "app/learning/intro/page.js",
+  "/learning/advanced/page": "app/learning/advanced/page.js",
+  "/learning/number-mysticism/page": "app/learning/number-mysticism/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/learning/name-gematria/page": "app/learning/name-gematria/page.js",
+  "/learning/systems/page": "app/learning/systems/page.js",
+  "/learning/page": "app/learning/page.js",
+  "/learning/practical-applications/page": "app/learning/practical-applications/page.js",
+  "/learning/torah-gematria/page": "app/learning/torah-gematria/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js",
+  "/privacy/page": "app/privacy/page.js",
+  "/number-maps/page": "app/number-maps/page.js",
   "/page": "app/page.js",
-  "/blog/page": "app/blog/page.js"
+  "/terms/page": "app/terms/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/learning/hebrew-alphabet/page": "app/learning/hebrew-alphabet/page.js"
 }
