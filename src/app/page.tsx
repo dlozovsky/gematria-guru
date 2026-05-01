@@ -78,7 +78,13 @@ const faqSchema = {
   ],
 };
 
-export default function HomePage() {
+export default function HomePage({
+  searchParams,
+}: {
+  searchParams?: Record<string, string | string[]>;
+}) {
+  const preset = typeof searchParams?.preset === "string" ? searchParams.preset : undefined;
+  const initialPreset = preset === "english" || preset === "hebrew" ? preset : undefined;
   return (
     <>
       <script
@@ -93,7 +99,7 @@ export default function HomePage() {
         <NavHeader />
         <main className="flex-1 w-full max-w-3xl mx-auto flex flex-col items-center justify-start px-4 py-8">
           <Suspense fallback={<div className="w-full h-40" />}>
-            <GematriaCalculatorClient />
+            <GematriaCalculatorClient initialPreset={initialPreset} />
           </Suspense>
 
           <section className="w-full mt-10 mb-6">

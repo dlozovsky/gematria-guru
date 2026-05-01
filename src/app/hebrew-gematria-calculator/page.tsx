@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Suspense } from "react";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
+import GematriaCalculatorClient from "@/app/GematriaCalculatorClient";
 
 const PAGE_TITLE = "Hebrew Gematria Calculator — Free Online Tool";
 const PAGE_DESCRIPTION =
@@ -34,17 +35,9 @@ export default function Page() {
           tradition, it is widely used in Torah study and mystical
           interpretation to uncover deeper textual relationships.
         </p>
-        <div className="rounded-xl border border-border p-6">
-          <p className="mb-4">
-            Use our main calculator with the Hebrew preset selected:
-          </p>
-          <Link
-            href="/?preset=hebrew"
-            className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90"
-          >
-            Open Calculator
-          </Link>
-        </div>
+        <Suspense fallback={<div className="w-full h-40" />}>
+          <GematriaCalculatorClient initialPreset="hebrew" />
+        </Suspense>
       </main>
       <NavFooter />
     </div>
