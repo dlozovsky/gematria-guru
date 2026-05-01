@@ -24,32 +24,55 @@ export const metadata: Metadata = {
   },
 };
 
+const webApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: HOMEPAGE_TITLE,
+  description: HOMEPAGE_DESCRIPTION,
+  url: HOMEPAGE_CANONICAL_URL,
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Any",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is gematria?",
+      name: "What is a gematria calculator?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Gematria is an ancient practice of assigning numerical values to letters and words. It originates in Hebrew tradition where each letter has a fixed numerical value.",
+        text: "A gematria calculator converts letters into numbers using ancient Hebrew and English cipher systems, revealing the numerical value of any word or phrase.",
       },
     },
     {
       "@type": "Question",
-      name: "What gematria systems does this calculator support?",
+      name: "Which gematria systems does this calculator support?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Our calculator supports Hebrew Standard (Mispar Hechrachi), Hebrew Gadol, Hebrew Ordinal, English Simple, English Reverse, English Ordinal, and several other traditional systems.",
+        text: "Hebrew Standard (Mispar Hechrachi), Mispar Gadol, Hebrew Ordinal, English Simple, English Ordinal, and English Reverse.",
       },
     },
     {
       "@type": "Question",
-      name: "Is this gematria calculator free to use?",
+      name: "Is this gematria calculator free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, Gematria Guru is completely free. No registration or account required.",
+        text: "Yes — completely free with no account, signup, or payment required.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does it work for both Hebrew and English?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, it supports full Hebrew and English gematria calculation simultaneously across all cipher systems.",
       },
     },
   ],
@@ -58,6 +81,10 @@ const faqSchema = {
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
