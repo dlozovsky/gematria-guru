@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import TextInput from "@/components/TextInput";
 import ResultsDisplay from "@/components/ResultsDisplay";
 import ShareButton from "@/components/ShareButton";
@@ -27,7 +27,13 @@ import RecentLookups, { type RecentLookup } from "@/components/RecentLookups";
 const RECENT_LOOKUPS_KEY = "recent_lookups";
 const MAX_LOOKUPS = 7;
 
-export default function GematriaCalculatorClient() {
+type GematriaCalculatorClientProps = {
+  initialPreset?: "english" | "hebrew";
+};
+
+export default function GematriaCalculatorClient({
+  initialPreset,
+}: GematriaCalculatorClientProps) {
   const [inputText, setInputText] = useState("");
   const [results, setResults] = useState<GematriaResult[]>([]);
   const [isCalculating, setIsCalculating] = useState(false);
@@ -38,7 +44,6 @@ export default function GematriaCalculatorClient() {
   const [greekOverride, setGreekOverride] = useState<string | undefined>(undefined);
   const { toast } = useToast();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     const saved = localStorage.getItem(RECENT_LOOKUPS_KEY);
@@ -54,17 +59,17 @@ export default function GematriaCalculatorClient() {
     setHebrewOverride(undefined);
     setGreekOverride(undefined);
   }, [inputText]);
+  // Keep preset handling prop-based to avoid useSearchParams CSR bailout on the home page.
   useEffect(() => {
-    const preset = searchParams.get("preset");
-    if (preset === "english") {
+    if (initialPreset === "english") {
       setInputText((current) => current || "gematria");
       setCalculationMode("strict");
     }
-    if (preset === "hebrew") {
+    if (initialPreset === "hebrew") {
       setInputText((current) => current || "אבג");
       setCalculationMode("strict");
     }
-  }, [searchParams]);
+  }, [initialPreset]);
 
 
   const runCalculation = useCallback(

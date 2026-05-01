@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Suspense } from "react";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
+import GematriaCalculatorClient from "@/app/GematriaCalculatorClient";
 
 const PAGE_TITLE = "English Gematria Calculator — Free Online Tool";
 const PAGE_DESCRIPTION =
@@ -34,17 +35,9 @@ export default function Page() {
           Z=26) and Simple English ciphers for quickly finding number patterns
           in words and phrases.
         </p>
-        <div className="rounded-xl border border-border p-6">
-          <p className="mb-4">
-            Use our main calculator with the English preset selected:
-          </p>
-          <Link
-            href="/?preset=english"
-            className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90"
-          >
-            Open Calculator
-          </Link>
-        </div>
+        <Suspense fallback={<div className="w-full h-40" />}>
+          <GematriaCalculatorClient initialPreset="english" />
+        </Suspense>
       </main>
       <NavFooter />
     </div>
