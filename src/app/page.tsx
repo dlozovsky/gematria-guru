@@ -7,7 +7,7 @@ import GematriaCalculatorClient from "./GematriaCalculatorClient";
 
 const HOMEPAGE_TITLE = "Free Online Gematria Calculator | Hebrew & English Gematria";
 const HOMEPAGE_DESCRIPTION =
-  "Free gematria calculator for Hebrew and English — get instant values across 6 cipher systems including Mispar Hechrachi, English Simple, Ordinal, and Reverse. No signup, no ads, works on any device.";
+  "Free gematria calculator for Hebrew and English — get instant values across 6 cipher systems including Mispar Hechrachi, English Simple, Ordinal, and Reverse. No signup, no ads, works on any device. Calculadora de gematria gratuita — hebraico e inglês.";
 const HOMEPAGE_CANONICAL_URL = "https://www.gematriaguru.com";
 
 export const metadata: Metadata = {
@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: HOMEPAGE_CANONICAL_URL,
+    languages: {
+      "pt-BR": "https://www.gematriaguru.com/?hl=pt",
+    },
   },
 };
 

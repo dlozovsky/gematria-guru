@@ -161,6 +161,29 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
+            {relatedPosts.length > 0 && (
+              <section className="mt-12 pt-8 border-t">
+                <h2 className="text-xl font-semibold mb-4">Related Articles</h2>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {relatedPosts.map((rel) => (
+                    <Link
+                      key={rel.id}
+                      href={`/blog/${rel.slug}`}
+                      className="border border-border rounded-xl p-4 hover:border-primary/40 transition-colors flex flex-col"
+                    >
+                      <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-medium self-start mb-2">
+                        {rel.category}
+                      </span>
+                      <h3 className="text-sm font-semibold leading-snug mb-2 line-clamp-2">{rel.title}</h3>
+                      <p className="text-xs text-muted-foreground line-clamp-3">
+                        {rel.excerpt.length > 120 ? rel.excerpt.slice(0, 120) + "…" : rel.excerpt}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
+
             <aside className="mt-10 p-5 border border-border rounded-xl bg-muted/40 flex gap-4 items-start">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary shrink-0">
                 <User className="h-5 w-5" />
@@ -171,27 +194,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               </div>
             </aside>
           </article>
-
-          {relatedPosts.length > 0 && (
-            <section className="mt-12 pt-8 border-t">
-              <h2 className="text-xl font-semibold mb-4">Related Articles</h2>
-              <div className="grid md:grid-cols-3 gap-4">
-                {relatedPosts.map((rel) => (
-                  <Link
-                    key={rel.id}
-                    href={`/blog/${rel.slug}`}
-                    className="border border-border rounded-xl p-4 hover:border-primary/40 transition-colors flex flex-col"
-                  >
-                    <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-medium self-start mb-2">
-                      {rel.category}
-                    </span>
-                    <h3 className="text-sm font-semibold leading-snug mb-2 line-clamp-2">{rel.title}</h3>
-                    <p className="text-xs text-muted-foreground line-clamp-3">{rel.excerpt}</p>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
 
           <div className="mt-12 pt-8 border-t">
             <h2 className="text-xl font-semibold mb-4">Continue Learning</h2>
