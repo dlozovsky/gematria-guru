@@ -7,7 +7,7 @@ import GematriaCalculatorClient from "@/app/GematriaCalculatorClient";
 
 const PAGE_TITLE = "Gematria Calculator Online — Free Hebrew & English Tool";
 const PAGE_DESCRIPTION =
-  "Use our free online gematria calculator instantly — no download, no signup. Supports Hebrew Standard, English Simple, Ordinal, Reverse, and more cipher systems.";
+  "Free online gematria calculator — no download, no signup. Instant values across Hebrew Standard, English Simple, Ordinal, Reverse, and more cipher systems.";
 const PAGE_CANONICAL_URL =
   "https://www.gematriaguru.com/gematria-calculator-online";
 
@@ -24,6 +24,37 @@ export const metadata: Metadata = {
   },
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Is this gematria calculator free to use online?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, completely free with no account or signup required.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does it work on mobile?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, the calculator works on any device including mobile, tablet, and desktop.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Which cipher systems are supported?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Hebrew Standard (Mispar Hechrachi), Mispar Gadol, Hebrew Ordinal, English Simple, English Ordinal, and English Reverse.",
+      },
+    },
+  ],
+};
+
 const CIPHER_SYSTEMS = [
   "Hebrew Standard (Mispar Hechrachi)",
   "Mispar Gadol",
@@ -35,6 +66,11 @@ const CIPHER_SYSTEMS = [
 
 export default function Page() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     <div className="min-h-screen flex flex-col">
       <NavHeader />
       <main className="flex-1 max-w-3xl mx-auto px-4 py-10 w-full">
@@ -92,9 +128,16 @@ export default function Page() {
           >
             Learn gematria →
           </Link>
+          <Link
+            href="/number-maps"
+            className="text-primary underline underline-offset-4 hover:opacity-80"
+          >
+            Number reference maps →
+          </Link>
         </nav>
       </main>
       <NavFooter />
     </div>
+    </>
   );
 }
