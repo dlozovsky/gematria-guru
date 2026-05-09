@@ -48,12 +48,12 @@ const faqSchema = {
       name: "What is a gematria calculator?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A gematria calculator converts letters into numbers using ancient Hebrew and English cipher systems, revealing the numerical value of any word or phrase.",
+        text: "A gematria calculator converts letters into numbers using ancient Hebrew and English cipher systems to reveal the numerical value of any word or phrase.",
       },
     },
     {
       "@type": "Question",
-      name: "Which gematria systems does this calculator support?",
+      name: "Which gematria systems does this support?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "Hebrew Standard (Mispar Hechrachi), Mispar Gadol, Hebrew Ordinal, English Simple, English Ordinal, and English Reverse.",
@@ -64,15 +64,15 @@ const faqSchema = {
       name: "Is this gematria calculator free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes — completely free with no account, signup, or payment required.",
+        text: "Yes, completely free with no account, signup, or payment required.",
       },
     },
     {
       "@type": "Question",
-      name: "Does it work for both Hebrew and English?",
+      name: "Does it work for Hebrew and English?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, it supports full Hebrew and English gematria calculation simultaneously across all cipher systems.",
+        text: "Yes, it calculates Hebrew and English gematria simultaneously across all supported cipher systems.",
       },
     },
   ],
