@@ -5,9 +5,11 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "./GematriaCalculatorClient";
 
-const HOMEPAGE_TITLE = "Free Online Gematria Calculator | Hebrew & English Gematria";
+const HOMEPAGE_TITLE = "Gematria Calculator — Hebrew & English, 6 Cipher Systems";
 const HOMEPAGE_DESCRIPTION =
-  "Free gematria calculator for Hebrew and English — get instant values across 6 cipher systems including Mispar Hechrachi, English Simple, Ordinal, and Reverse. No signup, no ads, works on any device. Calculadora de gematria gratuita — hebraico e inglês.";
+  "Calculate Hebrew and English gematria instantly. Type any word or phrase and see all six cipher values side by side — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.";
+const HOMEPAGE_OG_DESCRIPTION =
+  "Calculate Hebrew and English gematria instantly across six cipher systems. Calculadora de gematría gratis — hebreo e inglés. Calculadora de gematria grátis — hebraico e inglês.";
 const HOMEPAGE_CANONICAL_URL = "https://www.gematriaguru.com";
 
 export const metadata: Metadata = {
@@ -15,14 +17,19 @@ export const metadata: Metadata = {
   description: HOMEPAGE_DESCRIPTION,
   openGraph: {
     title: HOMEPAGE_TITLE,
-    description: HOMEPAGE_DESCRIPTION,
+    description: HOMEPAGE_OG_DESCRIPTION,
     url: HOMEPAGE_CANONICAL_URL,
     type: "website",
   },
   alternates: {
     canonical: HOMEPAGE_CANONICAL_URL,
     languages: {
-      "pt-BR": "https://www.gematriaguru.com/?hl=pt",
+      "x-default": HOMEPAGE_CANONICAL_URL,
+      en: HOMEPAGE_CANONICAL_URL,
+      es: HOMEPAGE_CANONICAL_URL,
+      "es-ES": HOMEPAGE_CANONICAL_URL,
+      "es-MX": HOMEPAGE_CANONICAL_URL,
+      "pt-BR": HOMEPAGE_CANONICAL_URL,
     },
   },
 };

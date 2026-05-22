@@ -5,11 +5,11 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gematriaguru.com"),
   title: {
-    default: "Free Online Gematria Calculator | Gematria Guru",
+    default: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
     template: "%s | Gematria Guru",
   },
   description:
-    "Calculate gematria values for Hebrew, English, and other systems. Explore numerology, kabbalah, and biblical numerology with our free gematria calculator.",
+    "Calculate Hebrew and English gematria instantly across six cipher systems — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.",
   keywords: [
     "gematria calculator",
     "Hebrew gematria",
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.gematriaguru.com",
     siteName: "Gematria Guru",
-    title: "Free Online Gematria Calculator | Gematria Guru",
-    description: "Calculate gematria values for Hebrew, English, and other systems.",
+    title: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
+    description: "Calculate Hebrew and English gematria instantly across six cipher systems. Calculadora de gematría gratis — hebreo e inglés. Calculadora de gematria grátis — hebraico e inglês.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Online Gematria Calculator | Gematria Guru",
-    description: "Calculate gematria values for Hebrew, English, and other systems.",
+    title: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
+    description: "Calculate Hebrew and English gematria instantly across six cipher systems — free, no signup.",
   },
 };
 
