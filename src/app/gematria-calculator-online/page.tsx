@@ -5,9 +5,11 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "@/app/GematriaCalculatorClient";
 
-const PAGE_TITLE = "Gematria Calculator Online — Free Hebrew & English Tool";
+const PAGE_TITLE = "Gematria Calculator Online — Instant Hebrew & English Values";
 const PAGE_DESCRIPTION =
-  "Free online gematria calculator — no download, no signup. Instant values across Hebrew Standard, English Simple, Ordinal, Reverse, and more cipher systems.";
+  "Use the gematria calculator online, right in your browser. Type any word and see all six cipher values side by side — Hebrew Standard, Mispar Gadol, Ordinal, English Simple, Ordinal, Reverse. No install.";
+const PAGE_OG_DESCRIPTION =
+  "Gematria calculator online — type any word, see all six Hebrew and English cipher values instantly. Calculadora de gematría online. Calculadora de gematria online.";
 const PAGE_CANONICAL_URL =
   "https://www.gematriaguru.com/gematria-calculator-online";
 
@@ -16,11 +18,19 @@ export const metadata: Metadata = {
   description: PAGE_DESCRIPTION,
   openGraph: {
     title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
+    description: PAGE_OG_DESCRIPTION,
     url: PAGE_CANONICAL_URL,
   },
   alternates: {
     canonical: PAGE_CANONICAL_URL,
+    languages: {
+      "x-default": PAGE_CANONICAL_URL,
+      en: PAGE_CANONICAL_URL,
+      es: PAGE_CANONICAL_URL,
+      "es-ES": PAGE_CANONICAL_URL,
+      "es-MX": PAGE_CANONICAL_URL,
+      "pt-BR": PAGE_CANONICAL_URL,
+    },
   },
 };
 
