@@ -21,6 +21,7 @@ export async function generateMetadata({
       "Explore gematria guides, number meanings, and tips for using our free Hebrew and English gematria calculator.",
     keywords: ["gematria articles", "numerology blog", "kabbalah guide", "biblical numerology"],
     openGraph: { title: "Gematria Blog | Guides, Meanings & Calculator Tips", description: "Explore gematria guides, number meanings, and tips for using our free Hebrew and English gematria calculator.", url: "https://www.gematriaguru.com/blog" },
+    alternates: { canonical: "https://www.gematriaguru.com/blog" },
     ...(hasCategory && { robots: { index: false, follow: true } }),
   };
 }
@@ -29,7 +30,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
   name: "Gematria Knowledge Center",
-  url: "https://gematriaguru.com/blog",
+  url: "https://www.gematriaguru.com/blog",
   publisher: { "@type": "Organization", name: "Gematria Guru" },
 };
 

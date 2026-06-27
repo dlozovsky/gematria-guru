@@ -5,7 +5,8 @@ import NavFooter from "@/components/NavFooter";
 export const metadata: Metadata = {
   title: "Cookie Policy",
   description: "Cookie Policy for Gematria Guru.",
-  openGraph: { url: "https://gematriaguru.com/cookies" },
+  openGraph: { url: "https://www.gematriaguru.com/cookies" },
+  alternates: { canonical: "https://www.gematriaguru.com/cookies" },
 };
 
 export default function CookiesPage() {

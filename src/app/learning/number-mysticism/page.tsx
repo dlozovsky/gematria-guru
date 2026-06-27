@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   title: "Number Mysticism in Jewish Tradition — Module 7",
   description: "Explore the spiritual significance of numbers in Jewish mysticism. Learn about key numbers like 7, 10, 18, 26, and 72 and their role in Kabbalah and Torah.",
   keywords: ["jewish number mysticism", "kabbalah numbers", "gematria number significance"],
-  openGraph: { title: "Number Mysticism", url: "https://gematriaguru.com/learning/number-mysticism" },
+  openGraph: { title: "Number Mysticism", url: "https://www.gematriaguru.com/learning/number-mysticism" },
+  alternates: { canonical: "https://www.gematriaguru.com/learning/number-mysticism" },
 };
 
 export default function NumberMysticismModulePage() {

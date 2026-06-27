@@ -9,7 +9,7 @@ const HOMEPAGE_TITLE = "Gematria Calculator — Hebrew & English, 6 Cipher Syste
 const HOMEPAGE_DESCRIPTION =
   "Calculate Hebrew and English gematria instantly. Type any word or phrase and see all six cipher values side by side — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.";
 const HOMEPAGE_OG_DESCRIPTION =
-  "Calculate Hebrew and English gematria instantly across six cipher systems. Calculadora de gematría gratis — hebreo e inglés. Calculadora de gematria grátis — hebraico e inglês.";
+  "Calculate Hebrew and English gematria instantly across six cipher systems — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.";
 const HOMEPAGE_CANONICAL_URL = "https://www.gematriaguru.com";
 
 export const metadata: Metadata = {
@@ -23,14 +23,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: HOMEPAGE_CANONICAL_URL,
-    languages: {
-      "x-default": HOMEPAGE_CANONICAL_URL,
-      en: HOMEPAGE_CANONICAL_URL,
-      es: HOMEPAGE_CANONICAL_URL,
-      "es-ES": HOMEPAGE_CANONICAL_URL,
-      "es-MX": HOMEPAGE_CANONICAL_URL,
-      "pt-BR": HOMEPAGE_CANONICAL_URL,
-    },
   },
 };
 

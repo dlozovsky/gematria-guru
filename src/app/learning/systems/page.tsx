@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   title: "Gematria Systems Overview — Module 3",
   description: "Explore the major gematria systems including standard, reduced, ordinal, gadol, and more. Learn how each system assigns values and when to use them.",
   keywords: ["gematria systems", "mispar gadol", "mispar katan", "ordinal gematria"],
-  openGraph: { title: "Gematria Systems Overview", url: "https://gematriaguru.com/learning/systems" },
+  openGraph: { title: "Gematria Systems Overview", url: "https://www.gematriaguru.com/learning/systems" },
+  alternates: { canonical: "https://www.gematriaguru.com/learning/systems" },
 };
 
 export default function SystemsModulePage() {

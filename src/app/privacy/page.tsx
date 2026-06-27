@@ -5,7 +5,8 @@ import NavFooter from "@/components/NavFooter";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Privacy Policy for Gematria Guru.",
-  openGraph: { url: "https://gematriaguru.com/privacy" },
+  openGraph: { url: "https://www.gematriaguru.com/privacy" },
+  alternates: { canonical: "https://www.gematriaguru.com/privacy" },
 };
 
 export default function PrivacyPage() {

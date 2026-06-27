@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: { absolute: "About Gematria Guru | Free Hebrew & English Calculator" },
   description: "Learn about Gematria Guru — a free online tool for calculating Hebrew and English gematria values with multiple cipher methods.",
   openGraph: { title: "About Gematria Guru | Free Hebrew & English Calculator", description: "Learn about Gematria Guru — a free online tool for calculating Hebrew and English gematria values with multiple cipher methods.", url: "https://www.gematriaguru.com/about" },
+  alternates: { canonical: "https://www.gematriaguru.com/about" },
 };
 
 export default function AboutPage() {
