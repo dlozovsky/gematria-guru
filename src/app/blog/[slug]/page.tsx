@@ -87,10 +87,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       type: "article",
       title: post.title,
       description: post.excerpt,
-      url: `https://gematriaguru.com/blog/${post.slug}`,
+      url: `https://www.gematriaguru.com/blog/${post.slug}`,
       publishedTime: post.published_at,
       modifiedTime,
     },
+    alternates: { canonical: `https://www.gematriaguru.com/blog/${post.slug}` },
   };
 }
 
@@ -113,10 +114,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     headline: post.title,
     description: post.excerpt,
     author: { "@type": "Person", name: post.author },
-    publisher: { "@type": "Organization", name: "Gematria Guru", url: "https://gematriaguru.com" },
+    publisher: { "@type": "Organization", name: "Gematria Guru", url: "https://www.gematriaguru.com" },
     datePublished: post.published_at,
     dateModified: modifiedTime,
-    url: `https://gematriaguru.com/blog/${post.slug}`,
+    url: `https://www.gematriaguru.com/blog/${post.slug}`,
   };
 
   return (

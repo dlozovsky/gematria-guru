@@ -6,7 +6,8 @@ export const metadata: Metadata = {
   title: "Introduction to Gematria — Learning Module 1",
   description: "Learn the basics of gematria: what it is, its historical origins in Jewish tradition, how Hebrew letters map to numbers, and common gematria systems.",
   keywords: ["what is gematria", "gematria introduction", "gematria basics"],
-  openGraph: { title: "Introduction to Gematria", url: "https://gematriaguru.com/learning/intro" },
+  openGraph: { title: "Introduction to Gematria", url: "https://www.gematriaguru.com/learning/intro" },
+  alternates: { canonical: "https://www.gematriaguru.com/learning/intro" },
 };
 
 export default function IntroModulePage() {

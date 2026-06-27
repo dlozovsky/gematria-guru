@@ -5,7 +5,8 @@ import NavFooter from "@/components/NavFooter";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "Terms of Service for Gematria Guru.",
-  openGraph: { url: "https://gematriaguru.com/terms" },
+  openGraph: { url: "https://www.gematriaguru.com/terms" },
+  alternates: { canonical: "https://www.gematriaguru.com/terms" },
 };
 
 export default function TermsPage() {

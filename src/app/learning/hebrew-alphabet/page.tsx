@@ -4,7 +4,8 @@ import NextModuleLayout from "@/components/NextModuleLayout";
 export const metadata: Metadata = {
   title: "Hebrew Alphabet and Numerical Values — Module 2",
   description: "Master all 22 Hebrew letters and their gematria values. Includes standard values, final letter forms, and practice examples.",
-  openGraph: { title: "Hebrew Alphabet as Numbers", url: "https://gematriaguru.com/learning/hebrew-alphabet" },
+  openGraph: { title: "Hebrew Alphabet as Numbers", url: "https://www.gematriaguru.com/learning/hebrew-alphabet" },
+  alternates: { canonical: "https://www.gematriaguru.com/learning/hebrew-alphabet" },
 };
 
 const letters = [

@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   title: "Practical Applications of Gematria — Module 8",
   description: "Learn how to apply gematria in everyday life, personal reflection, Jewish practice, and modern research. Includes tools, tips, and real-world use cases.",
   keywords: ["gematria applications", "how to use gematria", "gematria practice"],
-  openGraph: { title: "Practical Applications of Gematria", url: "https://gematriaguru.com/learning/practical-applications" },
+  openGraph: { title: "Practical Applications of Gematria", url: "https://www.gematriaguru.com/learning/practical-applications" },
+  alternates: { canonical: "https://www.gematriaguru.com/learning/practical-applications" },
 };
 
 export default function PracticalApplicationsModulePage() {

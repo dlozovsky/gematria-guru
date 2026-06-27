@@ -9,7 +9,7 @@ const PAGE_TITLE = "Gematria Calculator Online — Instant Hebrew & English Valu
 const PAGE_DESCRIPTION =
   "Use the gematria calculator online, right in your browser. Type any word and see all six cipher values side by side — Hebrew Standard, Mispar Gadol, Ordinal, English Simple, Ordinal, Reverse. No install.";
 const PAGE_OG_DESCRIPTION =
-  "Gematria calculator online — type any word, see all six Hebrew and English cipher values instantly. Calculadora de gematría online. Calculadora de gematria online.";
+  "Gematria calculator online — type any word, see all six Hebrew and English cipher values instantly. Free, no install.";
 const PAGE_CANONICAL_URL =
   "https://www.gematriaguru.com/gematria-calculator-online";
 
@@ -23,14 +23,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: PAGE_CANONICAL_URL,
-    languages: {
-      "x-default": PAGE_CANONICAL_URL,
-      en: PAGE_CANONICAL_URL,
-      es: PAGE_CANONICAL_URL,
-      "es-ES": PAGE_CANONICAL_URL,
-      "es-MX": PAGE_CANONICAL_URL,
-      "pt-BR": PAGE_CANONICAL_URL,
-    },
   },
 };
 

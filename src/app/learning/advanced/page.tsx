@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   title: "Advanced Gematria Techniques — Module 4",
   description: "Learn advanced gematria ciphers including AtBash, Albam, Ayak Bakar, and Achas Beta. Understand substitution ciphers and their use in Kabbalistic texts.",
   keywords: ["atbash gematria", "albam cipher", "advanced gematria", "kabbalistic ciphers"],
-  openGraph: { title: "Advanced Gematria Techniques", url: "https://gematriaguru.com/learning/advanced" },
+  openGraph: { title: "Advanced Gematria Techniques", url: "https://www.gematriaguru.com/learning/advanced" },
+  alternates: { canonical: "https://www.gematriaguru.com/learning/advanced" },
 };
 
 export default function AdvancedModulePage() {

@@ -6,7 +6,8 @@ import ContactForm from "./ContactForm";
 export const metadata: Metadata = {
   title: "Contact Us",
   description: "Get in touch with the Gematria Guru team. We welcome questions, feedback, and suggestions.",
-  openGraph: { title: "Contact Gematria Guru", url: "https://gematriaguru.com/contact" },
+  openGraph: { title: "Contact Gematria Guru", url: "https://www.gematriaguru.com/contact" },
+  alternates: { canonical: "https://www.gematriaguru.com/contact" },
 };
 
 export default function ContactPage() {

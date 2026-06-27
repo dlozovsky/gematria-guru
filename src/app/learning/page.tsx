@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description: "New to gematria? Learn how Hebrew and English gematria works, what the numbers mean, and how to use a gematria calculator.",
   keywords: ["learn gematria", "gematria course", "Hebrew numerology tutorial"],
   openGraph: { title: "Learn Gematria | Hebrew Numerology Explained", description: "New to gematria? Learn how Hebrew and English gematria works, what the numbers mean, and how to use a gematria calculator.", url: "https://www.gematriaguru.com/learning" },
+  alternates: { canonical: "https://www.gematriaguru.com/learning" },
 };
 
 const modules = [
@@ -33,8 +34,8 @@ const jsonLd = {
   "@type": "Course",
   name: "Gematria Learning Modules",
   description: "Comprehensive gematria course from beginner to advanced levels",
-  provider: { "@type": "Organization", name: "Gematria Guru", url: "https://gematriaguru.com" },
-  url: "https://gematriaguru.com/learning",
+  provider: { "@type": "Organization", name: "Gematria Guru", url: "https://www.gematriaguru.com" },
+  url: "https://www.gematriaguru.com/learning",
 };
 
 export default function LearningPage() {

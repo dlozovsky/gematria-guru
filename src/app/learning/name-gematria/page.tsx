@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   title: "Name Gematria — Module 6",
   description: "Learn how to calculate and interpret the gematria of Hebrew names. Understand the spiritual significance of names and how gematria reveals their hidden meaning.",
   keywords: ["name gematria", "hebrew name numerology", "gematria of names"],
-  openGraph: { title: "Name Gematria", url: "https://gematriaguru.com/learning/name-gematria" },
+  openGraph: { title: "Name Gematria", url: "https://www.gematriaguru.com/learning/name-gematria" },
+  alternates: { canonical: "https://www.gematriaguru.com/learning/name-gematria" },
 };
 
 export default function NameGematriaModulePage() {

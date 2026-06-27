@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   title: "Torah Gematria — Module 5",
   description: "Discover how gematria is used to interpret the Torah. Learn classic examples from the Five Books of Moses, rabbinic literature, and Kabbalistic commentary.",
   keywords: ["torah gematria", "gematria bible", "jewish numerology torah"],
-  openGraph: { title: "Torah Gematria", url: "https://gematriaguru.com/learning/torah-gematria" },
+  openGraph: { title: "Torah Gematria", url: "https://www.gematriaguru.com/learning/torah-gematria" },
+  alternates: { canonical: "https://www.gematriaguru.com/learning/torah-gematria" },
 };
 
 export default function TorahGematriaModulePage() {

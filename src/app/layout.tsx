@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     url: "https://www.gematriaguru.com",
     siteName: "Gematria Guru",
     title: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
-    description: "Calculate Hebrew and English gematria instantly across six cipher systems. Calculadora de gematría gratis — hebreo e inglés. Calculadora de gematria grátis — hebraico e inglês.",
+    description: "Calculate Hebrew and English gematria instantly across six cipher systems — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.",
   },
   twitter: {
     card: "summary_large_image",
