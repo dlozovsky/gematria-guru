@@ -13,11 +13,18 @@ const EDITORIAL_BIO =
   "Written by the Gematria Guru editorial team, specializing in Hebrew and English cipher systems and their modern applications.";
 
 async function getPost(slug: string): Promise<BlogPost | null> {
-  const fallbackPost = blogFallbackPosts.find((post) => post.slug === slug) ?? null;
+  const now = new Date().toISOString();
+  const fallbackPost =
+    blogFallbackPosts.find((post) => post.slug === slug && post.published_at <= now) ?? null;
 
   if (!supabase) return fallbackPost;
   try {
-    const { data } = await supabase.from("blog_posts").select("*").eq("slug", slug).maybeSingle();
+    const { data } = await supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("slug", slug)
+      .lte("published_at", now)
+      .maybeSingle();
     return data ?? fallbackPost;
   } catch {
     return fallbackPost;
@@ -25,8 +32,9 @@ async function getPost(slug: string): Promise<BlogPost | null> {
 }
 
 async function getRelatedPosts(current: BlogPost, limit = 3): Promise<BlogPost[]> {
+  const now = new Date().toISOString();
   const fallbackRelated = blogFallbackPosts
-    .filter((p) => p.slug !== current.slug)
+    .filter((p) => p.slug !== current.slug && p.published_at <= now)
     .sort((a, b) => {
       const sameCatA = a.category === current.category ? 0 : 1;
       const sameCatB = b.category === current.category ? 0 : 1;
@@ -42,6 +50,7 @@ async function getRelatedPosts(current: BlogPost, limit = 3): Promise<BlogPost[]
       .select("*")
       .eq("category", current.category)
       .neq("slug", current.slug)
+      .lte("published_at", now)
       .order("published_at", { ascending: false })
       .limit(limit);
 
@@ -51,6 +60,7 @@ async function getRelatedPosts(current: BlogPost, limit = 3): Promise<BlogPost[]
         .from("blog_posts")
         .select("*")
         .neq("slug", current.slug)
+        .lte("published_at", now)
         .order("published_at", { ascending: false })
         .limit(limit + results.length);
       for (const post of filler ?? []) {
@@ -65,13 +75,21 @@ async function getRelatedPosts(current: BlogPost, limit = 3): Promise<BlogPost[]
 }
 
 export async function generateStaticParams() {
-  if (!supabase) return blogFallbackPosts.map((post) => ({ slug: post.slug }));
+  const now = new Date().toISOString();
+  const fallbackSlugs = blogFallbackPosts
+    .filter((post) => post.published_at <= now)
+    .map((post) => ({ slug: post.slug }));
+
+  if (!supabase) return fallbackSlugs;
   try {
-    const { data } = await supabase.from("blog_posts").select("slug");
-    if (!data || data.length === 0) return blogFallbackPosts.map((post) => ({ slug: post.slug }));
+    const { data } = await supabase
+      .from("blog_posts")
+      .select("slug")
+      .lte("published_at", now);
+    if (!data || data.length === 0) return fallbackSlugs;
     return data.map((p) => ({ slug: p.slug }));
   } catch {
-    return blogFallbackPosts.map((post) => ({ slug: post.slug }));
+    return fallbackSlugs;
   }
 }
 
