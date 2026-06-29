@@ -35,14 +35,19 @@ const jsonLd = {
 };
 
 async function getPosts(category?: string): Promise<BlogPost[]> {
-  const fallbackPosts = category
-    ? blogFallbackPosts.filter((post) => post.category === category)
-    : blogFallbackPosts;
+  const now = new Date().toISOString();
+  const fallbackPosts = blogFallbackPosts
+    .filter((post) => post.published_at <= now)
+    .filter((post) => !category || post.category === category);
 
   if (!supabase) return fallbackPosts;
 
   try {
-    let query = supabase.from("blog_posts").select("*").order("published_at", { ascending: false });
+    let query = supabase
+      .from("blog_posts")
+      .select("*")
+      .lte("published_at", now)
+      .order("published_at", { ascending: false });
     if (category) query = query.eq("category", category);
     const { data } = await query;
 
