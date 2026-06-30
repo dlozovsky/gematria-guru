@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { supabase, type BlogPost } from "@/lib/supabase";
 import { blogFallbackPosts } from "@/lib/blogFallbackPosts";
 
+export const revalidate = 3600; // regenerate every hour as a fallback
+
 const BASE_URL = "https://www.gematriaguru.com";
 
 const LEARNING_MODULES = [
