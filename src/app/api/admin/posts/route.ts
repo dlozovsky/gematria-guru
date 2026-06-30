@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
+import { verifyToken } from "@/lib/admin-auth";
 
 function getServiceClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -14,7 +15,8 @@ export async function POST(request: Request) {
   // Auth check
   const cookieStore = await cookies();
   const token = cookieStore.get("admin_token")?.value;
-  if (!token || token !== process.env.ADMIN_PASSWORD) {
+  const password = process.env.ADMIN_PASSWORD ?? "";
+  if (!token || !password || !(await verifyToken(token, password))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
