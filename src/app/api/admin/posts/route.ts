@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
@@ -54,6 +55,10 @@ export async function POST(request: Request) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/blog");
+  revalidatePath(`/blog/${data.slug}`);
 
   return NextResponse.json({ ok: true, post: data });
 }
