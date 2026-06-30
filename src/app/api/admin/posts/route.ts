@@ -5,9 +5,11 @@ import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/admin-auth";
 import { supabase as anonClient } from "@/lib/supabase";
 
-function getServiceClient() {
+function getWriteClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Prefer service role key (bypasses RLS); fall back to anon key
+  const key = serviceKey || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !key) return null;
   return createClient(url, key, { auth: { persistSession: false } });
 }
@@ -43,10 +45,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const supabase = getServiceClient();
+  const supabase = getWriteClient();
   if (!supabase) {
     return NextResponse.json(
-      { error: "SUPABASE_SERVICE_ROLE_KEY not configured" },
+      { error: "Supabase not configured" },
       { status: 500 }
     );
   }
