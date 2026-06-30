@@ -29,7 +29,7 @@ export async function GET() {
     const now = new Date().toISOString();
     const { data, error } = await supabase
       .from("blog_posts")
-      .select("slug, published_at, updated_at")
+      .select("slug, published_at")
       .lte("published_at", now)
       .order("published_at", { ascending: false });
 
