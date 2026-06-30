@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/admin-auth";
+import { supabase as anonClient } from "@/lib/supabase";
 
 function getServiceClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -24,12 +25,11 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const supabase = getServiceClient();
-  if (!supabase) {
-    return NextResponse.json({ error: "SUPABASE_SERVICE_ROLE_KEY not configured" }, { status: 500 });
+  if (!anonClient) {
+    return NextResponse.json({ error: "Supabase not configured" }, { status: 500 });
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await anonClient
     .from("blog_posts")
     .select("id, title, slug, category, author, published_at, read_time")
     .order("published_at", { ascending: false });
