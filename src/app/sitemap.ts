@@ -22,7 +22,7 @@ async function getBlogPosts(): Promise<Pick<BlogPost, "slug" | "published_at" | 
   try {
     const { data } = await supabase
       .from("blog_posts")
-      .select("slug, published_at, updated_at")
+      .select("slug, published_at")
       .lte("published_at", new Date().toISOString())
       .order("published_at", { ascending: false });
     if (!data || data.length === 0) return blogFallbackPosts;
@@ -60,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getBlogPosts();
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: post.updated_at ? new Date(post.updated_at) : new Date(post.published_at),
+    lastModified: new Date(post.published_at),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
