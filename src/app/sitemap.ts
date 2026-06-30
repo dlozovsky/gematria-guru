@@ -21,6 +21,7 @@ async function getBlogPosts(): Promise<Pick<BlogPost, "slug" | "published_at" | 
     const { data } = await supabase
       .from("blog_posts")
       .select("slug, published_at, updated_at")
+      .lte("published_at", new Date().toISOString())
       .order("published_at", { ascending: false });
     if (!data || data.length === 0) return blogFallbackPosts;
     return data;
