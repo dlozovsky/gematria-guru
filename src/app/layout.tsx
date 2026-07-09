@@ -5,7 +5,7 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gematriaguru.com"),
   title: {
-    default: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
+    default: "Free Online Gematria Calculator — Hebrew & English, 6 Ciphers",
     template: "%s | Gematria Guru",
   },
   description:
@@ -31,12 +31,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.gematriaguru.com",
     siteName: "Gematria Guru",
-    title: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
+    title: "Free Online Gematria Calculator — Hebrew & English, 6 Ciphers",
     description: "Calculate Hebrew and English gematria instantly across six cipher systems — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
+    title: "Free Online Gematria Calculator — Hebrew & English, 6 Ciphers",
     description: "Calculate Hebrew and English gematria instantly across six cipher systems — free, no signup.",
   },
 };

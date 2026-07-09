@@ -5,7 +5,7 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "./GematriaCalculatorClient";
 
-const HOMEPAGE_TITLE = "Gematria Calculator — Hebrew & English, 6 Cipher Systems";
+const HOMEPAGE_TITLE = "Free Online Gematria Calculator — Hebrew & English, 6 Ciphers";
 const HOMEPAGE_DESCRIPTION =
   "Calculate Hebrew and English gematria instantly. Type any word or phrase and see all six cipher values side by side — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.";
 const HOMEPAGE_OG_DESCRIPTION =
@@ -75,6 +75,54 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "Yes, it calculates Hebrew and English gematria simultaneously across all supported cipher systems.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is Gematria?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Gematria is a system of assigning numerical values to letters in alphabets. It has been used in various cultures, particularly in Jewish mysticism, to find hidden meanings and connections between words and phrases that share the same numerical value.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How is English Gematria calculated?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "In English Gematria, each letter is assigned a value based on its position in the alphabet: A=1, B=2, C=3, and so on up to Z=26.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do I interpret Gematria numbers?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Gematria numbers can be interpreted by finding words with the same numerical value to discover hidden connections, relating results to significant biblical or cultural numbers (7 for completion, 18 for life), or breaking numbers into their constituent parts. The meaning often depends on cultural and religious context.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What do some common numbers mean in Gematria?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Significant numbers include 7 (spiritual perfection), 8 (new beginnings), 12 (governmental perfection), 18 (life in Jewish tradition), 26 (the divine name YHWH), and 666 (associated with 'the beast' in Christian tradition).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is Gematria scientific?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Gematria is not considered scientific in the modern sense. It is a mystical or hermeneutic approach to finding meaning, though many religious scholars value it as part of traditional exegesis.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Where is Gematria used today?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Today, Gematria is used in Jewish mysticism (Kabbalah), some Christian theological studies, occult practices and numerology, and by people interested in finding hidden patterns in language.",
       },
     },
   ],
