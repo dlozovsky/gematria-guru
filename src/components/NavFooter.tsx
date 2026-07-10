@@ -5,9 +5,12 @@ const NavFooter = () => (
     <div className="max-w-5xl mx-auto px-4 py-8">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
         <div>
-          <h3 className="font-semibold text-sm mb-3">Tools</h3>
+          <h3 className="font-semibold text-sm mb-3">Calculators</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><Link href="/" className="hover:text-primary transition-colors">Gematria Calculator</Link></li>
+            <li><Link href="/hebrew-gematria-calculator" className="hover:text-primary transition-colors">Hebrew Gematria Calculator</Link></li>
+            <li><Link href="/english-gematria-calculator" className="hover:text-primary transition-colors">English Gematria Calculator</Link></li>
+            <li><Link href="/gematria-calculator-online" className="hover:text-primary transition-colors">Gematria Calculator Online</Link></li>
             <li><Link href="/number-maps" className="hover:text-primary transition-colors">Number Maps</Link></li>
           </ul>
         </div>
@@ -16,6 +19,8 @@ const NavFooter = () => (
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><Link href="/learning" className="hover:text-primary transition-colors">Learning Modules</Link></li>
             <li><Link href="/blog" className="hover:text-primary transition-colors">Knowledge Center</Link></li>
+            <li><Link href="/hebrew-gematria-reference-chart-2026" className="hover:text-primary transition-colors">Hebrew Gematria Reference Chart</Link></li>
+            <li><Link href="/english-to-hebrew-gematria" className="hover:text-primary transition-colors">English to Hebrew Gematria</Link></li>
           </ul>
         </div>
         <div>

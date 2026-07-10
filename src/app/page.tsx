@@ -5,11 +5,11 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "./GematriaCalculatorClient";
 
-const HOMEPAGE_TITLE = "Gematria Calculator — Hebrew & English, 6 Cipher Systems";
+const HOMEPAGE_TITLE = "Free Gematria Calculator — Hebrew & English, 6 Cipher Systems";
 const HOMEPAGE_DESCRIPTION =
-  "Calculate Hebrew and English gematria instantly. Type any word or phrase and see all six cipher values side by side — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.";
+  "Free gematria calculator — Hebrew & English. Type a word, see instant values across 6 cipher systems (Mispar Hechrachi, Ordinal, Reverse). No signup.";
 const HOMEPAGE_OG_DESCRIPTION =
-  "Calculate Hebrew and English gematria instantly across six cipher systems — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.";
+  "Type a word, see instant gematria values across 6 Hebrew & English cipher systems. Free, no signup required.";
 const HOMEPAGE_CANONICAL_URL = "https://www.gematriaguru.com";
 
 export const metadata: Metadata = {
@@ -108,6 +108,18 @@ export default function HomePage({
             <h2 className="text-2xl font-bold mb-6">Explore Gematria</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
+                {
+                  title: "Hebrew Gematria Calculator",
+                  href: "/hebrew-gematria-calculator",
+                  description:
+                    "Convert Hebrew words to values with Mispar Hechrachi, Mispar Gadol, and Ordinal methods.",
+                },
+                {
+                  title: "English Gematria Calculator",
+                  href: "/english-gematria-calculator",
+                  description:
+                    "Convert English words to values with Simple, Ordinal, and Reverse cipher methods.",
+                },
                 {
                   title: "Learn Gematria",
                   href: "/learning",
