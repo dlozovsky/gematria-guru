@@ -4,7 +4,7 @@ import NavFooter from "@/components/NavFooter";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
+  title: "Contact Us — Questions, Feedback & Suggestions",
   description: "Get in touch with the Gematria Guru team. We welcome questions, feedback, and suggestions.",
   openGraph: { title: "Contact Gematria Guru", url: "https://www.gematriaguru.com/contact" },
   alternates: { canonical: "https://www.gematriaguru.com/contact" },
