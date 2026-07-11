@@ -126,6 +126,12 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const wasUpdated =
     !!post.updated_at && new Date(post.updated_at).getTime() > new Date(post.published_at).getTime();
 
+  // Post content is stored HTML that may contain its own <h1>; demote to <h2>
+  // so the page keeps a single H1 (the title in the header).
+  const contentHtml = post.content
+    .replace(/<h1(\s|>)/gi, "<h2$1")
+    .replace(/<\/h1>/gi, "</h2>");
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -177,7 +183,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
             <div
               className="prose prose-slate max-w-none prose-headings:font-bold prose-p:leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
 
             {relatedPosts.length > 0 && (

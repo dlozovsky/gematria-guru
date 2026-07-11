@@ -3,8 +3,8 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy",
-  description: "Cookie Policy for Gematria Guru.",
+  title: "Cookie Policy — How We Use Cookies",
+  description: "Learn which cookies Gematria Guru uses, why we use them, and how you can manage or disable them in your browser.",
   openGraph: { url: "https://www.gematriaguru.com/cookies" },
   alternates: { canonical: "https://www.gematriaguru.com/cookies" },
 };

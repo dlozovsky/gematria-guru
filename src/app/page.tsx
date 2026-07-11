@@ -100,6 +100,12 @@ export default function HomePage({
       <div className="min-h-screen flex flex-col">
         <NavHeader />
         <main className="flex-1 w-full max-w-3xl mx-auto flex flex-col items-center justify-start px-4 py-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            Free Gematria Calculator — Hebrew &amp; English
+          </h1>
+          <p className="text-muted-foreground text-center mb-6">
+            Type a word or phrase and see instant values across 6 cipher systems.
+          </p>
           <Suspense fallback={<div className="w-full h-40" />}>
             <GematriaCalculatorClient initialPreset={initialPreset} />
           </Suspense>
