@@ -60,6 +60,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <script
+          data-harbor-site="nd737jypeadr69kydz2121xexx83ew2f"
+          src="https://outgoing-oyster-428.convex.site/api/harbor-seo.js?siteId=nd737jypeadr69kydz2121xexx83ew2f"
+          async
+        />
       </head>
       <body>
         <Providers>{children}</Providers>
