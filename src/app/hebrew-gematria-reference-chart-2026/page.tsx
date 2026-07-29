@@ -5,7 +5,7 @@ import NavFooter from "@/components/NavFooter";
 export const metadata: Metadata = {
   title: { absolute: "2026 Master Reference Chart: Hebrew Alphabet Gematria Values | Gematria Guru" },
   description:
-    "Your definitive guide to Hebrew alphabet gematria values. Explore Mispar Hechrachi, Mispar Gadol, and Mispar Katan values for all 22 letters and 5 Soffit forms — the complete 2026 reference chart.",
+    "Your definitive guide to Hebrew alphabet gematria values. Explore Mispar Hechrachi, Mispar Gadol, and Mispar Katan values for all 22 letters and 5 Soffit forms in the complete 2026 reference chart.",
   keywords: [
     "hebrew alphabet gematria",
     "mispar hechrachi",
@@ -204,7 +204,7 @@ const LP_HTML = `
   <section class="lp-section">
     <img src="https://outgoing-oyster-428.convex.cloud/api/storage/89f1dd9b-9eb2-458f-98af-b7a38b1fd928" alt="Hebrew gematria illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>The Significance of Gematria in 2026</h2>
-    <p>As we navigate the year 2026, the study of Gematria—the ancient practice of assigning numerical values to Hebrew letters—takes on profound new dimensions. In the Hebrew calendar, 2026 aligns largely with the year <strong>5786 (תשפ״ו)</strong>. This year is particularly noteworthy for two primary reasons:</p>
+    <p>As we navigate the year 2026, the study of Gematria, the ancient practice of assigning numerical values to Hebrew letters, takes on new dimensions. In the Hebrew calendar, 2026 aligns largely with the year <strong>5786 (תשפ״ו)</strong>. This year is particularly noteworthy for two primary reasons:</p>
     <div class="lp-grid">
       <div class="lp-card">
         <h3>The Year of the Vav</h3>
@@ -212,7 +212,7 @@ const LP_HTML = `
       </div>
       <div class="lp-card">
         <h3>The "26" Connection</h3>
-        <p>The number 26 is the numerical value of the <strong>Tetragrammaton (YHVH)</strong>—the most sacred four-letter name of the Divine in Hebrew tradition (Yud=10, Hey=5, Vav=6, Hey=5). The appearance of "26" within the Gregorian year 2026 signals a "Master Year" for those exploring covenantal patterns and divine presence through numbers.</p>
+        <p>The number 26 is the numerical value of the <strong>Tetragrammaton (YHVH)</strong>, the most sacred four-letter name of the Divine in Hebrew tradition (Yud=10, Hey=5, Vav=6, Hey=5). The appearance of "26" within the Gregorian year 2026 signals a "Master Year" for those exploring covenantal patterns and divine presence through numbers.</p>
       </div>
     </div>
     <p style="margin-top: 20px;">Furthermore, in universal numerology, 2026 is a <strong>Universal Year 1</strong> (2+0+2+6 = 10 → 1). This signifies new beginnings, leadership, and the "Road Less Traveled," making it the perfect time to master the foundational building blocks of creation: the 22 letters of the Hebrew Aleph-Bet.</p>
@@ -220,7 +220,7 @@ const LP_HTML = `
 
   <section class="lp-section">
     <h2>2026 Master Reference Chart</h2>
-    <p>This comprehensive table maps the 22 standard letters and the 5 Soffit (final) forms across the most utilized cipher systems. Whether you are using our <a href="https://www.gematriaguru.com/">Gematria Calculator</a> or performing manual calculations, this chart serves as your primary key.</p>
+    <p>This table maps the 22 standard letters and the 5 Soffit (final) forms across the most used cipher systems. The values are the same ones the <a href="https://www.gematriaguru.com/">Gematria Calculator</a> applies, so the chart works equally well for checking its output or for calculating by hand.</p>
     <div class="lp-table-container">
       <table class="lp-reference-table">
         <thead>
@@ -318,7 +318,7 @@ const LP_HTML = `
       <li><strong>Personal Reflection:</strong> Finding numerical patterns in names, dates, and life events to gain spiritual perspective.</li>
       <li><strong>Linguistic Research:</strong> Exploring the mathematical symmetry inherent in the Hebrew language.</li>
     </ul>
-    <p>For a deeper dive into the mechanics of these systems, visit our <a href="https://www.gematriaguru.com/learning">Gematria Learning Center</a>.</p>
+    <p>For more on how these systems work, visit our <a href="https://www.gematriaguru.com/learning">Gematria Learning Center</a>.</p>
   </section>
 
   <section class="lp-section lp-faq-container">

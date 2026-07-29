@@ -3,7 +3,7 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — How We Handle Your Data",
+  title: "Privacy Policy: How We Handle Your Data",
   description: "How Gematria Guru collects, uses, and protects your data when you use our free gematria calculator and learning resources.",
   openGraph: { url: "https://www.gematriaguru.com/privacy" },
   alternates: { canonical: "https://www.gematriaguru.com/privacy" },

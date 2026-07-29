@@ -58,7 +58,7 @@ const ModuleCard = ({ title, description, icon: Icon, level, duration, path, obj
             )}
             {objectives && (
               <div className="mb-2">
-                <div className="font-semibold text-sm text-blue-800 mb-1">🎯 Learning Objectives</div>
+                <div className="font-semibold text-sm text-blue-800 mb-1">Learning Objectives</div>
                 <ul className="list-disc pl-6 space-y-1 text-[15px] text-blue-900">
                   {objectives.map((obj, i) => <li key={i}>{obj}</li>)}
                 </ul>
@@ -66,7 +66,7 @@ const ModuleCard = ({ title, description, icon: Icon, level, duration, path, obj
             )}
             {highlights && (
               <div className="mb-2">
-                <div className="font-semibold text-sm text-blue-800 mb-1">✨ Module Highlights</div>
+                <div className="font-semibold text-sm text-blue-800 mb-1">Module Highlights</div>
                 <ul className="list-disc pl-6 space-y-1 text-[15px] text-blue-900">
                   {highlights.map((h, i) => <li key={i}>{h}</li>)}
                 </ul>

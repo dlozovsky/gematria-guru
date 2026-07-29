@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import NextModuleLayout from "@/components/NextModuleLayout";
 
 export const metadata: Metadata = {
-  title: "Hebrew Alphabet and Numerical Values — Module 2",
+  title: "Hebrew Alphabet and Numerical Values (Module 2)",
   description: "Master all 22 Hebrew letters and their gematria values. Includes standard values, final letter forms, and practice examples.",
   openGraph: { title: "Hebrew Alphabet as Numbers", url: "https://www.gematriaguru.com/learning/hebrew-alphabet" },
   alternates: { canonical: "https://www.gematriaguru.com/learning/hebrew-alphabet" },
@@ -61,7 +61,7 @@ export default function HebrewAlphabetModulePage() {
       <div className="border border-border rounded-xl p-6">
         <h2 className="text-xl font-semibold mb-3">Practice Examples</h2>
         <div className="space-y-3 text-sm">
-          {[["אמת (Emet — Truth): 441","א(1) + מ(40) + ת(400) = 441. Note: 441 = 21², a perfect square."],["שלום (Shalom — Peace): 376","ש(300) + ל(30) + ו(6) + ם(40) = 376"],["חיים (Chaim — Life): 68","ח(8) + י(10) + י(10) + ם(40) = 68"]].map(([title,detail]) => (
+          {[["אמת (Emet, \"truth\"): 441","א(1) + מ(40) + ת(400) = 441. Note: 441 = 21², a perfect square."],["שלום (Shalom, \"peace\"): 376","ש(300) + ל(30) + ו(6) + ם(40) = 376"],["חיים (Chaim, \"life\"): 68","ח(8) + י(10) + י(10) + ם(40) = 68"]].map(([title,detail]) => (
             <div key={String(title)} className="bg-muted/50 rounded-lg p-4">
               <h3 className="font-semibold mb-1">{title}</h3>
               <p className="text-muted-foreground">{detail}</p>

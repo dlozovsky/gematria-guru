@@ -189,7 +189,7 @@ export default function NewPostPage() {
             rows={12}
             value={raw}
             onChange={(e) => handleContentChange(e.target.value)}
-            placeholder="Paste markdown or HTML here — all fields below will fill in automatically…"
+            placeholder="Paste markdown or HTML here. The fields below fill in automatically."
             className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm font-mono focus:outline-none focus:ring-2 focus:ring-ring resize-y"
           />
           {processing && (
@@ -288,7 +288,7 @@ export default function NewPostPage() {
               Publish date{" "}
               {isFuture && (
                 <span className="ml-2 text-xs font-normal text-amber-600 dark:text-amber-400">
-                  Scheduled — will go live at this date
+                  Scheduled: goes live on this date
                 </span>
               )}
             </label>
@@ -340,7 +340,7 @@ export default function NewPostPage() {
           </button>
           {saved && (
             <p className="text-sm text-green-600 dark:text-green-400">
-              Post saved — resetting form in 3 s…
+              Post saved. Resetting the form in 3 seconds.
             </p>
           )}
           {error && <p className="text-sm text-destructive">{error}</p>}
