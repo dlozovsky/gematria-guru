@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import { CIPHER_COUNT_WORD } from "@/lib/gematriaReference";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gematriaguru.com"),
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Gematria Guru",
   },
   description:
-    "Type a word and get its value in seven systems at once, across Hebrew, English and Greek, with the full letter tables. Free, no signup.",
+    `Type a word and get its value in ${CIPHER_COUNT_WORD} systems at once, across Hebrew, English and Greek, with the full letter tables. Free, no signup.`,
   keywords: [
     "gematria calculator",
     "Hebrew gematria",
@@ -34,12 +35,12 @@ export const metadata: Metadata = {
     url: "https://www.gematriaguru.com",
     siteName: "Gematria Guru",
     title: "Free Gematria Calculator for Hebrew, English and Greek",
-    description: "Type a word and get its value in seven systems at once, across Hebrew, English and Greek, with the full letter tables. Free, no signup.",
+    description: `Type a word and get its value in ${CIPHER_COUNT_WORD} systems at once, across Hebrew, English and Greek, with the full letter tables. Free, no signup.`,
   },
   twitter: {
     card: "summary_large_image",
     title: "Free Gematria Calculator for Hebrew, English and Greek",
-    description: "Type a word and get its value in seven Hebrew, English and Greek systems at once. Free, no signup.",
+    description: `Type a word and get its value in ${CIPHER_COUNT_WORD} Hebrew, English and Greek systems at once. Free, no signup.`,
   },
 };
 

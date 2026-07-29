@@ -86,6 +86,17 @@ export const REVERSE_MAP: Record<string, number> = (() => {
   return map;
 })();
 
+// English Sumerian: the ordinal position multiplied by six, so a=6 through
+// z=156. Values are a fixed multiple of ENGLISH_MAP rather than an independent
+// table, which is why a word's Sumerian total is always six times its ordinal.
+export const SUMERIAN_MAP: Record<string, number> = (() => {
+  const map: Record<string, number> = {};
+  for (let i = 0; i < 26; i++) {
+    map[String.fromCharCode(97 + i)] = (i + 1) * 6;
+  }
+  return map;
+})();
+
 export const HEBREW_MAP: Record<string, number> = {
   "\u05D0": 1,
   "\u05D1": 2,
@@ -288,6 +299,24 @@ export function calculatePythagoreanGematria(text: string, mode: CalculationMode
 }
 
 const noopTransliterate = (_t: string): string => "";
+
+export function calculateSumerianGematria(text: string, mode: CalculationMode = "strict"): GematriaResult {
+  const words = text.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z]/g, "")).filter(Boolean);
+  const { wordBreakdown, total, allLetters } = buildWordBreakdown(words, SUMERIAN_MAP);
+  const reducedValue = reduceToSingleDigit(total);
+  const reductionSteps = buildReductionSteps(total);
+  return {
+    method: "English Sumerian",
+    value: total,
+    reducedValue,
+    reductionSteps,
+    letterBreakdown: allLetters,
+    wordBreakdown,
+    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
+    status: "calculated-strict",
+    mode,
+  };
+}
 
 export function calculateEnglishReverse(text: string, mode: CalculationMode = "strict"): GematriaResult {
   const words = text.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z]/g, "")).filter(Boolean);
@@ -542,6 +571,7 @@ export function calculateAllGematria(
     calculateEnglishGematria(text, mode),
     calculateEnglishReverse(text, mode),
     calculatePythagoreanGematria(text, mode),
+    calculateSumerianGematria(text, mode),
     calculateJewishGematria(text, mode, transliterateLatinToHebrew, hebrewOverride),
     calculateMisparGadol(text, mode, transliterateLatinToHebrew, hebrewOverride),
     calculateHebrewOrdinal(text, mode, transliterateLatinToHebrew, hebrewOverride),

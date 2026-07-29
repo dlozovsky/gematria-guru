@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { ENGLISH_LETTER_TABLE } from "@/lib/gematriaReference";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
 export const metadata: Metadata = {
   title: { absolute: "The Ultimate English Gematria Value Chart | Gematria Guru" },
   description:
-    "Full English letter value tables for Ordinal, Reverse and Pythagorean reduction. Every letter listed, with the arithmetic shown and the Hebrew systems alongside.",
+    "Full English letter value tables for Ordinal, Reverse, Pythagorean reduction and Sumerian. Every letter listed, with the arithmetic shown and the Hebrew systems alongside.",
   keywords: [
     "english gematria chart",
     "english ordinal gematria",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Ultimate English Gematria Value Chart",
     description:
-      "Full English letter value tables for Ordinal, Reverse and Pythagorean reduction. Every letter listed, with the arithmetic shown and the Hebrew systems alongside.",
+      "Full English letter value tables for Ordinal, Reverse, Pythagorean reduction and Sumerian. Every letter listed, with the arithmetic shown and the Hebrew systems alongside.",
     url: "https://www.gematriaguru.com/english-gematria-value-chart",
     type: "article",
   },
@@ -30,7 +31,7 @@ const jsonLd = {
   "@type": "Article",
   headline: "The Ultimate English Gematria Value Chart",
   description:
-    "Full English letter value tables for Ordinal, Reverse and Pythagorean reduction. Every letter listed, with the arithmetic shown and the Hebrew systems alongside.",
+    "Full English letter value tables for Ordinal, Reverse, Pythagorean reduction and Sumerian. Every letter listed, with the arithmetic shown and the Hebrew systems alongside.",
   publisher: { "@type": "Organization", name: "Gematria Guru", url: "https://www.gematriaguru.com" },
   url: "https://www.gematriaguru.com/english-gematria-value-chart",
 };
@@ -220,7 +221,7 @@ const LP_HTML = `
 
   <section class="lp-hero">
     <h1>The Ultimate English Gematria Value Chart</h1>
-    <p>Full letter value tables for English Ordinal, English Reverse and Pythagorean reduction, with every letter listed and the arithmetic shown.</p>
+    <p>Full letter value tables for English Ordinal, English Reverse, Pythagorean reduction and English Sumerian, with every letter listed and the arithmetic shown.</p>
   </section>
 
   <section class="lp-section">
@@ -259,35 +260,14 @@ const LP_HTML = `
             <th>Ordinal (Simple)</th>
             <th>Full Reduction</th>
             <th>Reverse Ordinal</th>
+            <th>Sumerian</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>A</td><td>1</td><td>1</td><td>26</td></tr>
-          <tr><td>B</td><td>2</td><td>2</td><td>25</td></tr>
-          <tr><td>C</td><td>3</td><td>3</td><td>24</td></tr>
-          <tr><td>D</td><td>4</td><td>4</td><td>23</td></tr>
-          <tr><td>E</td><td>5</td><td>5</td><td>22</td></tr>
-          <tr><td>F</td><td>6</td><td>6</td><td>21</td></tr>
-          <tr><td>G</td><td>7</td><td>7</td><td>20</td></tr>
-          <tr><td>H</td><td>8</td><td>8</td><td>19</td></tr>
-          <tr><td>I</td><td>9</td><td>9</td><td>18</td></tr>
-          <tr><td>J</td><td>10</td><td>1</td><td>17</td></tr>
-          <tr><td>K</td><td>11</td><td>2</td><td>16</td></tr>
-          <tr><td>L</td><td>12</td><td>3</td><td>15</td></tr>
-          <tr><td>M</td><td>13</td><td>4</td><td>14</td></tr>
-          <tr><td>N</td><td>14</td><td>5</td><td>13</td></tr>
-          <tr><td>O</td><td>15</td><td>6</td><td>12</td></tr>
-          <tr><td>P</td><td>16</td><td>7</td><td>11</td></tr>
-          <tr><td>Q</td><td>17</td><td>8</td><td>10</td></tr>
-          <tr><td>R</td><td>18</td><td>9</td><td>9</td></tr>
-          <tr><td>S</td><td>19</td><td>1</td><td>8</td></tr>
-          <tr><td>T</td><td>20</td><td>2</td><td>7</td></tr>
-          <tr><td>U</td><td>21</td><td>3</td><td>6</td></tr>
-          <tr><td>V</td><td>22</td><td>4</td><td>5</td></tr>
-          <tr><td>W</td><td>23</td><td>5</td><td>4</td></tr>
-          <tr><td>X</td><td>24</td><td>6</td><td>3</td></tr>
-          <tr><td>Y</td><td>25</td><td>7</td><td>2</td></tr>
-          <tr><td>Z</td><td>26</td><td>8</td><td>1</td></tr>
+${ENGLISH_LETTER_TABLE.map(
+  (r) =>
+    `          <tr><td>${r.letter}</td><td>${r.ordinal}</td><td>${r.pythagorean}</td><td>${r.reverse}</td><td>${r.sumerian}</td></tr>`
+).join("\n")}
         </tbody>
       </table>
     </div>
@@ -297,15 +277,9 @@ const LP_HTML = `
     <h2>Advanced English Ciphers</h2>
     <h3>English Sumerian Gematria</h3>
     <p>The English Sumerian system is unique because it is based on the number 6. To find a letter's value in this system, you take its Ordinal position and multiply it by 6 (A=6, B=12, C=18... Z=156). This system is highly regarded by researchers looking for connections to time (60 seconds/minutes) and the physical geometry of the Earth.</p>
-    <h3>Jewish (Latin) Gematria</h3>
-    <p>This is a sophisticated mapping system where English letters are assigned the values of their phonetic Hebrew counterparts. For example:</p>
-    <ul class="lp-list">
-      <li><strong>A, I, J, Y:</strong> Value 1 (Aleph/Yod)</li>
-      <li><strong>B:</strong> Value 2 (Bet)</li>
-      <li><strong>S:</strong> Value 60 (Samekh)</li>
-      <li><strong>T:</strong> Value 400 (Tav)</li>
-    </ul>
-    <p>This chart is essential for those who want to apply traditional Kabbalistic interpretations to English words. You can explore these visual maps further on our <a href="https://www.gematriaguru.com/number-maps">Number Reference Maps</a> page.</p>
+    <h3>Applying Hebrew values to English words</h3>
+    <p>Some calculators publish a fixed table that assigns each English letter a Hebrew value directly, for example treating A, I, J and Y as 1 and T as 400. There is no single agreed version of that table, and different sites disagree about several letters.</p>
+    <p>This calculator takes a different route. Latin input is transliterated into Hebrew letters first, and the standard Hebrew values are then applied to the result. Because the outcome depends on how a word is spelled in Hebrew, the result is labelled a transliteration-assisted estimate rather than a fixed value, and the Hebrew spelling used is shown alongside it so you can check or override it. You can explore the same values on our <a href="https://www.gematriaguru.com/number-maps">Number Reference Maps</a> page.</p>
   </section>
 
   <section class="lp-section">
@@ -316,7 +290,7 @@ const LP_HTML = `
         <strong>For General Study:</strong> Use the <strong>English Ordinal</strong> chart. It is the most common and provides the most relatable mathematical connections in the English language.
       </div>
       <div class="lp-card">
-        <strong>For Spiritual/Esoteric:</strong> Use <strong>Jewish Gematria</strong> or <strong>Sumerian</strong>. These charts bridge the gap between ancient traditions and modern English.
+        <strong>For Spiritual/Esoteric:</strong> Use <strong>Jewish Gematria</strong> or <strong>English Sumerian</strong>. These bridge the gap between ancient traditions and modern English.
       </div>
       <div class="lp-card">
         <strong>For Root Analysis:</strong> Use <strong>Full Reduction</strong>. By stripping numbers down to their single-digit roots (1-9), you can find the core "vibration" of a word.

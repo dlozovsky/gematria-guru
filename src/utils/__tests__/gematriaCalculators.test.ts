@@ -3,6 +3,7 @@ import {
   ENGLISH_MAP,
   SIMPLE_MAP,
   REVERSE_MAP,
+  SUMERIAN_MAP,
   HEBREW_MAP,
   MISPAR_GADOL_MAP,
   HEBREW_ORDINAL_MAP,
@@ -14,6 +15,7 @@ import {
   calculateSimpleGematria,
   calculatePythagoreanGematria,
   calculateEnglishReverse,
+  calculateSumerianGematria,
   calculateMisparGadol,
   calculateHebrewOrdinal,
   calculateJewishGematria,
@@ -360,8 +362,8 @@ describe("Hebrew Ordinal (Mispar Siduri) mapping", () => {
 });
 
 describe("calculateAllGematria composition", () => {
-  it("returns seven methods", () => {
-    expect(calculateAllGematria("test")).toHaveLength(7);
+  it("returns eight methods", () => {
+    expect(calculateAllGematria("test")).toHaveLength(8);
   });
 
   it("returns no duplicate method names", () => {
@@ -374,6 +376,7 @@ describe("calculateAllGematria composition", () => {
     expect(methods).toContain("English Reverse");
     expect(methods).toContain("Mispar Gadol");
     expect(methods).toContain("Hebrew Ordinal");
+    expect(methods).toContain("English Sumerian");
   });
 
   it("no longer emits Simple Gematria, which duplicated Pythagorean", () => {
@@ -390,5 +393,39 @@ describe("calculateAllGematria composition", () => {
     expect(ordinal?.value).toBe(74);
     expect(reverse?.value).toBe(8 * 27 - 74);
     expect(reverse?.value).not.toBe(ordinal?.value);
+  });
+});
+
+describe("English Sumerian mapping", () => {
+  it("maps A to 6 and Z to 156", () => {
+    expect(SUMERIAN_MAP["a"]).toBe(6);
+    expect(SUMERIAN_MAP["z"]).toBe(156);
+  });
+
+  it("is exactly six times the ordinal map for every letter", () => {
+    for (let i = 0; i < 26; i++) {
+      const ch = String.fromCharCode(97 + i);
+      expect(SUMERIAN_MAP[ch]).toBe(ENGLISH_MAP[ch] * 6);
+    }
+  });
+
+  it("gives a word total six times its ordinal total", () => {
+    const ordinal = calculateEnglishGematria("gematria").value;
+    const sumerian = calculateSumerianGematria("gematria").value;
+    expect(ordinal).toBe(74);
+    expect(sumerian).toBe(74 * 6);
+  });
+
+  it("gives JESUS the widely cited Sumerian value of 444", () => {
+    expect(calculateEnglishGematria("JESUS").value).toBe(74);
+    expect(calculateSumerianGematria("JESUS").value).toBe(444);
+  });
+
+  it("differs from every other Latin cipher for the same word", () => {
+    const results = calculateAllGematria("JESUS");
+    const latin = results.filter((r) => r.status === "calculated-strict" && r.value > 0);
+    const sumerian = results.find((r) => r.method === "English Sumerian")!;
+    const others = latin.filter((r) => r.method !== "English Sumerian").map((r) => r.value);
+    expect(others).not.toContain(sumerian.value);
   });
 });
