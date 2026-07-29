@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { CIPHER_COUNT_WORD } from "@/lib/gematriaReference";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
 export const metadata: Metadata = {
   title: { absolute: "About Gematria Guru | Free Hebrew & English Calculator" },
-  description: "Gematria Guru is a free online tool for calculating Hebrew, English and Greek gematria values across seven cipher methods.",
-  openGraph: { title: "About Gematria Guru | Free Hebrew & English Calculator", description: "Gematria Guru is a free online tool for calculating Hebrew, English and Greek gematria values across seven cipher methods.", url: "https://www.gematriaguru.com/about" },
+  description: `Gematria Guru is a free online tool for calculating Hebrew, English and Greek gematria values across ${CIPHER_COUNT_WORD} cipher methods.`,
+  openGraph: { title: "About Gematria Guru | Free Hebrew & English Calculator", description: `Gematria Guru is a free online tool for calculating Hebrew, English and Greek gematria values across ${CIPHER_COUNT_WORD} cipher methods.`, url: "https://www.gematriaguru.com/about" },
   alternates: { canonical: "https://www.gematriaguru.com/about" },
 };
 

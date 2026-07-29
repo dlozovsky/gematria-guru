@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CIPHER_COUNT } from "@/lib/gematriaReference";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
@@ -214,7 +215,7 @@ const LP_HTML = `
 
   <section class="lp-section">
     <h2>The Six Essential Cipher Systems</h2>
-    <p>Working across the two alphabets means understanding how each assigns numbers to letters. This calculator runs seven systems:</p>
+    <p>Working across the two alphabets means understanding how each assigns numbers to letters. This calculator runs ${CIPHER_COUNT} systems:</p>
     <div class="lp-table-wrapper">
       <table class="lp-table">
         <thead>

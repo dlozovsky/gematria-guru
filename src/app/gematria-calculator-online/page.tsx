@@ -4,13 +4,13 @@ import Link from "next/link";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "@/app/GematriaCalculatorClient";
-import { CIPHER_SYSTEMS as REFERENCE_SYSTEMS } from "@/lib/gematriaReference";
+import { CIPHER_SYSTEMS as REFERENCE_SYSTEMS, CIPHER_COUNT_WORD } from "@/lib/gematriaReference";
 
 const PAGE_TITLE = "Gematria Calculator Online for Hebrew, English and Greek";
 const PAGE_DESCRIPTION =
-  "Use the gematria calculator online, right in your browser. Type any word and see all seven cipher values side by side, across Hebrew, English and Greek. No install.";
+  `Use the gematria calculator online, right in your browser. Type any word and see all ${CIPHER_COUNT_WORD} cipher values side by side, across Hebrew, English and Greek. No install.`;
 const PAGE_OG_DESCRIPTION =
-  "Gematria calculator online. Type any word and see all seven Hebrew, English and Greek cipher values at once. Free, no install.";
+  `Gematria calculator online. Type any word and see all ${CIPHER_COUNT_WORD} Hebrew, English and Greek cipher values at once. Free, no install.`;
 const PAGE_CANONICAL_URL =
   "https://www.gematriaguru.com/gematria-calculator-online";
 
@@ -78,7 +78,7 @@ export default function Page() {
           An online gematria calculator lets you instantly convert any word or phrase into its
           numerical value using traditional Hebrew, English and Greek cipher systems, right in your
           browser, with no software to install. Type your text below and results appear across
-          all seven supported systems simultaneously.
+          all {CIPHER_COUNT_WORD} supported systems simultaneously.
         </p>
 
         <Suspense fallback={<div className="w-full h-40" />}>

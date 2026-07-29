@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CIPHER_COUNT } from "@/lib/gematriaReference";
 import NextModuleLayout from "@/components/NextModuleLayout";
 
 export const metadata: Metadata = {
@@ -40,7 +41,7 @@ export default function PracticalApplicationsModulePage() {
       <div className="border border-border rounded-xl p-6">
         <h2 className="text-xl font-semibold mb-3">Modern Research and Digital Tools</h2>
         <p className="text-muted-foreground mb-3">The digital age has made gematria research far more accessible. Online calculators, searchable databases of Hebrew words by value, and cross-referenced commentaries allow both beginners and advanced students to explore connections that once required years of manuscript study.</p>
-        <p className="text-muted-foreground mb-3">Our own calculator on this site supports seven systems, covering standard, reduced, ordinal and gadol, and can compute values for Hebrew, English, Greek and transliterated text. Use it alongside your Torah study to quickly cross-reference findings.</p>
+        <p className="text-muted-foreground mb-3">Our own calculator on this site supports {CIPHER_COUNT} systems, covering standard, reduced, ordinal and gadol, and can compute values for Hebrew, English, Greek and transliterated text. Use it alongside your Torah study to quickly cross-reference findings.</p>
         <p className="text-muted-foreground">When using digital tools, always validate interesting findings against classical sources to distinguish genuine traditional interpretations from coincidental numerical matches.</p>
       </div>
       <div className="border border-border rounded-xl p-6">

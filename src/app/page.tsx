@@ -7,6 +7,7 @@ import GematriaCalculatorClient from "./GematriaCalculatorClient";
 import {
   CIPHER_SYSTEMS,
   CIPHER_COUNT,
+  CIPHER_COUNT_WORD,
   CALCULATION_STEPS,
   WORKED_EXAMPLES,
   HEBREW_LETTER_TABLE,
@@ -16,10 +17,21 @@ import {
 
 const HOMEPAGE_TITLE = "Free Gematria Calculator for Hebrew, English and Greek";
 const HOMEPAGE_DESCRIPTION =
-  "Free gematria calculator for Hebrew, English and Greek. Type a word and see all seven values at once, with the letter tables and the arithmetic worked out. No signup.";
+  `Free gematria calculator for Hebrew, English and Greek. Type a word and see all ${CIPHER_COUNT_WORD} values at once, with the letter tables and the arithmetic worked out. No signup.`;
 const HOMEPAGE_OG_DESCRIPTION =
-  "Type a word and see its value in seven Hebrew, English and Greek systems at once. Free, no signup required.";
+  `Type a word and see its value in ${CIPHER_COUNT_WORD} Hebrew, English and Greek systems at once. Free, no signup required.`;
 const HOMEPAGE_CANONICAL_URL = "https://www.gematriaguru.com";
+
+const byScript = (script: string) =>
+  CIPHER_SYSTEMS.filter((c) => c.script === script);
+const scriptBreakdown = (["Latin", "Hebrew", "Greek"] as const)
+  .map((sc) => {
+    const n = byScript(sc).length;
+    const name = sc === "Latin" ? "the Latin alphabet" : sc;
+    return `${n} ${n === 1 ? "uses" : "use"} ${name}`;
+  })
+  .filter((part) => !part.startsWith("0 "))
+  .join(", ");
 
 const HOMEPAGE_FAQ: { q: string; a: string }[] = [
   {
@@ -28,7 +40,7 @@ const HOMEPAGE_FAQ: { q: string; a: string }[] = [
   },
   {
     q: `Which gematria systems does this calculator support?`,
-    a: `${CIPHER_COUNT} systems, calculated simultaneously: ${CIPHER_SYSTEMS.map((s) => s.method).join(", ")}. Three use the Latin alphabet, three use Hebrew, and one uses Greek.`,
+    a: `${CIPHER_COUNT} systems, calculated simultaneously: ${CIPHER_SYSTEMS.map((s) => s.method).join(", ")}. Of these, ${scriptBreakdown}.`,
   },
   {
     q: "What is the difference between Mispar Hechrachi and Mispar Gadol?",
@@ -40,7 +52,7 @@ const HOMEPAGE_FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Does this calculator work for Hebrew and Greek, or only English?",
-    a: "All three. Hebrew input is calculated in Mispar Hechrachi, Mispar Gadol and Hebrew Ordinal. Greek input is calculated in isopsephy, including the archaic letters digamma (6), qoppa (90) and sampi (900). Latin input is calculated in English Ordinal, English Reverse and Pythagorean reduction.",
+    a: `All three. Hebrew input is calculated in ${byScript("Hebrew").map((c) => c.method).join(", ")}. Greek input is calculated in isopsephy, including the archaic letters digamma (6), qoppa (90) and sampi (900). Latin input is calculated in ${byScript("Latin").map((c) => c.method).join(", ")}.`,
   },
   {
     q: "What is the reduced value shown beside each total?",
@@ -318,7 +330,7 @@ export default function HomePage({
             <div className="overflow-x-auto border border-border rounded-lg">
               <table className="w-full text-sm">
                 <caption className="sr-only">
-                  English letter values in English Ordinal, English Reverse, and Pythagorean reduction
+                  English letter values in English Ordinal, English Reverse, Pythagorean reduction and Sumerian
                 </caption>
                 <thead>
                   <tr className="bg-muted/60 text-left">
@@ -326,6 +338,7 @@ export default function HomePage({
                     <th scope="col" className="px-3 py-2 font-medium text-right">Ordinal</th>
                     <th scope="col" className="px-3 py-2 font-medium text-right">Reverse</th>
                     <th scope="col" className="px-3 py-2 font-medium text-right">Pythagorean</th>
+                    <th scope="col" className="px-3 py-2 font-medium text-right">Sumerian</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -335,6 +348,7 @@ export default function HomePage({
                       <td className="px-3 py-1.5 text-right tabular-nums">{row.ordinal}</td>
                       <td className="px-3 py-1.5 text-right tabular-nums">{row.reverse}</td>
                       <td className="px-3 py-1.5 text-right tabular-nums">{row.pythagorean}</td>
+                      <td className="px-3 py-1.5 text-right tabular-nums">{row.sumerian}</td>
                     </tr>
                   ))}
                 </tbody>

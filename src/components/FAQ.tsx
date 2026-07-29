@@ -8,6 +8,7 @@ import {
   AccordionTrigger 
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { CIPHER_SYSTEMS, CIPHER_COUNT_WORD } from "@/lib/gematriaReference";
 
 const FAQ = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -90,15 +91,15 @@ const FAQ = () => {
       question: "What are the different types of Gematria?",
       answer: (
         <div>
-          <p>This calculator runs seven systems at once, across three scripts:</p>
+          <p>
+            This calculator runs {CIPHER_COUNT_WORD} systems at once, across three scripts:
+          </p>
           <ul className="list-disc ml-6">
-            <li><strong>English Gematria</strong> (A=1 through Z=26)</li>
-            <li><strong>English Reverse</strong> (Z=1 through A=26)</li>
-            <li><strong>Pythagorean Gematria</strong> (values cycle 1 to 9)</li>
-            <li><strong>Jewish Gematria</strong> (Mispar Hechrachi, the standard Hebrew values)</li>
-            <li><strong>Mispar Gadol</strong> (final Hebrew letters take 500 to 900)</li>
-            <li><strong>Hebrew Ordinal</strong> (Mispar Siduri, Aleph=1 through Tav=22)</li>
-            <li><strong>Greek Isopsephy</strong> (Alpha=1 through Sampi=900)</li>
+            {CIPHER_SYSTEMS.map((c) => (
+              <li key={c.method}>
+                <strong>{c.method}</strong> ({c.script}){c.alsoKnownAs ? `, also called ${c.alsoKnownAs}` : ""}
+              </li>
+            ))}
           </ul>
         </div>
       ),

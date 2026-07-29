@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CIPHER_COUNT } from "@/lib/gematriaReference";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
@@ -344,7 +345,7 @@ const LP_HTML = `
 
   <section class="lp-cta-block">
     <h2>Calculate Your Values Instantly</h2>
-    <p>Ready to explore the numerical secrets of your name or favorite verses? Use our free, multi-cipher Gematria calculator to get instant results across all seven Hebrew, English and Greek systems.</p>
+    <p>Ready to explore the numerical secrets of your name or favorite verses? Use our free, multi-cipher Gematria calculator to get instant results across all ${CIPHER_COUNT} Hebrew, English and Greek systems.</p>
     <a href="https://www.gematriaguru.com/" class="lp-cta-button">Open Gematria Calculator</a>
     <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">No registration required. Free for all users.</p>
   </section>

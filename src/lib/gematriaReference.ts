@@ -10,12 +10,14 @@ import {
   ENGLISH_MAP,
   REVERSE_MAP,
   SIMPLE_MAP,
+  SUMERIAN_MAP,
   HEBREW_MAP,
   MISPAR_GADOL_MAP,
   HEBREW_ORDINAL_MAP,
   calculateEnglishGematria,
   calculateEnglishReverse,
   calculatePythagoreanGematria,
+  calculateSumerianGematria,
   calculateJewishGematria,
   calculateMisparGadol,
   calculateHebrewOrdinal,
@@ -51,6 +53,12 @@ export const CIPHER_SYSTEMS: CipherSystem[] = [
     rule: "Letters cycle through the digits 1 to 9. A=1 to I=9, then J=1 to R=9, then S=1 to Z=8.",
   },
   {
+    method: "English Sumerian",
+    alsoKnownAs: "Sumerian, Agrippa",
+    script: "Latin",
+    rule: "Each letter takes its ordinal position multiplied by six, so A=6 through Z=156. A word's Sumerian total is therefore always six times its English Ordinal total.",
+  },
+  {
     method: "Jewish Gematria",
     alsoKnownAs: "Mispar Hechrachi, Standard Value",
     script: "Hebrew",
@@ -78,11 +86,24 @@ export const CIPHER_SYSTEMS: CipherSystem[] = [
 
 export const CIPHER_COUNT = CIPHER_SYSTEMS.length;
 
+const NUMBER_WORDS = [
+  "zero", "one", "two", "three", "four", "five", "six", "seven",
+  "eight", "nine", "ten", "eleven", "twelve",
+];
+
+/**
+ * The cipher count spelled out, for use in prose. Import this rather than
+ * writing the number into copy: hardcoded counts are how the site ended up
+ * advertising six systems while shipping five.
+ */
+export const CIPHER_COUNT_WORD = NUMBER_WORDS[CIPHER_COUNT] ?? String(CIPHER_COUNT);
+
 export interface EnglishLetterRow {
   letter: string;
   ordinal: number;
   reverse: number;
   pythagorean: number;
+  sumerian: number;
 }
 
 export const ENGLISH_LETTER_TABLE: EnglishLetterRow[] = Array.from({ length: 26 }, (_, i) => {
@@ -92,6 +113,7 @@ export const ENGLISH_LETTER_TABLE: EnglishLetterRow[] = Array.from({ length: 26 
     ordinal: ENGLISH_MAP[ch],
     reverse: REVERSE_MAP[ch],
     pythagorean: SIMPLE_MAP[ch],
+    sumerian: SUMERIAN_MAP[ch],
   };
 });
 
@@ -212,6 +234,13 @@ export const WORKED_EXAMPLES: WorkedExample[] = [
     method: "English Reverse",
     arithmetic: letterSum("gematria", REVERSE_MAP, LATIN_LABELS),
     total: calculateEnglishReverse("GEMATRIA").value,
+  },
+  {
+    input: "GEMATRIA",
+    gloss: "the same word with every letter multiplied by six, so the total is six times the ordinal value of 74",
+    method: "English Sumerian",
+    arithmetic: letterSum("gematria", SUMERIAN_MAP, LATIN_LABELS),
+    total: calculateSumerianGematria("GEMATRIA").value,
   },
   {
     input: "GEMATRIA",
