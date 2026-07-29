@@ -202,7 +202,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/89f1dd9b-9eb2-458f-98af-b7a38b1fd928" alt="Hebrew gematria illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>The Significance of Gematria in 2026</h2>
     <p>As we navigate the year 2026, the study of Gematria, the ancient practice of assigning numerical values to Hebrew letters, takes on new dimensions. In the Hebrew calendar, 2026 aligns largely with the year <strong>5786 (תשפ״ו)</strong>. This year is particularly noteworthy for two primary reasons:</p>
     <div class="lp-grid">
@@ -263,7 +262,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/94aab912-c767-43a9-bebc-b88844e32b5d" alt="Hebrew final letter forms illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>The 5 Soffit (Final) Forms</h2>
     <p>In Hebrew, five letters change their shape when they appear at the end of a word. In the <strong>Mispar Gadol</strong> system, these final forms are assigned higher values (500–900), whereas in the Standard system, they retain the value of their non-final counterparts.</p>
     <div class="lp-table-container">
@@ -309,7 +307,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/3ea13533-3673-4e42-b855-991340f93eb2" alt="Gematria study illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>Why Gematria Matters Today</h2>
     <p>The practice of Gematria dates back thousands of years in Jewish tradition, where scholars like the <em>Baal HaTurim</em> would find connections between seemingly unrelated words that shared the same numerical value. Today, it remains a vital tool for:</p>
     <ul>
@@ -322,7 +319,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section lp-faq-container">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/eae492e6-85c7-43e0-8c28-abed3673d43a" alt="FAQ illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>Frequently Asked Questions</h2>
     <div class="lp-faq-item">
       <span class="lp-faq-question">Why is 2026 significant in Gematria?</span>

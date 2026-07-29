@@ -191,7 +191,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/2bdefd53-56ac-49c7-9175-e9f91f48b847" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>Bridging Two Worlds Through Numbers</h2>
     <p>Gematria is more than just a calculation; it is an ancient interpretive lens that views letters as numerical values. While traditionally rooted in the 22 letters of the Hebrew alphabet, the practice of <strong>English to Hebrew Gematria</strong> has evolved to help modern seekers find connections between Latin-based languages and the sacred structures of Jewish mysticism.</p>
     <p>The calculator handles both directions: taking an English concept to its Hebrew equivalent, or running a modern English word through the Latin-script ciphers. In either case the letter-by-letter arithmetic is shown, so the result can be checked. Our platform serves as your definitive resource.</p>
@@ -214,7 +213,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/44c0fad4-e1e2-45df-979f-4d519ab13f29" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>The Six Essential Cipher Systems</h2>
     <p>Working across the two alphabets means understanding how each assigns numbers to letters. This calculator runs seven systems:</p>
     <div class="lp-table-wrapper">
@@ -290,7 +288,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/bab21c5a-d59f-4e9f-860b-108e0d5b7763" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>How to Choose Your Gematria Method</h2>
     <p>If you are new to English to Hebrew Gematria, follow these steps to get the most accurate results for your study or meditation:</p>
     <h3>Step 1: Define Your Intent</h3>
@@ -316,7 +313,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/d49c8aa6-16c6-4868-8e2e-724d38a3aeb2" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>Frequently Asked Questions</h2>
     <div class="lp-faq-item">
       <span class="lp-faq-question">Is English Gematria as "accurate" as Hebrew Gematria?</span>
