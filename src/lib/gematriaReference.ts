@@ -4,7 +4,7 @@
  *
  * Every number here is read out of the maps in `gematriaCalculators`, so the
  * published tables cannot drift away from what the calculator actually
- * computes. Do not hardcode values in page copy — import from here.
+ * computes. Do not hardcode values in page copy; import from here.
  */
 import {
   ENGLISH_MAP,
@@ -48,7 +48,7 @@ export const CIPHER_SYSTEMS: CipherSystem[] = [
     method: "Pythagorean Gematria",
     alsoKnownAs: "Full Reduction",
     script: "Latin",
-    rule: "Letters cycle through the digits 1 to 9 — A=1 to I=9, then J=1 to R=9, then S=1 to Z=8.",
+    rule: "Letters cycle through the digits 1 to 9. A=1 to I=9, then J=1 to R=9, then S=1 to Z=8.",
   },
   {
     method: "Jewish Gematria",
@@ -137,7 +137,7 @@ export interface WorkedExample {
   transliteration?: string;
   gloss: string;
   method: string;
-  /** e.g. "ח(8) + י(10)" — the arithmetic, shown rather than asserted. */
+  /** e.g. "ח(8) + י(10)". The arithmetic, shown rather than asserted. */
   arithmetic: string;
   total: number;
 }
@@ -167,7 +167,7 @@ export const WORKED_EXAMPLES: WorkedExample[] = [
   {
     input: "חי",
     transliteration: "chai",
-    gloss: "life — the number behind the customary gift in multiples of 18",
+    gloss: "life, the number behind the customary gift in multiples of 18",
     method: "Jewish Gematria",
     arithmetic: letterSum("חי", HEBREW_MAP, { "ח": "Chet", "י": "Yod" }),
     total: calculateJewishGematria("חי", "strict", () => "").value,
@@ -185,7 +185,7 @@ export const WORKED_EXAMPLES: WorkedExample[] = [
   {
     input: "מלך",
     transliteration: "melech",
-    gloss: "king — shows how Mispar Gadol diverges once a final letter appears",
+    gloss: "king, which shows how Mispar Gadol diverges once a final letter appears",
     method: "Mispar Gadol",
     arithmetic: letterSum("מלך", MISPAR_GADOL_MAP, {
       "מ": "Mem", "ל": "Lamed", "ך": "Final Kaf",
@@ -194,7 +194,7 @@ export const WORKED_EXAMPLES: WorkedExample[] = [
   },
   {
     input: "LOVE",
-    gloss: "a short English word — note that LOVE is symmetric across the alphabet, so its Reverse value is also 54",
+    gloss: "a short English word. LOVE is symmetric across the alphabet, so its Reverse value is also 54",
     method: "English Gematria",
     arithmetic: letterSum("love", ENGLISH_MAP, { l: "L", o: "O", v: "V", e: "E" }),
     total: calculateEnglishGematria("LOVE").value,
@@ -208,7 +208,7 @@ export const WORKED_EXAMPLES: WorkedExample[] = [
   },
   {
     input: "GEMATRIA",
-    gloss: "the same word counted backwards — each letter takes the mirror of its ordinal value",
+    gloss: "the same word counted backwards, so each letter takes the mirror of its ordinal value",
     method: "English Reverse",
     arithmetic: letterSum("gematria", REVERSE_MAP, LATIN_LABELS),
     total: calculateEnglishReverse("GEMATRIA").value,
@@ -242,7 +242,7 @@ export const CALCULATION_STEPS: { title: string; detail: string }[] = [
   {
     title: "The total is reduced to a single digit",
     detail:
-      "The digits of the total are added repeatedly until one digit remains — 376 becomes 3+7+6=16, then 1+6=7. This reduced value is reported alongside the full total.",
+      "The digits of the total are added repeatedly until one digit remains. 376 becomes 3+7+6=16, then 1+6=7. This reduced value is reported alongside the full total.",
   },
   {
     title: "Every system is calculated at once",

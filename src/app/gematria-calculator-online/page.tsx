@@ -6,11 +6,11 @@ import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "@/app/GematriaCalculatorClient";
 import { CIPHER_SYSTEMS as REFERENCE_SYSTEMS } from "@/lib/gematriaReference";
 
-const PAGE_TITLE = "Gematria Calculator Online — Hebrew, English & Greek Values";
+const PAGE_TITLE = "Gematria Calculator Online for Hebrew, English and Greek";
 const PAGE_DESCRIPTION =
-  "Use the gematria calculator online, right in your browser. Type any word and see all 7 cipher values side by side — Hebrew, English and Greek systems. No install.";
+  "Use the gematria calculator online, right in your browser. Type any word and see all seven cipher values side by side, across Hebrew, English and Greek. No install.";
 const PAGE_OG_DESCRIPTION =
-  "Gematria calculator online — type any word, see all 7 Hebrew, English and Greek cipher values instantly. Free, no install.";
+  "Gematria calculator online. Type any word and see all seven Hebrew, English and Greek cipher values at once. Free, no install.";
 const PAGE_CANONICAL_URL =
   "https://www.gematriaguru.com/gematria-calculator-online";
 
@@ -76,7 +76,7 @@ export default function Page() {
         <h1 className="text-3xl font-bold mb-4">Free Online Gematria Calculator</h1>
         <p className="text-muted-foreground mb-8">
           An online gematria calculator lets you instantly convert any word or phrase into its
-          numerical value using traditional Hebrew, English and Greek cipher systems — right in your
+          numerical value using traditional Hebrew, English and Greek cipher systems, right in your
           browser, with no software to install. Type your text below and results appear across
           all seven supported systems simultaneously.
         </p>
@@ -90,7 +90,7 @@ export default function Page() {
           <ul className="space-y-3 text-muted-foreground list-disc pl-5">
             <li>
               <strong className="text-foreground">Instant results, any device.</strong> No
-              download or installation — open the page and start calculating from any phone,
+              download or installation. Open the page and start calculating from any phone,
               tablet, or desktop.
             </li>
             <li>

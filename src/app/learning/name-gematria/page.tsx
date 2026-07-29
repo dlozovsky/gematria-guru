@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import NextModuleLayout from "@/components/NextModuleLayout";
 
 export const metadata: Metadata = {
-  title: "Name Gematria — Module 6",
+  title: "Name Gematria (Module 6)",
   description: "Learn how to calculate and interpret the gematria of Hebrew names. Understand the spiritual significance of names and how gematria reveals their hidden meaning.",
   keywords: ["name gematria", "hebrew name numerology", "gematria of names"],
   openGraph: { title: "Name Gematria", url: "https://www.gematriaguru.com/learning/name-gematria" },
@@ -19,16 +19,16 @@ export default function NameGematriaModulePage() {
     >
       <div className="border border-border rounded-xl p-6">
         <h2 className="text-xl font-semibold mb-3">The Significance of Names in Judaism</h2>
-        <p className="text-muted-foreground mb-3">In Jewish tradition, a name is not merely a label — it is a window into a person's essence and spiritual mission. The Talmud teaches that parents receive a minor form of prophecy when naming a child, encoding the soul's purpose into the name itself.</p>
-        <p className="text-muted-foreground">Calculating the gematria of a name can reveal connections to Torah verses, divine attributes, or other names — all of which shed light on the name-bearer's deeper identity.</p>
+        <p className="text-muted-foreground mb-3">In Jewish tradition, a name is not merely a label. It is a window into a person's essence and spiritual mission. The Talmud teaches that parents receive a minor form of prophecy when naming a child, encoding the soul's purpose into the name itself.</p>
+        <p className="text-muted-foreground">Calculating the gematria of a name can reveal connections to Torah verses, divine attributes or other names, all of which shed light on the name-bearer's deeper identity.</p>
       </div>
       <div className="border border-border rounded-xl p-6">
         <h2 className="text-xl font-semibold mb-3">Famous Name Examples</h2>
         <div className="space-y-4 text-sm">
           {[
-            ["משה (Moshe — Moses) = 345","345 is the same value as השם (HaShem — The Name), suggesting Moses was uniquely connected to the divine. It also equals שמו (Shmo — His name), a self-referential gematria."],
-            ["אברהם (Avraham — Abraham) = 248","248 corresponds to the 248 positive commandments in the Torah and the 248 limbs of the human body — reflecting Abraham as the embodiment of the full mitzvot."],
-            ["דוד (David) = 14","14 corresponds to יד (Yad — Hand), symbolizing David's kingship as the hand of God in the world. Fourteen also appears in the genealogy of Jesus in Matthew 1, which is structured around this gematria."]
+            ["משה (Moshe, \"Moses\") = 345","345 is the same value as השם (HaShem, \"the Name\"), suggesting Moses was uniquely connected to the divine. It also equals שמו (Shmo, \"his name\"), a self-referential gematria."],
+            ["אברהם (Avraham, \"Abraham\") = 248","248 corresponds to the 248 positive commandments in the Torah and the 248 limbs of the human body, reflecting Abraham as the embodiment of the full mitzvot."],
+            ["דוד (David) = 14","14 corresponds to יד (Yad, \"hand\"), symbolizing David's kingship as the hand of God in the world. Fourteen also appears in the genealogy of Jesus in Matthew 1, which is structured around this gematria."]
           ].map(([title, detail]) => (
             <div key={String(title)} className="bg-muted/50 rounded-lg p-4">
               <h3 className="font-semibold mb-1">{title}</h3>

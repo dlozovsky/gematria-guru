@@ -296,7 +296,7 @@ export default function EditPostPage() {
               Publish date{" "}
               {isFuture && (
                 <span className="ml-2 text-xs font-normal text-amber-600 dark:text-amber-400">
-                  Scheduled — will go live at this date
+                  Scheduled: goes live on this date
                 </span>
               )}
             </label>

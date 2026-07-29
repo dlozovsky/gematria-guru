@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import NextModuleLayout from "@/components/NextModuleLayout";
 
 export const metadata: Metadata = {
-  title: "Torah Gematria — Module 5",
+  title: "Torah Gematria (Module 5)",
   description: "Discover how gematria is used to interpret the Torah. Learn classic examples from the Five Books of Moses, rabbinic literature, and Kabbalistic commentary.",
   keywords: ["torah gematria", "gematria bible", "jewish numerology torah"],
   openGraph: { title: "Torah Gematria", url: "https://www.gematriaguru.com/learning/torah-gematria" },
@@ -39,13 +39,13 @@ export default function TorahGematriaModulePage() {
       </div>
       <div className="border border-border rounded-xl p-6">
         <h2 className="text-xl font-semibold mb-3">The First Word of the Torah</h2>
-        <p className="text-muted-foreground mb-3">The Torah begins with בראשית (Bereishit — "In the beginning"). Its gematria value is 913. Kabbalistic commentators note that 913 contains deep numerical structure: it is the product of hidden names and is linked to concepts of creation, wisdom, and divine speech.</p>
-        <p className="text-muted-foreground">The letter Bet (ב), with which the Torah begins, has a value of 2 — symbolizing duality, the nature of creation, and the separation of the primordial unity into the world of multiplicity.</p>
+        <p className="text-muted-foreground mb-3">The Torah begins with בראשית (Bereishit, "in the beginning"). Its gematria value is 913. Kabbalistic commentators note that 913 contains deep numerical structure: it is the product of hidden names and is linked to concepts of creation, wisdom, and divine speech.</p>
+        <p className="text-muted-foreground">The letter Bet (ב), with which the Torah begins, has a value of 2, symbolizing duality, the nature of creation, and the separation of the primordial unity into the world of multiplicity.</p>
       </div>
       <div className="border border-border rounded-xl p-6">
         <h2 className="text-xl font-semibold mb-3">Gematria in Talmudic Reasoning</h2>
-        <p className="text-muted-foreground mb-3">The Talmud (Kiddushin 30a) teaches that there are 600,000 letters in the Torah — matching the 600,000 Jewish souls said to have stood at Sinai. Each soul corresponds to a letter, making the entire Jewish people a living Torah.</p>
-        <p className="text-muted-foreground">While scholars debate the precise count, the principle illustrates how numerical symbolism in Torah study is not merely academic — it is deeply personal and communal.</p>
+        <p className="text-muted-foreground mb-3">The Talmud (Kiddushin 30a) teaches that there are 600,000 letters in the Torah, matching the 600,000 Jewish souls said to have stood at Sinai. Each soul corresponds to a letter, making the entire Jewish people a living Torah.</p>
+        <p className="text-muted-foreground">While scholars debate the precise count, the principle illustrates how numerical symbolism in Torah study is not merely academic. It is deeply personal and communal.</p>
       </div>
     </NextModuleLayout>
   );

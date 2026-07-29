@@ -5,11 +5,11 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gematriaguru.com"),
   title: {
-    default: "Gematria Calculator — Hebrew, English & Greek, 7 Systems",
+    default: "Free Gematria Calculator for Hebrew, English and Greek",
     template: "%s | Gematria Guru",
   },
   description:
-    "Calculate Hebrew, English and Greek gematria instantly across 7 systems — Mispar Hechrachi, Mispar Gadol, Hebrew Ordinal, English Ordinal, Reverse, Pythagorean and Greek isopsephy. Free, no signup.",
+    "Type a word and get its value in seven systems at once, across Hebrew, English and Greek, with the full letter tables. Free, no signup.",
   keywords: [
     "gematria calculator",
     "Hebrew gematria",
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.gematriaguru.com",
     siteName: "Gematria Guru",
-    title: "Gematria Calculator — Hebrew, English & Greek, 7 Systems",
-    description: "Calculate Hebrew, English and Greek gematria instantly across 7 systems — Mispar Hechrachi, Mispar Gadol, Hebrew Ordinal, English Ordinal, Reverse, Pythagorean and Greek isopsephy. Free, no signup.",
+    title: "Free Gematria Calculator for Hebrew, English and Greek",
+    description: "Type a word and get its value in seven systems at once, across Hebrew, English and Greek, with the full letter tables. Free, no signup.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gematria Calculator — Hebrew, English & Greek, 7 Systems",
-    description: "Calculate Hebrew, English and Greek gematria instantly across 7 cipher systems — free, no signup.",
+    title: "Free Gematria Calculator for Hebrew, English and Greek",
+    description: "Type a word and get its value in seven Hebrew, English and Greek systems at once. Free, no signup.",
   },
 };
 

@@ -5,7 +5,7 @@ import NavFooter from "@/components/NavFooter";
 export const metadata: Metadata = {
   title: { absolute: "English to Hebrew Gematria: The Ultimate Guide | Gematria Guru" },
   description:
-    "Explore the mystical intersection of language and mathematics. Use our comprehensive English to Hebrew Gematria tools to uncover the hidden numerical patterns within your words and phrases.",
+    "Convert English words into Hebrew gematria values. Compare the Latin-script ciphers against the traditional Hebrew systems, with the full letter tables and worked examples.",
   keywords: [
     "english to hebrew gematria",
     "english gematria calculator",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "English to Hebrew Gematria: The Ultimate Guide",
     description:
-      "Explore the mystical intersection of language and mathematics. Use our comprehensive English to Hebrew Gematria tools to uncover the hidden numerical patterns within your words and phrases.",
+      "Convert English words into Hebrew gematria values. Compare the Latin-script ciphers against the traditional Hebrew systems, with the full letter tables and worked examples.",
     url: "https://www.gematriaguru.com/english-to-hebrew-gematria",
     type: "article",
   },
@@ -30,7 +30,7 @@ const jsonLd = {
   "@type": "Article",
   headline: "English to Hebrew Gematria: The Ultimate Guide",
   description:
-    "Explore the mystical intersection of language and mathematics. Use our comprehensive English to Hebrew Gematria tools to uncover the hidden numerical patterns within your words and phrases.",
+    "Convert English words into Hebrew gematria values. Compare the Latin-script ciphers against the traditional Hebrew systems, with the full letter tables and worked examples.",
   publisher: { "@type": "Organization", name: "Gematria Guru", url: "https://www.gematriaguru.com" },
   url: "https://www.gematriaguru.com/english-to-hebrew-gematria",
 };
@@ -187,14 +187,14 @@ const LP_HTML = `
 
   <section class="lp-hero">
     <h1>English to Hebrew Gematria: The Ultimate Guide</h1>
-    <p>Explore the mystical intersection of language and mathematics. Use our comprehensive English to Hebrew Gematria tools to uncover the hidden numerical patterns within your words and phrases.</p>
+    <p>Convert English words into Hebrew gematria values, and compare the Latin-script ciphers against the traditional Hebrew systems. The full letter tables and worked examples are below.</p>
   </section>
 
   <section class="lp-section">
     <img src="https://outgoing-oyster-428.convex.cloud/api/storage/2bdefd53-56ac-49c7-9175-e9f91f48b847" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>Bridging Two Worlds Through Numbers</h2>
     <p>Gematria is more than just a calculation; it is an ancient interpretive lens that views letters as numerical values. While traditionally rooted in the 22 letters of the Hebrew alphabet, the practice of <strong>English to Hebrew Gematria</strong> has evolved to help modern seekers find connections between Latin-based languages and the sacred structures of Jewish mysticism.</p>
-    <p>At <a href="https://www.gematriaguru.com/">Gematria Guru</a>, we provide the tools to navigate this complexity. Whether you are translating an English concept into its Hebrew equivalent to find its spiritual "root" or using modern English ciphers to see how contemporary words resonate with ancient truths, our platform serves as your definitive resource.</p>
+    <p>The calculator handles both directions: taking an English concept to its Hebrew equivalent, or running a modern English word through the Latin-script ciphers. In either case the letter-by-letter arithmetic is shown, so the result can be checked. Our platform serves as your definitive resource.</p>
   </section>
 
   <section class="lp-section">
@@ -210,13 +210,13 @@ const LP_HTML = `
         <p>Applying the principles of Hebrew numerology directly to the English alphabet. This includes systems like "English Simple" (A=1, B=2) or "Pythagorean Numerology" to see how English words stack up against known Hebrew values.</p>
       </div>
     </div>
-    <p>The core philosophy, as found in Kabbalistic texts like the <em>Sefer Yitzirah</em> (The Book of Creation), posits that the letters of the alphabet are the "building blocks" of the universe. By analyzing the numerical weight of a word, practitioners believe they can uncover its essential nature or find "conceptual twins"—different words that share the same value.</p>
+    <p>The core philosophy, as found in Kabbalistic texts like the <em>Sefer Yitzirah</em> (The Book of Creation), posits that the letters of the alphabet are the "building blocks" of the universe. By analyzing the numerical weight of a word, practitioners believe they can uncover its essential nature or find "conceptual twins", different words that share the same value.</p>
   </section>
 
   <section class="lp-section">
     <img src="https://outgoing-oyster-428.convex.cloud/api/storage/44c0fad4-e1e2-45df-979f-4d519ab13f29" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>The Six Essential Cipher Systems</h2>
-    <p>To master English to Hebrew Gematria, one must understand the various ways numbers are assigned to letters. Gematria Guru supports six primary systems for comprehensive analysis:</p>
+    <p>Working across the two alphabets means understanding how each assigns numbers to letters. This calculator runs seven systems:</p>
     <div class="lp-table-wrapper">
       <table class="lp-table">
         <thead>
@@ -306,7 +306,7 @@ const LP_HTML = `
 
   <section class="lp-section">
     <h2>The Mystical Roots of Numerical Analysis</h2>
-    <p>The practice of Gematria was utilized by the <strong>Soferim</strong> (scribes) to ensure the accuracy of sacred texts. By counting the numerical values of verses, they could confirm that no letters were added or removed. Over time, this evolved into a method of <em>exegesis</em>—the interpretation of hidden meanings within the text.</p>
+    <p>The practice of Gematria was utilized by the <strong>Soferim</strong> (scribes) to ensure the accuracy of sacred texts. By counting the numerical values of verses, they could confirm that no letters were added or removed. Over time, this evolved into a method of <em>exegesis</em>, the interpretation of hidden meanings within the text.</p>
     <p>Key numerical pairs to watch for in your calculations include:</p>
     <ul>
       <li><strong>18 (Chai):</strong> The symbol for life. Many practitioners look for words that result in 18 or multiples thereof as a sign of vitality and blessing.</li>
@@ -342,7 +342,7 @@ const LP_HTML = `
 
   <section class="lp-cta-block">
     <h2>Begin Your Numerical Exploration</h2>
-    <p>Ready to uncover the hidden values in your name, favorite phrases, or sacred texts? Gematria Guru offers the most comprehensive free tool for English and Hebrew analysis.</p>
+    <p>Type a name, a phrase or a verse into the calculator to see its value in every system at once, with the arithmetic shown for each letter.</p>
     <a href="https://www.gematriaguru.com/" class="lp-btn">Open Free Gematria Calculator</a>
     <p style="margin-top: 20px; font-size: 0.9rem;">
       Explore our <a href="https://www.gematriaguru.com/number-maps">Number Maps</a> or read the <a href="https://www.gematriaguru.com/blog">Gematria Blog</a> to deepen your knowledge.

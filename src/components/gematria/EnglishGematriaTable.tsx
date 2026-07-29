@@ -40,7 +40,7 @@ export const EnglishGematriaTable = () => {
   return (
     <Card>
       <CardContent className="p-6">
-        <h2 className="text-2xl font-semibold mb-4">📊 English Gematria Reference Table</h2>
+        <h2 className="text-2xl font-semibold mb-4">English Gematria Reference Table</h2>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>

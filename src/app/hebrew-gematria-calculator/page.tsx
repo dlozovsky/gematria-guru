@@ -5,7 +5,7 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "@/app/GematriaCalculatorClient";
 
-const PAGE_TITLE = "Hebrew Gematria Calculator — Mispar Hechrachi & Gadol";
+const PAGE_TITLE = "Hebrew Gematria Calculator: Hechrachi, Gadol and Ordinal";
 const PAGE_DESCRIPTION =
   "Free Hebrew gematria calculator. Convert Hebrew words to their numerical values using Mispar Hechrachi (standard), Mispar Gadol, and Ordinal methods, with a full Hebrew letter value chart.";
 const PAGE_CANONICAL_URL =
@@ -33,7 +33,7 @@ const faqSchema = {
       name: "How is Hebrew gematria calculated?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In standard Hebrew gematria (Mispar Hechrachi) each of the 22 Hebrew letters has a fixed value — Aleph=1, Bet=2 up to Yod=10, then 20, 30 and so on to Tav=400 — and the value of a word is the sum of its letters.",
+        text: "In standard Hebrew gematria (Mispar Hechrachi) each of the 22 Hebrew letters has a fixed value. Aleph=1 and Bet=2 up to Yod=10, then 20, 30 and so on to Tav=400. The value of a word is the sum of its letters.",
       },
     },
     {
@@ -41,7 +41,7 @@ const faqSchema = {
       name: "What is Mispar Gadol?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Mispar Gadol is a Hebrew gematria method that gives the five final letter forms (sofit) their own higher values — Final Kaf=500, Final Mem=600, Final Nun=700, Final Pe=800, Final Tsadi=900 — instead of the standard values used in Mispar Hechrachi.",
+        text: "Mispar Gadol is a Hebrew gematria method that gives the five final letter forms (sofit) their own higher values: Final Kaf=500, Final Mem=600, Final Nun=700, Final Pe=800 and Final Tsadi=900, instead of the standard values used in Mispar Hechrachi.",
       },
     },
     {

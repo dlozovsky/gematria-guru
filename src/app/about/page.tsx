@@ -4,8 +4,8 @@ import NavFooter from "@/components/NavFooter";
 
 export const metadata: Metadata = {
   title: { absolute: "About Gematria Guru | Free Hebrew & English Calculator" },
-  description: "Learn about Gematria Guru — a free online tool for calculating Hebrew and English gematria values with multiple cipher methods.",
-  openGraph: { title: "About Gematria Guru | Free Hebrew & English Calculator", description: "Learn about Gematria Guru — a free online tool for calculating Hebrew and English gematria values with multiple cipher methods.", url: "https://www.gematriaguru.com/about" },
+  description: "Gematria Guru is a free online tool for calculating Hebrew, English and Greek gematria values across seven cipher methods.",
+  openGraph: { title: "About Gematria Guru | Free Hebrew & English Calculator", description: "Gematria Guru is a free online tool for calculating Hebrew, English and Greek gematria values across seven cipher methods.", url: "https://www.gematriaguru.com/about" },
   alternates: { canonical: "https://www.gematriaguru.com/about" },
 };
 
@@ -18,7 +18,7 @@ export default function AboutPage() {
         <div className="space-y-6 text-muted-foreground">
           <p>Welcome to Gematria Guru, your premier destination for exploring the ancient practice of gematria and numerical connections in text. Founded with the mission to make gematria accessible and meaningful to everyone, our platform combines traditional wisdom with modern technology.</p>
           <h2 className="text-2xl font-semibold text-foreground mt-8">Our Mission</h2>
-          <p>Our mission is to provide an intuitive and comprehensive tool for exploring the hidden numerical patterns and meanings within words and phrases through gematria. We believe in making this ancient practice accessible to both newcomers and experienced practitioners.</p>
+          <p>Our mission is to provide a clear, accurate tool for exploring the numerical patterns and meanings within words and phrases through gematria. We believe in making this ancient practice accessible to both newcomers and experienced practitioners.</p>
           <h2 className="text-2xl font-semibold text-foreground mt-8">What We Offer</h2>
           <ul className="list-disc pl-6 space-y-2">
             <li>Accurate gematria calculations across multiple methods including Hebrew and English systems</li>

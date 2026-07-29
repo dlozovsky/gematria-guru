@@ -5,7 +5,7 @@ import NavFooter from "@/components/NavFooter";
 export const metadata: Metadata = {
   title: { absolute: "The Ultimate English Gematria Value Chart | Gematria Guru" },
   description:
-    "Master the numerical essence of the English language. Explore comprehensive value charts for English Ordinal, Pythagorean Reduction, Sumerian, and Jewish Gematria systems.",
+    "Full English letter value tables for Ordinal, Reverse and Pythagorean reduction. Every letter listed, with the arithmetic shown and the Hebrew systems alongside.",
   keywords: [
     "english gematria chart",
     "english ordinal gematria",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Ultimate English Gematria Value Chart",
     description:
-      "Master the numerical essence of the English language. Explore comprehensive value charts for English Ordinal, Pythagorean Reduction, Sumerian, and Jewish Gematria systems.",
+      "Full English letter value tables for Ordinal, Reverse and Pythagorean reduction. Every letter listed, with the arithmetic shown and the Hebrew systems alongside.",
     url: "https://www.gematriaguru.com/english-gematria-value-chart",
     type: "article",
   },
@@ -30,7 +30,7 @@ const jsonLd = {
   "@type": "Article",
   headline: "The Ultimate English Gematria Value Chart",
   description:
-    "Master the numerical essence of the English language. Explore comprehensive value charts for English Ordinal, Pythagorean Reduction, Sumerian, and Jewish Gematria systems.",
+    "Full English letter value tables for Ordinal, Reverse and Pythagorean reduction. Every letter listed, with the arithmetic shown and the Hebrew systems alongside.",
   publisher: { "@type": "Organization", name: "Gematria Guru", url: "https://www.gematriaguru.com" },
   url: "https://www.gematriaguru.com/english-gematria-value-chart",
 };
@@ -220,14 +220,14 @@ const LP_HTML = `
 
   <section class="lp-hero">
     <h1>The Ultimate English Gematria Value Chart</h1>
-    <p>Master the numerical essence of the English language. Explore comprehensive value charts for English Ordinal, Pythagorean Reduction, Sumerian, and Jewish Gematria systems.</p>
+    <p>Full letter value tables for English Ordinal, English Reverse and Pythagorean reduction, with every letter listed and the arithmetic shown.</p>
   </section>
 
   <section class="lp-section">
     <img src="https://outgoing-oyster-428.convex.cloud/api/storage/af13464f-a056-4648-b133-923e800bd834" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>Understanding English Gematria</h2>
     <p>Gematria is an ancient practice, traditionally rooted in Hebrew and Greek, that assigns numerical values to letters. While it began with the 22 letters of the Hebrew alphabet, the same esoteric principles have been adapted to the 26-letter English alphabet. An <strong>English Gematria value chart</strong> serves as the foundational map for this practice, allowing practitioners to convert words, phrases, and names into numerical signatures.</p>
-    <p>At <a href="https://www.gematriaguru.com/">Gematria Guru</a>, we believe that numbers are a universal language. By using a standardized English Gematria value chart, you can uncover hidden linguistic patterns, explore biblical numerology, and find synchronicity between seemingly unrelated words. Whether you are a student of Kabbalah or a curious linguist, understanding these charts is the first step toward deeper alphanumeric analysis.</p>
+    <p>A standardised value chart is what makes results comparable. Once the letter values are fixed, two words can be checked against each other, a total can be verified by hand, and a claim about a shared value can be tested rather than taken on trust.</p>
   </section>
 
   <section class="lp-section">
@@ -369,7 +369,7 @@ const LP_HTML = `
 
   <section class="lp-cta-section">
     <h2>Ready to Calculate?</h2>
-    <p>Put these value charts to work. Use our comprehensive, free tool to instantly calculate English and Hebrew Gematria across all major systems.</p>
+    <p>Put the charts to work. The calculator computes English, Hebrew and Greek values from the same tables shown on this page.</p>
     <a href="https://www.gematriaguru.com/" class="lp-btn">Open Gematria Calculator</a>
     <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
       Explore more resources:

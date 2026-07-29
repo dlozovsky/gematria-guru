@@ -73,7 +73,7 @@ export async function POST(request: Request) {
     );
   }
 
-  // Correct password — issue a signed session token (never the password itself)
+  // Correct password: issue a signed session token (never the password itself)
   resetAttempts(ip);
   const token = await signToken(expected);
 

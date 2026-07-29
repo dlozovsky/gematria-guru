@@ -92,7 +92,7 @@ const SystemCard: React.FC<SystemCardProps> = ({ result, onScriptOverrideChange 
           {result.isAssistedEstimate && (
             <div className="rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 text-xs text-amber-700">
               <AlertTriangle className="inline w-3 h-3 mr-1" />
-              Transliteration-assisted estimate — the value depends on spelling.
+              Transliteration-assisted estimate. The value depends on spelling.
             </div>
           )}
 
