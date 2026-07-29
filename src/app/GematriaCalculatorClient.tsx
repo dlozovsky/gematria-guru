@@ -152,7 +152,7 @@ export default function GematriaCalculatorClient({
 
   return (
     <div className="w-full">
-      <ExampleCard />
+      <ExampleCard preset={initialPreset} />
       <Instructions />
       <div className="w-full mb-2">
         <TextInput
