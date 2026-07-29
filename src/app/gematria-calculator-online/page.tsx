@@ -4,12 +4,13 @@ import Link from "next/link";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "@/app/GematriaCalculatorClient";
+import { CIPHER_SYSTEMS as REFERENCE_SYSTEMS } from "@/lib/gematriaReference";
 
-const PAGE_TITLE = "Gematria Calculator Online — Instant Hebrew & English Values";
+const PAGE_TITLE = "Gematria Calculator Online — Hebrew, English & Greek Values";
 const PAGE_DESCRIPTION =
-  "Use the gematria calculator online, right in your browser. Type any word and see all six cipher values side by side — Hebrew Standard, Mispar Gadol, Ordinal, English Simple, Ordinal, Reverse. No install.";
+  "Use the gematria calculator online, right in your browser. Type any word and see all 7 cipher values side by side — Hebrew, English and Greek systems. No install.";
 const PAGE_OG_DESCRIPTION =
-  "Gematria calculator online — type any word, see all six Hebrew and English cipher values instantly. Free, no install.";
+  "Gematria calculator online — type any word, see all 7 Hebrew, English and Greek cipher values instantly. Free, no install.";
 const PAGE_CANONICAL_URL =
   "https://www.gematriaguru.com/gematria-calculator-online";
 
@@ -51,20 +52,16 @@ const faqSchema = {
       name: "Which cipher systems are supported?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Hebrew Standard (Mispar Hechrachi), Mispar Gadol, Hebrew Ordinal, English Simple, English Ordinal, and English Reverse.",
+        text: "Hebrew Standard (Mispar Hechrachi), Mispar Gadol, Hebrew Ordinal, English Ordinal, English Reverse, Pythagorean reduction, and Greek isopsephy.",
       },
     },
   ],
 };
 
-const CIPHER_SYSTEMS = [
-  "Hebrew Standard (Mispar Hechrachi)",
-  "Mispar Gadol",
-  "Hebrew Ordinal",
-  "English Simple",
-  "English Ordinal",
-  "English Reverse",
-];
+
+const CIPHER_SYSTEMS = REFERENCE_SYSTEMS.map((s) =>
+  s.alsoKnownAs ? `${s.method} (${s.alsoKnownAs})` : s.method
+);
 
 export default function Page() {
   return (
@@ -79,9 +76,9 @@ export default function Page() {
         <h1 className="text-3xl font-bold mb-4">Free Online Gematria Calculator</h1>
         <p className="text-muted-foreground mb-8">
           An online gematria calculator lets you instantly convert any word or phrase into its
-          numerical value using traditional Hebrew and English cipher systems — right in your
+          numerical value using traditional Hebrew, English and Greek cipher systems — right in your
           browser, with no software to install. Type your text below and results appear across
-          all six supported systems simultaneously.
+          all seven supported systems simultaneously.
         </p>
 
         <Suspense fallback={<div className="w-full h-40" />}>

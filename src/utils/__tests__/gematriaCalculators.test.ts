@@ -2,7 +2,10 @@ import { describe, it, expect } from "vitest";
 import {
   ENGLISH_MAP,
   SIMPLE_MAP,
+  REVERSE_MAP,
   HEBREW_MAP,
+  MISPAR_GADOL_MAP,
+  HEBREW_ORDINAL_MAP,
   GREEK_MAP,
   reduceToSingleDigit,
   buildReductionSteps,
@@ -10,7 +13,11 @@ import {
   calculateEnglishGematria,
   calculateSimpleGematria,
   calculatePythagoreanGematria,
+  calculateEnglishReverse,
+  calculateMisparGadol,
+  calculateHebrewOrdinal,
   calculateJewishGematria,
+  calculateAllGematria,
   calculateGreekGematria,
 } from "../gematriaCalculators";
 import { latinToHebrew, latinToGreek } from "../transliteration";
@@ -266,5 +273,122 @@ describe("Per-word breakdown", () => {
     expect(lo).toBeDefined();
     expect(hi!.wordSum).toBe(ENGLISH_MAP["h"] + ENGLISH_MAP["i"]);
     expect(lo!.wordSum).toBe(ENGLISH_MAP["l"] + ENGLISH_MAP["o"]);
+  });
+});
+
+describe("English Reverse mapping", () => {
+  it("maps Z to 1", () => {
+    expect(REVERSE_MAP["z"]).toBe(1);
+  });
+
+  it("maps A to 26", () => {
+    expect(REVERSE_MAP["a"]).toBe(26);
+  });
+
+  it("mirrors the ordinal map: each letter pair sums to 27", () => {
+    for (let i = 0; i < 26; i++) {
+      const ch = String.fromCharCode(97 + i);
+      expect(ENGLISH_MAP[ch] + REVERSE_MAP[ch]).toBe(27);
+    }
+  });
+
+  it("differs from English Ordinal for asymmetric input", () => {
+    const ordinal = calculateEnglishGematria("abc");
+    const reverse = calculateEnglishReverse("abc");
+    expect(ordinal.value).toBe(6);
+    expect(reverse.value).toBe(75);
+  });
+});
+
+describe("Mispar Gadol mapping", () => {
+  it("gives final kaf 500 where Hechrachi gives 20", () => {
+    expect(MISPAR_GADOL_MAP["ך"]).toBe(500);
+    expect(HEBREW_MAP["ך"]).toBe(20);
+  });
+
+  it("gives final tsadi 900", () => {
+    expect(MISPAR_GADOL_MAP["ץ"]).toBe(900);
+  });
+
+  it("leaves non-final letters identical to Hechrachi", () => {
+    for (const ch of ["א", "י", "ל", "ת"]) {
+      expect(MISPAR_GADOL_MAP[ch]).toBe(HEBREW_MAP[ch]);
+    }
+  });
+
+  it("matches Jewish Gematria when the word has no final forms", () => {
+    const jewish = calculateJewishGematria("חי", "strict", latinToHebrew);
+    const gadol = calculateMisparGadol("חי", "strict", latinToHebrew);
+    expect(jewish.value).toBe(18);
+    expect(gadol.value).toBe(18);
+  });
+
+  it("diverges from Jewish Gematria when a final form is present", () => {
+    // מלך — final kaf: 40 + 30 + 20 = 90 standard, 40 + 30 + 500 = 570 gadol
+    const jewish = calculateJewishGematria("מלך", "strict", latinToHebrew);
+    const gadol = calculateMisparGadol("מלך", "strict", latinToHebrew);
+    expect(jewish.value).toBe(90);
+    expect(gadol.value).toBe(570);
+  });
+});
+
+describe("Hebrew Ordinal (Mispar Siduri) mapping", () => {
+  it("maps aleph to 1 and tav to 22", () => {
+    expect(HEBREW_ORDINAL_MAP["א"]).toBe(1);
+    expect(HEBREW_ORDINAL_MAP["ת"]).toBe(22);
+  });
+
+  it("maps yod to 10 and kaf to 11", () => {
+    expect(HEBREW_ORDINAL_MAP["י"]).toBe(10);
+    expect(HEBREW_ORDINAL_MAP["כ"]).toBe(11);
+  });
+
+  it("gives final forms the same ordinal as their base letter", () => {
+    expect(HEBREW_ORDINAL_MAP["ך"]).toBe(HEBREW_ORDINAL_MAP["כ"]);
+    expect(HEBREW_ORDINAL_MAP["ם"]).toBe(HEBREW_ORDINAL_MAP["מ"]);
+  });
+
+  it("calculates chai as 18 in ordinal (8 + 10)", () => {
+    const r = calculateHebrewOrdinal("חי", "strict", latinToHebrew);
+    expect(r.value).toBe(18);
+  });
+
+  it("blocks in strict mode without Hebrew input", () => {
+    const r = calculateHebrewOrdinal("shalom", "strict", latinToHebrew);
+    expect(r.status).toBe("blocked");
+  });
+});
+
+describe("calculateAllGematria composition", () => {
+  it("returns seven methods", () => {
+    expect(calculateAllGematria("test")).toHaveLength(7);
+  });
+
+  it("returns no duplicate method names", () => {
+    const methods = calculateAllGematria("test").map((r) => r.method);
+    expect(new Set(methods).size).toBe(methods.length);
+  });
+
+  it("includes the three previously missing ciphers", () => {
+    const methods = calculateAllGematria("test").map((r) => r.method);
+    expect(methods).toContain("English Reverse");
+    expect(methods).toContain("Mispar Gadol");
+    expect(methods).toContain("Hebrew Ordinal");
+  });
+
+  it("no longer emits Simple Gematria, which duplicated Pythagorean", () => {
+    const methods = calculateAllGematria("test").map((r) => r.method);
+    expect(methods).not.toContain("Simple Gematria");
+  });
+
+  it("produces distinct ordinal and reverse values for a real word", () => {
+    // "gematria" — ordinal 7+5+13+1+20+18+9+1 = 74.
+    // Reverse mirrors each letter (pairs sum to 27), so 8 letters => 8*27 - 74.
+    const results = calculateAllGematria("gematria");
+    const ordinal = results.find((r) => r.method === "English Gematria");
+    const reverse = results.find((r) => r.method === "English Reverse");
+    expect(ordinal?.value).toBe(74);
+    expect(reverse?.value).toBe(8 * 27 - 74);
+    expect(reverse?.value).not.toBe(ordinal?.value);
   });
 });
