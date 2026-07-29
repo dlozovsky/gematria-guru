@@ -224,7 +224,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/af13464f-a056-4648-b133-923e800bd834" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>Understanding English Gematria</h2>
     <p>Gematria is an ancient practice, traditionally rooted in Hebrew and Greek, that assigns numerical values to letters. While it began with the 22 letters of the Hebrew alphabet, the same esoteric principles have been adapted to the 26-letter English alphabet. An <strong>English Gematria value chart</strong> serves as the foundational map for this practice, allowing practitioners to convert words, phrases, and names into numerical signatures.</p>
     <p>A standardised value chart is what makes results comparable. Once the letter values are fixed, two words can be checked against each other, a total can be verified by hand, and a claim about a shared value can be tested rather than taken on trust.</p>
@@ -250,7 +249,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/ddb5a1e5-f37b-48c0-a245-12653416c7ce" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>Master English Gematria Value Chart (Ordinal &amp; Reduction)</h2>
     <p>Use the table below as your primary reference for the two most common English systems. This chart allows you to manually calculate the value of any name or phrase.</p>
     <div class="lp-table-container">
@@ -311,7 +309,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/dd2cd23a-ae65-4eef-a840-82b0344fa460" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>How to Choose the Right Value Chart</h2>
     <p>With so many charts available, users often ask which one is "correct." The answer depends on the intent of your study:</p>
     <div class="lp-grid">
@@ -343,7 +340,6 @@ const LP_HTML = `
   </section>
 
   <section class="lp-section lp-faq-container">
-    <img src="https://outgoing-oyster-428.convex.cloud/api/storage/9047f4c6-6a44-44a0-ad32-dae349ec393a" alt="Landing page illustration" style="max-width:100%;height:auto;border-radius:8px;margin:24px 0;" />
     <h2>Frequently Asked Questions</h2>
     <div class="lp-faq-item">
       <span class="lp-faq-question">Why does 'A' sometimes equal 1 and sometimes 6 or 26?</span>
