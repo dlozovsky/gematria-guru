@@ -40,7 +40,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
   const [xDomain, setXDomain] = useState<[number, number] | null>(null);
   const [visibleSystems, setVisibleSystems] = useState({
     "English Gematria": true,
-    "Simple Gematria": true,
+    "English Reverse": true,
     "Jewish Gematria": true,
     "Pythagorean Gematria": true,
     "Greek Isopsephy": true
@@ -112,7 +112,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
   
   const chartConfig = {
     english: { label: "English Gematria", theme: { light: "#3b82f6", dark: "#60a5fa" } },
-    simple: { label: "Simple Gematria", theme: { light: "#10b981", dark: "#34d399" } },
+    simple: { label: "English Reverse", theme: { light: "#10b981", dark: "#34d399" } },
     jewish: { label: "Jewish Gematria", theme: { light: "#8b5cf6", dark: "#a78bfa" } },
     pythagorean: { label: "Pythagorean Gematria", theme: { light: "#f97316", dark: "#fb923c" } },
     greek: { label: "Greek Isopsephy", theme: { light: "#06b6d4", dark: "#22d3ee" } },
@@ -149,7 +149,7 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                  <p className="text-xs">Simple Gematria</p>
+                  <p className="text-xs">English Reverse</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-purple-500"></div>
@@ -285,10 +285,10 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                 key={`english-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
               />
             )}
-            {visibleSystems["Simple Gematria"] && (
+            {visibleSystems["English Reverse"] && (
               <Scatter 
-                name="Simple Gematria" 
-                data={connections.nodes.filter(node => node.method === "Simple Gematria")} 
+                name="English Reverse" 
+                data={connections.nodes.filter(node => node.method === "English Reverse")} 
                 fill="#10b981" 
                 key={`simple-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
               />
@@ -340,12 +340,12 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
           variant="outline"
           className={cn(
             "text-xs h-7 gap-1",
-            visibleSystems["Simple Gematria"] ? "bg-green-50 text-green-700 border-green-200" : "text-muted-foreground"
+            visibleSystems["English Reverse"] ? "bg-green-50 text-green-700 border-green-200" : "text-muted-foreground"
           )}
-          onClick={() => toggleSystem("Simple Gematria")}
+          onClick={() => toggleSystem("English Reverse")}
         >
-          {visibleSystems["Simple Gematria"] ? <Eye size={12} /> : <EyeOff size={12} />}
-          Simple
+          {visibleSystems["English Reverse"] ? <Eye size={12} /> : <EyeOff size={12} />}
+          Reverse
         </Button>
         <Button
           size="sm"

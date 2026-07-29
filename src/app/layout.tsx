@@ -5,11 +5,11 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gematriaguru.com"),
   title: {
-    default: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
+    default: "Gematria Calculator — Hebrew, English & Greek, 7 Systems",
     template: "%s | Gematria Guru",
   },
   description:
-    "Calculate Hebrew and English gematria instantly across six cipher systems — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.",
+    "Calculate Hebrew, English and Greek gematria instantly across 7 systems — Mispar Hechrachi, Mispar Gadol, Hebrew Ordinal, English Ordinal, Reverse, Pythagorean and Greek isopsephy. Free, no signup.",
   keywords: [
     "gematria calculator",
     "Hebrew gematria",
@@ -19,6 +19,8 @@ export const metadata: Metadata = {
     "biblical numerology",
     "gematria value",
     "gematria tool",
+    "Greek isopsephy",
+    "Mispar Gadol",
   ],
   authors: [{ name: "Gematria Guru" }],
   robots: {
@@ -31,13 +33,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.gematriaguru.com",
     siteName: "Gematria Guru",
-    title: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
-    description: "Calculate Hebrew and English gematria instantly across six cipher systems — Mispar Hechrachi, English Simple, Ordinal, Reverse and more. Free, no signup.",
+    title: "Gematria Calculator — Hebrew, English & Greek, 7 Systems",
+    description: "Calculate Hebrew, English and Greek gematria instantly across 7 systems — Mispar Hechrachi, Mispar Gadol, Hebrew Ordinal, English Ordinal, Reverse, Pythagorean and Greek isopsephy. Free, no signup.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gematria Calculator — Hebrew & English, 6 Cipher Systems",
-    description: "Calculate Hebrew and English gematria instantly across six cipher systems — free, no signup.",
+    title: "Gematria Calculator — Hebrew, English & Greek, 7 Systems",
+    description: "Calculate Hebrew, English and Greek gematria instantly across 7 cipher systems — free, no signup.",
   },
 };
 

@@ -88,10 +88,75 @@ Columns:
 1. Export the Page Indexing report from GSC for each exclusion reason (duplicate, crawled-not-indexed,
    discovered-not-indexed, redirect) and paste URLs into the matching rows above (add rows for anything
    not listed — likely additional Supabase blog posts).
-2. For the 11 "duplicate without user-selected canonical" URLs specifically: check whether they are
-   `www` vs. non-`www`, `http` vs. `https`, or trailing-slash variants of pages above — those are
-   typically Vercel/DNS-level, not fixable in this repo's route code (all routes here already emit a
-   self-referencing canonical).
+2. See "Duplicate without user-selected canonical" below — that bucket has since been resolved and
+   needs no code change.
 3. For "crawled/discovered but not indexed" URLs, prioritize starting with the core calculator and
    learning pages, since those now have stronger internal links after this change — request indexing in
    GSC once you confirm content/canonical are correct.
+
+---
+
+## Duplicate without user-selected canonical — resolved, no code change needed
+
+*Added 2026-07-29, after the URL-level GSC export became available.*
+
+**Correction.** The original version of this sheet stated that these URLs were "likely `www` vs.
+non-`www`, `http` vs. `https`, or trailing-slash variants … typically Vercel/DNS-level, not fixable in
+this repo's route code." **That was wrong**, and was inferred before the URL list was available. All 12
+affected URLs are ordinary `https://www.` content URLs.
+
+The 12 URLs GSC lists:
+
+| URL | Type |
+|---|---|
+| `/learning/intro` | static route |
+| `/learning/systems` | static route |
+| `/learning/name-gematria` | static route |
+| `/blog/gematria-codes-famous-examples` | in `blogFallbackPosts` |
+| `/blog/english-gematria-systems-different-methods` | in `blogFallbackPosts` |
+| `/blog/modern-applications-gematria-digital-age` | in `blogFallbackPosts` |
+| `/blog/number-18-jewish-concept-chai` | Supabase only |
+| `/blog/gematria-zohar-mystical-text-analysis` | Supabase only |
+| `/blog/john-fitzgerald-cowboys-lineman-gematria-77-…` | Supabase only |
+| `/blog/leonid-radvinsky-gematria-43-…` | Supabase only |
+| `/blog/justin-fairfax-gematria-…` | Supabase only |
+| `/blog/oklahoma-city-bombing-gematria-anniversary-…` | Supabase only |
+
+**Finding: the canonicals are correct.** Verified against generated HTML in `.next/server/app/`:
+
+```
+/learning/intro    <link rel="canonical" href="https://www.gematriaguru.com/learning/intro"/>
+/learning/systems  <link rel="canonical" href="https://www.gematriaguru.com/learning/systems"/>
+```
+
+Each has a self-referencing canonical, a unique title, and distinct content. `/blog/[slug]` emits a
+per-slug canonical via `generateMetadata`.
+
+**What the status actually means.** GSC distinguishes "Duplicate, Google chose different canonical than
+user" (canonical seen, overruled) from "Duplicate **without user-selected canonical**" (no canonical
+found). This property reports the latter, so Google was served pages without canonical tags — which the
+build output shows is not what these routes emit.
+
+**Most likely cause: the crawl window, not the code.** All 12 share `first detected 6/30/26` and
+`last crawled Jun 30, 2026`, and none has been recrawled since. June 30 is the day ~10 PRs merged in
+rapid succession (#23–#32), several fixing Supabase failures in flight ("Remove updated_at from sitemap
+query — column does not exist in DB", "Fall back to anon key for post writes when service role key is
+absent", "Use anon Supabase client for admin read endpoints"). The affected set spans static routes,
+fallback posts, and Supabase-only posts while sparing their near-identical siblings — a pattern that
+fits site state during one crawl, not a per-page defect.
+
+**Action: use "Validate Fix" in Search Console.** Do not change canonical code. Validation is known to
+work on this property — the "Discovered – currently not indexed" bucket already shows Validation:
+Passed.
+
+### Separate issue surfaced by this list: possible duplicate slugs in Supabase
+
+A third-party SEO dashboard listed two different article titles resolving to the same URL,
+`/blog/english-gematria-systems-different-methods` — which is one of the 12. If two `blog_posts` rows
+share a slug, `.maybeSingle()` in `src/app/blog/[slug]/page.tsx` throws on multi-row results, the
+`catch` swallows it, and the page silently serves the repo's fallback copy instead of either real
+article. Worth confirming directly:
+
+```sql
+select slug, count(*) from blog_posts group by slug having count(*) > 1;
+```
