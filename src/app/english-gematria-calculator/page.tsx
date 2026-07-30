@@ -5,7 +5,7 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import GematriaCalculatorClient from "@/app/GematriaCalculatorClient";
 
-const PAGE_TITLE = "English Gematria Calculator: Ordinal, Reverse and Pythagorean";
+const PAGE_TITLE = "English Gematria Calculator — Simple, Ordinal & Reverse";
 const PAGE_DESCRIPTION =
   "Free English gematria calculator. Convert any word to its English Simple (A=1–Z=26), Ordinal, and Reverse cipher values instantly, with a full A–Z letter value chart.";
 const PAGE_CANONICAL_URL =
@@ -33,7 +33,7 @@ const faqSchema = {
       name: "How is English gematria calculated?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In English Ordinal gematria each letter is given its position in the alphabet, A=1, B=2, through Z=26, and the values of every letter in a word are added together to get the total.",
+        text: "In English Simple (Ordinal) gematria each letter is given its position in the alphabet — A=1, B=2, through Z=26 — and the values of every letter in a word are added together to get the total.",
       },
     },
     {
@@ -71,8 +71,8 @@ export default function Page() {
           <p className="text-muted-foreground mb-8">
             English gematria assigns a number to every letter of the Latin alphabet and adds them
             together to give a word or phrase its numerical value. This calculator computes the most
-            common English methods at once: Ordinal (A=1 through Z=26), Reverse (Z=1 through A=26) and
-            Pythagorean reduction, so you can compare results side by side as you type.
+            common English methods at once — English Simple (Ordinal, A=1 through Z=26), and English
+            Reverse — so you can compare results side by side as you type.
           </p>
 
           <Suspense fallback={<div className="w-full h-40" />}>

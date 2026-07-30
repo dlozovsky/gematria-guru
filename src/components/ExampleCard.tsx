@@ -10,7 +10,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { HEBREW_MAP } from "@/utils/gematriaCalculators";
 
 interface ExampleWithMeaning {
   word: string;
@@ -19,62 +18,8 @@ interface ExampleWithMeaning {
   meaning: string;
 }
 
-/** Sum a Hebrew word from the live map so an example cannot show a wrong total. */
-const hebrewValue = (word: string) =>
-  word.split("").reduce((sum, ch) => sum + (HEBREW_MAP[ch] ?? 0), 0);
-
-const HEBREW_EXAMPLES: ExampleWithMeaning[] = [
-  {
-    word: "חי",
-    value: hebrewValue("חי"),
-    method: "Jewish Gematria",
-    meaning:
-      "Chai means life. Its value of 18 is why charitable gifts are customarily given in multiples of 18.",
-  },
-  {
-    word: "שלום",
-    value: hebrewValue("שלום"),
-    method: "Jewish Gematria",
-    meaning:
-      "Shalom means peace. Shin(300) + Lamed(30) + Vav(6) + Final Mem(40) gives 376, which reduces to 7.",
-  },
-  {
-    word: "אהבה",
-    value: hebrewValue("אהבה"),
-    method: "Jewish Gematria",
-    meaning:
-      "Ahavah means love and totals 13, the same value as echad (אחד), meaning one. Commentators read the pair together.",
-  },
-  {
-    word: "אלהים",
-    value: hebrewValue("אלהים"),
-    method: "Jewish Gematria",
-    meaning:
-      "Elohim totals 86. Kabbalistic commentary notes that HaTeva (הטבע), meaning nature, carries the same value.",
-  },
-  {
-    word: "אמת",
-    value: hebrewValue("אמת"),
-    method: "Jewish Gematria",
-    meaning:
-      "Emet means truth and totals 441, which is 21 squared. Its letters are the first, middle and last of the alphabet.",
-  },
-  {
-    word: "תורה",
-    value: hebrewValue("תורה"),
-    method: "Jewish Gematria",
-    meaning:
-      "Torah totals 611. Tav(400) + Vav(6) + Resh(200) + He(5), summing the four letters of the word itself.",
-  },
-];
-
-interface ExampleCardProps {
-  /** When "hebrew", show Hebrew worked examples instead of the English set. */
-  preset?: "english" | "hebrew";
-}
-
-const ExampleCard = ({ preset }: ExampleCardProps) => {
-  const englishExamples: ExampleWithMeaning[] = [
+const ExampleCard = () => {
+  const examples: ExampleWithMeaning[] = [
     { 
       word: "LOVE", 
       value: 54, 
@@ -112,8 +57,6 @@ const ExampleCard = ({ preset }: ExampleCardProps) => {
       meaning: "87 reduces to 15 (8+7), which further reduces to 6 (1+5). This connects truth to harmony and balance, suggesting that truth brings equilibrium."
     }
   ];
-
-  const examples = preset === "hebrew" ? HEBREW_EXAMPLES : englishExamples;
 
   return (
     <motion.div

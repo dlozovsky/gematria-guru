@@ -14,7 +14,7 @@ export const LearningObjectives = () => {
   return (
     <Card>
       <CardContent className="p-6">
-        <h2 className="text-2xl font-semibold mb-4">Learning Objectives</h2>
+        <h2 className="text-2xl font-semibold mb-4">🎯 Learning Objectives</h2>
         <ul className="space-y-2">
           {objectives.map((objective, index) => (
             <li key={index} className="flex items-start gap-2">

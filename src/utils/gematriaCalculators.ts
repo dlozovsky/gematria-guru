@@ -77,26 +77,6 @@ export const SIMPLE_MAP: Record<string, number> = (() => {
   return map;
 })();
 
-// Reverse ordinal: z=1 through a=26.
-export const REVERSE_MAP: Record<string, number> = (() => {
-  const map: Record<string, number> = {};
-  for (let i = 0; i < 26; i++) {
-    map[String.fromCharCode(97 + i)] = 26 - i;
-  }
-  return map;
-})();
-
-// English Sumerian: the ordinal position multiplied by six, so a=6 through
-// z=156. Values are a fixed multiple of ENGLISH_MAP rather than an independent
-// table, which is why a word's Sumerian total is always six times its ordinal.
-export const SUMERIAN_MAP: Record<string, number> = (() => {
-  const map: Record<string, number> = {};
-  for (let i = 0; i < 26; i++) {
-    map[String.fromCharCode(97 + i)] = (i + 1) * 6;
-  }
-  return map;
-})();
-
 export const HEBREW_MAP: Record<string, number> = {
   "\u05D0": 1,
   "\u05D1": 2,
@@ -125,49 +105,6 @@ export const HEBREW_MAP: Record<string, number> = {
   "\u05DF": 50,
   "\u05E3": 80,
   "\u05E5": 90,
-};
-
-// Mispar Gadol: identical to Mispar Hechrachi except the five final (sofit)
-// forms carry their own values of 500-900 instead of repeating the base letter.
-export const MISPAR_GADOL_MAP: Record<string, number> = {
-  ...HEBREW_MAP,
-  "\u05DA": 500,
-  "\u05DD": 600,
-  "\u05DF": 700,
-  "\u05E3": 800,
-  "\u05E5": 900,
-};
-
-// Mispar Siduri (Hebrew Ordinal): letters numbered 1-22 by alphabetical
-// position. Final forms take the same ordinal as their base letter.
-export const HEBREW_ORDINAL_MAP: Record<string, number> = {
-  "\u05D0": 1,
-  "\u05D1": 2,
-  "\u05D2": 3,
-  "\u05D3": 4,
-  "\u05D4": 5,
-  "\u05D5": 6,
-  "\u05D6": 7,
-  "\u05D7": 8,
-  "\u05D8": 9,
-  "\u05D9": 10,
-  "\u05DB": 11,
-  "\u05DC": 12,
-  "\u05DE": 13,
-  "\u05E0": 14,
-  "\u05E1": 15,
-  "\u05E2": 16,
-  "\u05E4": 17,
-  "\u05E6": 18,
-  "\u05E7": 19,
-  "\u05E8": 20,
-  "\u05E9": 21,
-  "\u05EA": 22,
-  "\u05DA": 11,
-  "\u05DD": 13,
-  "\u05DF": 14,
-  "\u05E3": 17,
-  "\u05E5": 18,
 };
 
 export const GREEK_MAP: Record<string, number> = {
@@ -298,132 +235,6 @@ export function calculatePythagoreanGematria(text: string, mode: CalculationMode
   };
 }
 
-const noopTransliterate = (_t: string): string => "";
-
-export function calculateSumerianGematria(text: string, mode: CalculationMode = "strict"): GematriaResult {
-  const words = text.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z]/g, "")).filter(Boolean);
-  const { wordBreakdown, total, allLetters } = buildWordBreakdown(words, SUMERIAN_MAP);
-  const reducedValue = reduceToSingleDigit(total);
-  const reductionSteps = buildReductionSteps(total);
-  return {
-    method: "English Sumerian",
-    value: total,
-    reducedValue,
-    reductionSteps,
-    letterBreakdown: allLetters,
-    wordBreakdown,
-    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
-    status: "calculated-strict",
-    mode,
-  };
-}
-
-export function calculateEnglishReverse(text: string, mode: CalculationMode = "strict"): GematriaResult {
-  const words = text.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z]/g, "")).filter(Boolean);
-  const { wordBreakdown, total, allLetters } = buildWordBreakdown(words, REVERSE_MAP);
-  const reducedValue = reduceToSingleDigit(total);
-  const reductionSteps = buildReductionSteps(total);
-  return {
-    method: "English Reverse",
-    value: total,
-    reducedValue,
-    reductionSteps,
-    letterBreakdown: allLetters,
-    wordBreakdown,
-    explanation: `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
-    status: "calculated-strict",
-    mode,
-  };
-}
-
-/**
- * Shared implementation for the Hebrew-script ciphers. They differ only in
- * which letter-value table they use, but all share the same strict/assisted
- * handling: strict mode requires real Hebrew input, assisted mode falls back
- * to a transliteration and flags the result as an estimate.
- */
-function calculateHebrewScript(
-  text: string,
-  mode: CalculationMode,
-  transliterateLatinToHebrew: (t: string) => string,
-  hebrewOverride: string | undefined,
-  map: Record<string, number>,
-  method: string
-): GematriaResult {
-  const hasHebrew = /[\u0590-\u05FF]/.test(text);
-
-  if (mode === "strict" && !hasHebrew) {
-    return {
-      method,
-      value: 0,
-      reducedValue: 0,
-      reductionSteps: "",
-      letterBreakdown: [],
-      wordBreakdown: [],
-      explanation: `Strict mode: ${method} requires Hebrew letters. Paste the name in Hebrew, or switch to Assisted mode to generate an estimate.`,
-      requiresScript: "hebrew",
-      scriptMissing: true,
-      status: "blocked",
-      mode,
-    };
-  }
-
-  let sourceText: string;
-  let isAssistedEstimate = false;
-
-  if (hasHebrew) {
-    sourceText = stripHebrewNiqqud(text);
-  } else {
-    sourceText = hebrewOverride !== undefined ? hebrewOverride : transliterateLatinToHebrew(text);
-    isAssistedEstimate = true;
-  }
-
-  const words = sourceText.split(/\s+/).filter(Boolean);
-  const { wordBreakdown, total, allLetters } = buildWordBreakdown(words, map);
-  const reducedValue = reduceToSingleDigit(total);
-  const reductionSteps = buildReductionSteps(total);
-
-  return {
-    method,
-    value: total,
-    reducedValue,
-    reductionSteps,
-    letterBreakdown: allLetters,
-    wordBreakdown,
-    explanation: isAssistedEstimate
-      ? `Transliteration-assisted estimate (depends on spelling).\nTotal: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`
-      : `Total: ${total}\nReduction: ${reductionSteps}\nFinal Reduced: ${reducedValue}`,
-    requiresScript: "hebrew",
-    scriptMissing: false,
-    status: isAssistedEstimate ? "calculated-assisted" : "calculated-strict",
-    mode,
-    scriptUsed: sourceText,
-    isAssistedEstimate,
-  };
-}
-
-export function calculateMisparGadol(
-  text: string,
-  mode: CalculationMode = "strict",
-  transliterateLatinToHebrew: (t: string) => string = noopTransliterate,
-  hebrewOverride?: string
-): GematriaResult {
-  return calculateHebrewScript(
-    text, mode, transliterateLatinToHebrew, hebrewOverride, MISPAR_GADOL_MAP, "Mispar Gadol"
-  );
-}
-
-export function calculateHebrewOrdinal(
-  text: string,
-  mode: CalculationMode = "strict",
-  transliterateLatinToHebrew: (t: string) => string = noopTransliterate,
-  hebrewOverride?: string
-): GematriaResult {
-  return calculateHebrewScript(
-    text, mode, transliterateLatinToHebrew, hebrewOverride, HEBREW_ORDINAL_MAP, "Hebrew Ordinal"
-  );
-}
-
 export function calculateJewishGematria(
   text: string,
   mode: CalculationMode = "strict",
@@ -551,6 +362,7 @@ export interface CalculateAllOptions {
   transliterateLatinToGreek?: (t: string) => string;
 }
 
+const noopTransliterate = (_t: string): string => "";
 
 export function calculateAllGematria(
   text: string,
@@ -563,18 +375,11 @@ export function calculateAllGematria(
     transliterateLatinToHebrew = noopTransliterate,
     transliterateLatinToGreek = noopTransliterate,
   } = options;
-  // Simple Gematria is deliberately absent: it shares SIMPLE_MAP with
-  // Pythagorean, so including both printed the same number twice. The
-  // standalone calculateSimpleGematria export is kept for callers that ask
-  // for that cipher by name.
   return [
     calculateEnglishGematria(text, mode),
-    calculateEnglishReverse(text, mode),
+    calculateSimpleGematria(text, mode),
     calculatePythagoreanGematria(text, mode),
-    calculateSumerianGematria(text, mode),
     calculateJewishGematria(text, mode, transliterateLatinToHebrew, hebrewOverride),
-    calculateMisparGadol(text, mode, transliterateLatinToHebrew, hebrewOverride),
-    calculateHebrewOrdinal(text, mode, transliterateLatinToHebrew, hebrewOverride),
     calculateGreekGematria(text, mode, transliterateLatinToGreek, greekOverride),
   ];
 }

@@ -1,4 +1,4 @@
-// Web Crypto API: works in both Edge (middleware) and Node.js (API routes)
+// Web Crypto API — works in both Edge (middleware) and Node.js (API routes)
 
 function hexEncode(buf: ArrayBuffer): string {
   return Array.from(new Uint8Array(buf))

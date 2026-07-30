@@ -17,7 +17,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <h3 className="text-white font-semibold mb-4">Gematria Guru</h3>
             <p className="text-slate-300 text-sm mb-4">
-              A free calculator and reference for Hebrew, English and Greek gematria. 
+              Your comprehensive platform for learning and exploring the ancient art of Gematria. 
               Discover hidden meanings in Hebrew and English through our interactive calculators and educational modules.
             </p>
             <div className="space-y-2 text-sm text-slate-300">
