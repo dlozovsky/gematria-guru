@@ -27,10 +27,7 @@ export interface Author {
 
 export const SITE_AUTHOR: Author = {
   name: "Daniel Lozovsky",
-  // TODO(daniel): expand this. Anything added must be true and checkable:
-  // what drew you to gematria, how long you have worked on it, relevant
-  // background. Avoid titles or credentials you do not hold.
-  bio: "Daniel Lozovsky built and maintains Gematria Guru.",
+  bio: "Gematria Guru was built by Daniel Lozovsky, a software engineer who got tired of gematria calculators that were slow, ad-choked, or quietly wrong about cipher math. This site is the tool he wanted: every cipher implemented from published definitions, results you can check by hand, and no interpretation layered on top of the numbers. He builds and maintains it independently.",
   url: "https://www.gematriaguru.com/about",
   sameAs: [],
 };

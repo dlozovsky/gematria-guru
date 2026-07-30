@@ -26,9 +26,7 @@ export default function AboutPage() {
 
           <section>
             <h2 className="text-2xl font-semibold text-foreground mt-8 mb-3">Who writes this site</h2>
-            <p className="mb-3">
-              <strong className="text-foreground">{SITE_AUTHOR.name}</strong>. {SITE_AUTHOR.bio}
-            </p>
+            <p className="mb-3">{SITE_AUTHOR.bio}</p>
             <p>
               Articles here carry a real byline. Earlier versions of this site published posts under
               author names that did not correspond to real people; those bylines have been corrected.
