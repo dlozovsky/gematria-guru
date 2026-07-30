@@ -131,7 +131,7 @@ export const UnifiedMeaningCard: React.FC<UnifiedMeaningCardProps> = ({
               <span>
                 {r.value} → <strong>{r.reducedValue}</strong>
                 {REDUCED_MEANINGS[r.reducedValue]
-                  ? ` — ${REDUCED_MEANINGS[r.reducedValue]}`
+                  ? `: ${REDUCED_MEANINGS[r.reducedValue]}`
                   : ""}
                 {r.isAssistedEstimate && (
                   <span className="ml-1 text-amber-600 text-xs italic">
@@ -148,7 +148,7 @@ export const UnifiedMeaningCard: React.FC<UnifiedMeaningCardProps> = ({
         {dominantNumber !== null && dominantCount !== null ? (
           <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r p-3">
             <p className="text-sm font-semibold text-blue-800">
-              Dominant reduced number: <strong>{dominantNumber}</strong> — appears in{" "}
+              Dominant reduced number: <strong>{dominantNumber}</strong>, appears in{" "}
               {dominantCount} of {active.length} computed systems.
             </p>
             {REDUCED_MEANINGS[dominantNumber] && (

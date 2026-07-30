@@ -60,24 +60,41 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "title, slug and content are required" }, { status: 400 });
   }
 
-  const { data, error } = await supabase
+  const payload = {
+    title,
+    slug,
+    excerpt: excerpt ?? "",
+    content,
+    author: author ?? "Gematria Guru Team",
+    published_at: published_at ?? new Date().toISOString(),
+    read_time: read_time ?? "5 min read",
+    category: category ?? "General",
+    image_url: image_url || null,
+  };
+
+  // Check if a post with this slug already exists
+  const { data: existing } = await supabase
     .from("blog_posts")
-    .upsert(
-      {
-        title,
-        slug,
-        excerpt: excerpt ?? "",
-        content,
-        author: author ?? "Gematria Guru Team",
-        published_at: published_at ?? new Date().toISOString(),
-        read_time: read_time ?? "5 min read",
-        category: category ?? "General",
-        image_url: image_url || null,
-      },
-      { onConflict: "slug" }
-    )
-    .select()
-    .single();
+    .select("id")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  let data, error;
+
+  if (existing) {
+    ({ data, error } = await supabase
+      .from("blog_posts")
+      .update(payload)
+      .eq("slug", slug)
+      .select()
+      .single());
+  } else {
+    ({ data, error } = await supabase
+      .from("blog_posts")
+      .insert(payload)
+      .select()
+      .single());
+  }
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

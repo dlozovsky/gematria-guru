@@ -8,6 +8,7 @@ import {
   AccordionTrigger 
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { CIPHER_SYSTEMS, CIPHER_COUNT_WORD } from "@/lib/gematriaReference";
 
 const FAQ = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,28 +19,19 @@ const FAQ = () => {
       answer: (
         <div>
           <p>
-            Great question! Sometimes when you enter a word or name — especially full names — the numerical values across different Gematria systems (English, Simple, Jewish, Pythagorean, Greek) don't reduce to the same number.
+            Each system uses a different letter table, so the same word usually produces a different
+            total in each one. Those totals are then reduced to a single digit. Sometimes several
+            systems reduce to the same digit, and sometimes they scatter.
           </p>
           <p>
-            Instead, you might get a variety of different reduced values like:<br />
-            <strong>English:</strong> 153 → 1<br />
-            <strong>Simple:</strong> 63 → 9<br />
-            <strong>Jewish:</strong> 742 → 4<br />
-            <strong>Greek:</strong> 811 → 2
+            When no digit repeats across the systems, the results show <strong>no dominant theme</strong>.
+            Longer inputs and full names scatter more often, simply because there are more letters and
+            larger totals involved.
           </p>
           <p>
-            Because these reduced numbers don't repeat or cluster, we say there's <strong>no dominant theme</strong>.
-          </p>
-          <p>
-            <span role="img" aria-label="brain">🧠</span> <strong>What does that mean?</strong> It doesn't mean the word or name is meaningless — in fact, it usually means the person or idea carries a blend of energies:
-          </p>
-          <ul className="list-disc ml-6">
-            <li>A mix of leadership and compassion</li>
-            <li>A blend of intuition and structure</li>
-            <li>A combination of creativity and spiritual insight</li>
-          </ul>
-          <p>
-            This kind of result is often interpreted as a <strong>"Complex Soul"</strong> or multifaceted identity — someone who isn't defined by one archetype but instead draws strength from diverse traits.
+            This is a property of the arithmetic rather than a verdict on the word. A scattered result
+            means the totals happened not to share a reduced digit; it does not mean the calculation
+            failed, and it does not say anything factual about the person or idea behind the word.
           </p>
         </div>
       ),
@@ -99,11 +91,15 @@ const FAQ = () => {
       question: "What are the different types of Gematria?",
       answer: (
         <div>
-          <p>This calculator offers three main types:</p>
+          <p>
+            This calculator runs {CIPHER_COUNT_WORD} systems at once, across three scripts:
+          </p>
           <ul className="list-disc ml-6">
-            <li><strong>English Gematria</strong> (A=1, B=2, etc.)</li>
-            <li><strong>Simple Gematria</strong> (cycles values 1-9)</li>
-            <li><strong>Jewish Gematria</strong> (based on traditional Hebrew letter values applied to English)</li>
+            {CIPHER_SYSTEMS.map((c) => (
+              <li key={c.method}>
+                <strong>{c.method}</strong> ({c.script}){c.alsoKnownAs ? `, also called ${c.alsoKnownAs}` : ""}
+              </li>
+            ))}
           </ul>
         </div>
       ),
@@ -117,10 +113,12 @@ const FAQ = () => {
       ),
     },
     {
-      question: "What is Simple Gematria?",
+      question: "What is Pythagorean Gematria?",
       answer: (
         <p>
-          <strong>Simple Gematria</strong> assigns values from 1-9 in a repeating pattern: A=1, B=2... I=9, J=1, K=2, etc. This method is also known as the 'digital root' system.
+          <strong>Pythagorean Gematria</strong>, also called Full Reduction, assigns values from 1 to 9
+          in a repeating pattern: A=1 through I=9, then J=1 through R=9, then S=1 through Z=8. It is
+          sometimes described as the digital root system.
         </p>
       ),
     },
@@ -342,7 +340,7 @@ const FAQ = () => {
             <p className="font-semibold text-blue-800 mb-1">What the chart shows:</p>
             <ul className="list-disc ml-6">
               <li><strong>X-axis:</strong> Numerical values (higher numbers appear further right)</li>
-              <li><strong>Y-axis:</strong> Different Gematria systems (English, Simple, Jewish, etc.)</li>
+              <li><strong>Y-axis:</strong> The gematria systems (English Gematria, English Reverse, Jewish Gematria and so on)</li>
               <li><strong>Colored dots:</strong> Each dot represents a calculation in a specific system</li>
               <li><strong>Number Matches:</strong> When the same number appears in multiple systems</li>
               <li><strong>Significant Numbers:</strong> Values with special meaning in spiritual traditions</li>

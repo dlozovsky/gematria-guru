@@ -29,22 +29,45 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { CIPHER_SYSTEMS } from "@/lib/gematriaReference";
 
 interface NumberMapChartProps {
   connections: NumberConnections;
   inputText: string;
 }
 
+/**
+ * One plotted series per cipher, derived from CIPHER_SYSTEMS so a newly added
+ * cipher cannot silently go unplotted. Colours cycle if more ciphers are added
+ * than there are palette entries.
+ */
+const SERIES_PALETTE = [
+  { fill: "#3b82f6", chip: "bg-blue-50 text-blue-700 border-blue-200" },
+  { fill: "#10b981", chip: "bg-green-50 text-green-700 border-green-200" },
+  { fill: "#f97316", chip: "bg-orange-50 text-orange-700 border-orange-200" },
+  { fill: "#e11d48", chip: "bg-rose-50 text-rose-700 border-rose-200" },
+  { fill: "#8b5cf6", chip: "bg-purple-50 text-purple-700 border-purple-200" },
+  { fill: "#ca8a04", chip: "bg-yellow-50 text-yellow-700 border-yellow-200" },
+  { fill: "#0f766e", chip: "bg-teal-50 text-teal-700 border-teal-200" },
+  { fill: "#06b6d4", chip: "bg-cyan-50 text-cyan-700 border-cyan-200" },
+];
+
+const SERIES = CIPHER_SYSTEMS.map((cipher, i) => ({
+  method: cipher.method,
+  // short label for the toggle chips, which are tight on mobile
+  short: cipher.method
+    .replace("English ", "")
+    .replace(" Gematria", "")
+    .replace(" Isopsephy", ""),
+  ...SERIES_PALETTE[i % SERIES_PALETTE.length],
+}));
+
 const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
   // Instead of a zoom level, we'll use domain states to control the view
   const [xDomain, setXDomain] = useState<[number, number] | null>(null);
-  const [visibleSystems, setVisibleSystems] = useState({
-    "English Gematria": true,
-    "Simple Gematria": true,
-    "Jewish Gematria": true,
-    "Pythagorean Gematria": true,
-    "Greek Isopsephy": true
-  });
+  const [visibleSystems, setVisibleSystems] = useState<Record<string, boolean>>(
+    () => Object.fromEntries(SERIES.map((sr) => [sr.method, true]))
+  );
   
   // Extract nodes that have significance
   const significantNodes = useMemo(() => {
@@ -110,13 +133,12 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
     }));
   };
   
-  const chartConfig = {
-    english: { label: "English Gematria", theme: { light: "#3b82f6", dark: "#60a5fa" } },
-    simple: { label: "Simple Gematria", theme: { light: "#10b981", dark: "#34d399" } },
-    jewish: { label: "Jewish Gematria", theme: { light: "#8b5cf6", dark: "#a78bfa" } },
-    pythagorean: { label: "Pythagorean Gematria", theme: { light: "#f97316", dark: "#fb923c" } },
-    greek: { label: "Greek Isopsephy", theme: { light: "#06b6d4", dark: "#22d3ee" } },
-  };
+  const chartConfig = Object.fromEntries(
+    SERIES.map((sr) => [
+      sr.method,
+      { label: sr.method, theme: { light: sr.fill, dark: sr.fill } },
+    ])
+  );
 
   if (!inputText.trim() || !connections.nodes || connections.nodes.length === 0) {
     return (
@@ -143,26 +165,15 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                 This chart shows how your input produces values across different Gematria systems.
               </p>
               <div className="space-y-1 mt-1">
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-blue-500"></div>
-                  <p className="text-xs">English Gematria</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                  <p className="text-xs">Simple Gematria</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                  <p className="text-xs">Jewish Gematria</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-orange-500"></div>
-                  <p className="text-xs">Pythagorean Gematria</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-cyan-500"></div>
-                  <p className="text-xs">Greek Isopsephy</p>
-                </div>
+                {SERIES.map((sr) => (
+                  <div key={sr.method} className="flex items-center gap-2">
+                    <div
+                      className="h-2 w-2 rounded-full"
+                      style={{ backgroundColor: sr.fill }}
+                    ></div>
+                    <p className="text-xs">{sr.method}</p>
+                  </div>
+                ))}
               </div>
               <div className="text-xs space-y-1 mt-2">
                 <p className="font-medium">How to use:</p>
@@ -277,112 +288,36 @@ const NumberMapChart = ({ connections, inputText }: NumberMapChartProps) => {
                 );
               }}
             />
-            {visibleSystems["English Gematria"] && (
-              <Scatter 
-                name="English Gematria" 
-                data={connections.nodes.filter(node => node.method === "English Gematria")} 
-                fill="#3b82f6" 
-                key={`english-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
+            {SERIES.filter((sr) => visibleSystems[sr.method]).map((sr) => (
+              <Scatter
+                key={`${sr.method}-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : "auto"}`}
+                name={sr.method}
+                data={connections.nodes.filter((node) => node.method === sr.method)}
+                fill={sr.fill}
               />
-            )}
-            {visibleSystems["Simple Gematria"] && (
-              <Scatter 
-                name="Simple Gematria" 
-                data={connections.nodes.filter(node => node.method === "Simple Gematria")} 
-                fill="#10b981" 
-                key={`simple-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
-              />
-            )}
-            {visibleSystems["Jewish Gematria"] && (
-              <Scatter 
-                name="Jewish Gematria" 
-                data={connections.nodes.filter(node => node.method === "Jewish Gematria")} 
-                fill="#8b5cf6" 
-                key={`jewish-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
-              />
-            )}
-            {visibleSystems["Pythagorean Gematria"] && (
-              <Scatter 
-                name="Pythagorean Gematria" 
-                data={connections.nodes.filter(node => node.method === "Pythagorean Gematria")} 
-                fill="#f97316" 
-                key={`pythagorean-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
-              />
-            )}
-            {visibleSystems["Greek Isopsephy"] && (
-              <Scatter 
-                name="Greek Isopsephy" 
-                data={connections.nodes.filter(node => node.method === "Greek Isopsephy")} 
-                fill="#06b6d4" 
-                key={`greek-${xDomain ? `${xDomain[0]}-${xDomain[1]}` : 'auto'}`}
-              />
-            )}
+            ))}
           </ScatterChart>
         </ResponsiveContainer>
       </div>
 
       {/* System toggle buttons */}
       <div className="mt-2 flex flex-wrap gap-1 justify-center">
-        <Button
-          size="sm"
-          variant="outline"
-          className={cn(
-            "text-xs h-7 gap-1",
-            visibleSystems["English Gematria"] ? "bg-blue-50 text-blue-700 border-blue-200" : "text-muted-foreground"
-          )}
-          onClick={() => toggleSystem("English Gematria")}
-        >
-          {visibleSystems["English Gematria"] ? <Eye size={12} /> : <EyeOff size={12} />}
-          English
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
-          className={cn(
-            "text-xs h-7 gap-1",
-            visibleSystems["Simple Gematria"] ? "bg-green-50 text-green-700 border-green-200" : "text-muted-foreground"
-          )}
-          onClick={() => toggleSystem("Simple Gematria")}
-        >
-          {visibleSystems["Simple Gematria"] ? <Eye size={12} /> : <EyeOff size={12} />}
-          Simple
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
-          className={cn(
-            "text-xs h-7 gap-1",
-            visibleSystems["Jewish Gematria"] ? "bg-purple-50 text-purple-700 border-purple-200" : "text-muted-foreground"
-          )}
-          onClick={() => toggleSystem("Jewish Gematria")}
-        >
-          {visibleSystems["Jewish Gematria"] ? <Eye size={12} /> : <EyeOff size={12} />}
-          Jewish
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
-          className={cn(
-            "text-xs h-7 gap-1",
-            visibleSystems["Pythagorean Gematria"] ? "bg-orange-50 text-orange-700 border-orange-200" : "text-muted-foreground"
-          )}
-          onClick={() => toggleSystem("Pythagorean Gematria")}
-        >
-          {visibleSystems["Pythagorean Gematria"] ? <Eye size={12} /> : <EyeOff size={12} />}
-          Pythagorean
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
-          className={cn(
-            "text-xs h-7 gap-1",
-            visibleSystems["Greek Isopsephy"] ? "bg-cyan-50 text-cyan-700 border-cyan-200" : "text-muted-foreground"
-          )}
-          onClick={() => toggleSystem("Greek Isopsephy")}
-        >
-          {visibleSystems["Greek Isopsephy"] ? <Eye size={12} /> : <EyeOff size={12} />}
-          Greek
-        </Button>
+        {SERIES.map((sr) => (
+          <Button
+            key={sr.method}
+            size="sm"
+            variant="outline"
+            className={cn(
+              "text-xs h-7 gap-1",
+              visibleSystems[sr.method] ? sr.chip : "text-muted-foreground"
+            )}
+            onClick={() => toggleSystem(sr.method)}
+            aria-pressed={visibleSystems[sr.method]}
+          >
+            {visibleSystems[sr.method] ? <Eye size={12} /> : <EyeOff size={12} />}
+            {sr.short}
+          </Button>
+        ))}
       </div>
     </div>
   );

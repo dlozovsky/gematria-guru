@@ -6,11 +6,16 @@ import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 import { supabase, type BlogPost } from "@/lib/supabase";
 import { blogFallbackPosts } from "@/lib/blogFallbackPosts";
+import { SITE_AUTHOR, authorSchema } from "@/lib/author";
 
 export const revalidate = 60;
 
-const EDITORIAL_BIO =
-  "Written by the Gematria Guru editorial team, specializing in Hebrew and English cipher systems and their modern applications.";
+// Bio text comes from the author record so the byline, the schema and the
+// /about page cannot disagree. A byline that is not the site author gets no
+// invented biography.
+function bioFor(author: string): string | null {
+  return author === SITE_AUTHOR.name ? SITE_AUTHOR.bio : null;
+}
 
 async function getPost(slug: string): Promise<BlogPost | null> {
   const now = new Date().toISOString();
@@ -126,12 +131,18 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const wasUpdated =
     !!post.updated_at && new Date(post.updated_at).getTime() > new Date(post.published_at).getTime();
 
+  // Post content is stored HTML that may contain its own <h1>; demote to <h2>
+  // so the page keeps a single H1 (the title in the header).
+  const contentHtml = post.content
+    .replace(/<h1(\s|>)/gi, "<h2$1")
+    .replace(/<\/h1>/gi, "</h2>");
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
-    author: { "@type": "Person", name: post.author },
+    author: authorSchema(post.author),
     publisher: { "@type": "Organization", name: "Gematria Guru", url: "https://www.gematriaguru.com" },
     datePublished: post.published_at,
     dateModified: modifiedTime,
@@ -177,7 +188,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
             <div
               className="prose prose-slate max-w-none prose-headings:font-bold prose-p:leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
 
             {relatedPosts.length > 0 && (
@@ -208,8 +219,18 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <User className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-semibold mb-1">{post.author}</p>
-                <p className="text-sm text-muted-foreground">{EDITORIAL_BIO}</p>
+                <p className="text-sm font-semibold mb-1">
+                  {post.author === SITE_AUTHOR.name ? (
+                    <Link href="/about" className="hover:text-primary transition-colors">
+                      {post.author}
+                    </Link>
+                  ) : (
+                    post.author
+                  )}
+                </p>
+                {bioFor(post.author) && (
+                  <p className="text-sm text-muted-foreground">{bioFor(post.author)}</p>
+                )}
               </div>
             </aside>
           </article>
