@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { CIPHER_COUNT_WORD } from "@/lib/gematriaReference";
+import { CIPHER_COUNT_WORD, CIPHER_SYSTEMS } from "@/lib/gematriaReference";
+import { SITE_AUTHOR } from "@/lib/author";
 import NavHeader from "@/components/NavHeader";
 import NavFooter from "@/components/NavFooter";
 
@@ -17,21 +18,57 @@ export default function AboutPage() {
       <main className="flex-1 max-w-3xl mx-auto px-4 py-10 w-full">
         <h1 className="text-3xl font-bold mb-6">About Gematria Guru</h1>
         <div className="space-y-6 text-muted-foreground">
-          <p>Welcome to Gematria Guru, your premier destination for exploring the ancient practice of gematria and numerical connections in text. Founded with the mission to make gematria accessible and meaningful to everyone, our platform combines traditional wisdom with modern technology.</p>
-          <h2 className="text-2xl font-semibold text-foreground mt-8">Our Mission</h2>
-          <p>Our mission is to provide a clear, accurate tool for exploring the numerical patterns and meanings within words and phrases through gematria. We believe in making this ancient practice accessible to both newcomers and experienced practitioners.</p>
-          <h2 className="text-2xl font-semibold text-foreground mt-8">What We Offer</h2>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Accurate gematria calculations across multiple methods including Hebrew and English systems</li>
-            <li>Interactive number mapping and visualization tools</li>
-            <li>Educational resources and learning modules about gematria and numerology</li>
-            <li>A knowledge center with articles on gematria history, kabbalah, and biblical numerology</li>
-            <li>Free access with no account required</li>
-          </ul>
-          <h2 className="text-2xl font-semibold text-foreground mt-8">The Practice of Gematria</h2>
-          <p>Gematria is an ancient numerological technique that assigns numerical values to letters in an alphabet. The practice is most associated with Hebrew, where each of the 22 letters carries a specific numerical value. Kabbalists developed sophisticated gematria techniques as part of their mystical exploration of the Torah.</p>
-          <h2 className="text-2xl font-semibold text-foreground mt-8">Contact Us</h2>
-          <p>Have questions or feedback? Visit our <a href="/contact" className="text-primary hover:underline">contact page</a> to get in touch.</p>
+          <p>
+            Gematria Guru is a free calculator for Hebrew, English and Greek gematria. Enter a word
+            and it returns the value in {CIPHER_COUNT_WORD} systems at once, showing the value of
+            every letter so the total can be checked by hand.
+          </p>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-3">Who writes this site</h2>
+            <p className="mb-3">
+              <strong className="text-foreground">{SITE_AUTHOR.name}</strong>. {SITE_AUTHOR.bio}
+            </p>
+            <p>
+              Articles here carry a real byline. Earlier versions of this site published posts under
+              author names that did not correspond to real people; those bylines have been corrected.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-3">What the calculator does</h2>
+            <ul className="list-disc pl-6 space-y-2">
+              {CIPHER_SYSTEMS.map((c) => (
+                <li key={c.method}>
+                  <strong className="text-foreground">{c.method}</strong> ({c.script}). {c.rule}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-3">On accuracy and interpretation</h2>
+            <p className="mb-3">
+              The arithmetic is fixed. Every letter table published on this site is generated from
+              the same code that computes your result, so a chart here cannot disagree with the
+              calculator.
+            </p>
+            <p>
+              What a number means is a different question. Gematria is a historical interpretive
+              practice, and two words sharing a value is an arithmetic fact rather than evidence of
+              a connection between them. This site reports the numbers and leaves the reading to you.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-3">Contact</h2>
+            <p>
+              Corrections and questions are welcome through the{" "}
+              <a href="/contact" className="text-primary hover:underline">contact page</a>. If you
+              find a value on this site that you believe is wrong, please say so and include the
+              word and the system.
+            </p>
+          </section>
         </div>
       </main>
       <NavFooter />
