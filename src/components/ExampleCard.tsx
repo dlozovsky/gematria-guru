@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { HEBREW_MAP } from "@/utils/gematriaCalculators";
+import { HEBREW_MAP, GREEK_MAP } from "@/utils/gematriaCalculators";
 
 interface ExampleWithMeaning {
   word: string;
@@ -68,9 +68,58 @@ const HEBREW_EXAMPLES: ExampleWithMeaning[] = [
   },
 ];
 
+/** Sum a Greek word from the live map, ignoring accents, so an example cannot show a wrong total. */
+const greekValue = (word: string) =>
+  word
+    .normalize("NFD")
+    .replace(/[\u0300-\u036F]/g, "")
+    .normalize("NFC")
+    .toLowerCase()
+    .split("")
+    .reduce((sum, ch) => sum + (GREEK_MAP[ch] ?? 0), 0);
+
+const GREEK_EXAMPLES: ExampleWithMeaning[] = [
+  {
+    word: "ἀγάπη",
+    value: greekValue("ἀγάπη"),
+    method: "Greek Isopsephy",
+    meaning: "Agape means love, in the sense of selfless regard. Alpha(1) + Gamma(3) + Alpha(1) + Pi(80) + Eta(8) gives 93.",
+  },
+  {
+    word: "λόγος",
+    value: greekValue("λόγος"),
+    method: "Greek Isopsephy",
+    meaning: "Logos means word or reason. Lambda(30) + Omicron(70) + Gamma(3) + Omicron(70) + Final Sigma(200) gives 373.",
+  },
+  {
+    word: "Ἰησοῦς",
+    value: greekValue("Ἰησοῦς"),
+    method: "Greek Isopsephy",
+    meaning: "Iesous, the Greek form of Jesus, totals 888. Early Christian writers contrasted it with 666 and read it as a number of superabundance.",
+  },
+  {
+    word: "σοφία",
+    value: greekValue("σοφία"),
+    method: "Greek Isopsephy",
+    meaning: "Sophia means wisdom. Sigma(200) + Omicron(70) + Phi(500) + Iota(10) + Alpha(1) gives 781.",
+  },
+  {
+    word: "ἀλήθεια",
+    value: greekValue("ἀλήθεια"),
+    method: "Greek Isopsephy",
+    meaning: "Aletheia means truth. Alpha(1) + Lambda(30) + Eta(8) + Theta(9) + Epsilon(5) + Iota(10) + Alpha(1) gives 64.",
+  },
+  {
+    word: "Χριστός",
+    value: greekValue("Χριστός"),
+    method: "Greek Isopsephy",
+    meaning: "Christos means anointed and totals 1480. Chi(600) + Rho(100) + Iota(10) + Sigma(200) + Tau(300) + Omicron(70) + Final Sigma(200).",
+  },
+];
+
 interface ExampleCardProps {
-  /** When "hebrew", show Hebrew worked examples instead of the English set. */
-  preset?: "english" | "hebrew";
+  /** Selects the Hebrew or Greek worked examples instead of the English set. */
+  preset?: "english" | "hebrew" | "greek";
 }
 
 const ExampleCard = ({ preset }: ExampleCardProps) => {
@@ -113,7 +162,12 @@ const ExampleCard = ({ preset }: ExampleCardProps) => {
     }
   ];
 
-  const examples = preset === "hebrew" ? HEBREW_EXAMPLES : englishExamples;
+  const examples =
+    preset === "hebrew"
+      ? HEBREW_EXAMPLES
+      : preset === "greek"
+      ? GREEK_EXAMPLES
+      : englishExamples;
 
   return (
     <motion.div

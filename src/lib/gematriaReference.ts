@@ -14,6 +14,7 @@ import {
   HEBREW_MAP,
   MISPAR_GADOL_MAP,
   HEBREW_ORDINAL_MAP,
+  GREEK_MAP,
   calculateEnglishGematria,
   calculateEnglishReverse,
   calculatePythagoreanGematria,
@@ -21,6 +22,7 @@ import {
   calculateJewishGematria,
   calculateMisparGadol,
   calculateHebrewOrdinal,
+  calculateGreekGematria,
 } from "@/utils/gematriaCalculators";
 
 export interface CipherSystem {
@@ -154,6 +156,35 @@ function hebrewRow([glyph, name]: [string, string], isFinal = false): HebrewLett
 export const HEBREW_LETTER_TABLE: HebrewLetterRow[] = HEBREW_NAMES.map((n) => hebrewRow(n));
 export const HEBREW_FINAL_TABLE: HebrewLetterRow[] = HEBREW_FINAL_NAMES.map((n) => hebrewRow(n, true));
 
+export interface GreekLetterRow {
+  glyph: string;
+  name: string;
+  value: number;
+  /** True for the archaic letters, which are not in the modern alphabet. */
+  archaic?: boolean;
+}
+
+const GREEK_NAMES: [string, string, boolean?][] = [
+  ["α", "Alpha"], ["β", "Beta"], ["γ", "Gamma"], ["δ", "Delta"],
+  ["ε", "Epsilon"], ["ϛ", "Digamma (stigma)", true], ["ζ", "Zeta"], ["η", "Eta"],
+  ["θ", "Theta"], ["ι", "Iota"], ["κ", "Kappa"], ["λ", "Lambda"],
+  ["μ", "Mu"], ["ν", "Nu"], ["ξ", "Xi"], ["ο", "Omicron"],
+  ["π", "Pi"], ["ϟ", "Qoppa", true], ["ρ", "Rho"], ["σ", "Sigma"],
+  ["τ", "Tau"], ["υ", "Upsilon"], ["φ", "Phi"], ["χ", "Chi"],
+  ["ψ", "Psi"], ["ω", "Omega"], ["ϡ", "Sampi", true],
+];
+
+/**
+ * The 27 Greek isopsephy letters. The glyphs in GREEK_MAP are \u03DB (digamma),
+ * \u03DF (qoppa) and \u03E1 (sampi); values are read from the live map.
+ */
+export const GREEK_LETTER_TABLE: GreekLetterRow[] = GREEK_NAMES.map(([glyph, name, archaic]) => ({
+  glyph,
+  name,
+  value: GREEK_MAP[glyph],
+  ...(archaic ? { archaic: true } : {}),
+}));
+
 export interface WorkedExample {
   input: string;
   transliteration?: string;
@@ -249,6 +280,41 @@ export const WORKED_EXAMPLES: WorkedExample[] = [
     arithmetic: letterSum("gematria", SIMPLE_MAP, LATIN_LABELS),
     total: calculatePythagoreanGematria("GEMATRIA").value,
   },
+];
+
+const GREEK_LABELS: Record<string, string> = Object.fromEntries(
+  GREEK_NAMES.map(([glyph, name]) => [glyph, name.split(" ")[0]])
+);
+
+function greekExample(
+  input: string,
+  transliteration: string,
+  gloss: string
+): WorkedExample {
+  const letters = input
+    .normalize("NFD")
+    .replace(/[\u0300-\u036F]/g, "")
+    .normalize("NFC")
+    .toLowerCase()
+    .replace(/σ$/, "ς");
+  return {
+    input,
+    transliteration,
+    gloss,
+    method: "Greek Isopsephy",
+    arithmetic: letterSum(letters, GREEK_MAP, { ...GREEK_LABELS, ς: "Final Sigma" }),
+    total: calculateGreekGematria(input, "strict", () => "").value,
+  };
+}
+
+/** Greek worked examples, computed from GREEK_MAP like every other example. */
+export const GREEK_EXAMPLES: WorkedExample[] = [
+  greekExample("ἀγάπη", "agape", "love, in the sense of selfless regard"),
+  greekExample("λόγος", "logos", "word, reason, the term opening the Gospel of John"),
+  greekExample("Ἰησοῦς", "Iesous", "Jesus, the name behind the early Christian reading of 888"),
+  greekExample("Χριστός", "Christos", "Christ, anointed"),
+  greekExample("ἀλήθεια", "aletheia", "truth"),
+  greekExample("σοφία", "sophia", "wisdom"),
 ];
 
 /** Steps stated plainly, in the order the calculator performs them. */
