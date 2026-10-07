@@ -28,7 +28,7 @@ const RECENT_LOOKUPS_KEY = "recent_lookups";
 const MAX_LOOKUPS = 7;
 
 type GematriaCalculatorClientProps = {
-  initialPreset?: "english" | "hebrew";
+  initialPreset?: "english" | "hebrew" | "greek";
 };
 
 export default function GematriaCalculatorClient({
@@ -67,6 +67,10 @@ export default function GematriaCalculatorClient({
     }
     if (initialPreset === "hebrew") {
       setInputText((current) => current || "אבג");
+      setCalculationMode("strict");
+    }
+    if (initialPreset === "greek") {
+      setInputText((current) => current || "αβγ");
       setCalculationMode("strict");
     }
   }, [initialPreset]);

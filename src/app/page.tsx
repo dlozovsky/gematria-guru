@@ -164,6 +164,12 @@ export default function HomePage({
                     "Convert Hebrew words using Mispar Hechrachi, Mispar Gadol, and Hebrew Ordinal, with the full letter table.",
                 },
                 {
+                  title: "Greek Gematria Calculator",
+                  href: "/greek-gematria-calculator",
+                  description:
+                    "Convert Greek words using isopsephy, including digamma, qoppa and sampi, with the full letter table.",
+                },
+                {
                   title: "English Gematria Calculator",
                   href: "/english-gematria-calculator",
                   description:

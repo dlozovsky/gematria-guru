@@ -24,6 +24,7 @@ Columns:
 | `/` | ✅ | ✅ | | P0 | | Homepage; ~99.7% of clicks |
 | `/gematria-calculator-online` | ✅ | ✅ | | P0 | | |
 | `/hebrew-gematria-calculator` | ✅ | ✅ | | P0 | | Now linked from footer + homepage (added) |
+| `/greek-gematria-calculator` | ✅ | ✅ | | P0 | | New; linked from homepage, footer and Hebrew page |
 | `/english-gematria-calculator` | ✅ | ✅ | | P0 | | Now linked from footer + homepage (added) |
 | `/english-to-hebrew-gematria` | ✅ | ✅ | | P1 | | Now linked from footer (added) |
 | `/hebrew-gematria-reference-chart-2026` | ✅ | ✅ | | P1 | | Now linked from footer (added) |

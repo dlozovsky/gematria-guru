@@ -10,6 +10,7 @@ import {
   HEBREW_FINAL_TABLE,
   WORKED_EXAMPLES,
 } from "@/lib/gematriaReference";
+import { HEBREW_MAP } from "@/utils/gematriaCalculators";
 
 const PAGE_TITLE = "Hebrew Gematria Calculator and Letter Value Chart";
 const PAGE_DESCRIPTION =
@@ -21,6 +22,29 @@ const HEBREW_SYSTEMS = CIPHER_SYSTEMS.filter((c) => c.script === "Hebrew");
 const HEBREW_EXAMPLES = WORKED_EXAMPLES.filter((e) =>
   HEBREW_SYSTEMS.some((s) => s.method === e.method)
 );
+
+/** Sum from the live map so a listed value can never disagree with the calculator. */
+const hebrewValue = (word: string) =>
+  word.split("").reduce((sum, ch) => sum + (HEBREW_MAP[ch] ?? 0), 0);
+
+type CommonWord = { word: string; transliteration: string; gloss: string };
+
+const COMMON_WORD_LIST: CommonWord[] = [
+  { word: "אחד", transliteration: "echad", gloss: "one" },
+  { word: "אהבה", transliteration: "ahavah", gloss: "love" },
+  { word: "חי", transliteration: "chai", gloss: "life" },
+  { word: "יהוה", transliteration: "YHVH", gloss: "the four-letter divine name" },
+  { word: "אלהים", transliteration: "Elohim", gloss: "God" },
+  { word: "הטבע", transliteration: "ha-teva", gloss: "nature" },
+  { word: "אמת", transliteration: "emet", gloss: "truth" },
+  { word: "שלום", transliteration: "shalom", gloss: "peace" },
+  { word: "תורה", transliteration: "Torah", gloss: "instruction, the Five Books" },
+  { word: "משיח", transliteration: "mashiach", gloss: "anointed, messiah" },
+  { word: "נחש", transliteration: "nachash", gloss: "serpent" },
+  { word: "ברכה", transliteration: "brachah", gloss: "blessing" },
+];
+
+const COMMON_WORDS = COMMON_WORD_LIST.map((w) => ({ ...w, value: hebrewValue(w.word) }));
 
 const FAQ: { q: string; a: string }[] = [
   {
@@ -50,6 +74,18 @@ const FAQ: { q: string; a: string }[] = [
   {
     q: "Does the calculator handle vowel points?",
     a: "Yes. Niqqud carries no numerical value in gematria, so vowel points and cantillation marks are stripped before the letters are counted. Pasting pointed text from a Hebrew Bible gives the same result as pasting the unpointed consonants.",
+  },
+  {
+    q: "Why do some Hebrew words share the same value?",
+    a: "There are only 22 letters and totals tend to cluster, so many words land on the same number by chance. Jewish commentary treats some of these matches as meaningful, such as ahavah (love) and echad (one), which both total 13, or mashiach (messiah) and nachash (serpent), which both total 358. The calculator shows the numbers. Whether a match carries meaning is a question of interpretation.",
+  },
+  {
+    q: "How do I find the gematria of my Hebrew name?",
+    a: "Write the name in Hebrew letters and paste it into the calculator. If you only know the English spelling, the calculator can transliterate it to a Hebrew spelling, but a name can be spelled several ways in Hebrew and each spelling gives a different total. Use the Hebrew spelling from a source you trust for a fixed value.",
+  },
+  {
+    q: "How is Hebrew gematria different from Greek isopsephy?",
+    a: "Both assign values to letters in alphabetical order and add them. Hebrew runs from 1 to 400 across 22 letters, with variant systems such as Mispar Gadol and Ordinal, while Greek runs from 1 to 900 across 27 letters including the archaic digamma, qoppa and sampi. The Greek counterpart has its own calculator.",
   },
   {
     q: "Is the Hebrew gematria calculator free?",
@@ -212,6 +248,38 @@ export default function Page() {
             </div>
           </section>
 
+          <section id="common-words" className="mb-8">
+            <h2 className="text-2xl font-bold mb-3">Values of common Hebrew words</h2>
+            <p className="text-muted-foreground mb-4">
+              Standard values (Mispar Hechrachi) for words that come up often in gematria
+              discussion. Words that share a total, such as echad and ahavah, are the pairs
+              commentators most often cite.
+            </p>
+            <div className="overflow-x-auto border border-border rounded-lg">
+              <table className="w-full text-sm">
+                <caption className="sr-only">Standard gematria values of common Hebrew words</caption>
+                <thead>
+                  <tr className="bg-muted/60 text-left">
+                    <th scope="col" className="px-3 py-2 font-medium">Word</th>
+                    <th scope="col" className="px-3 py-2 font-medium">Transliteration</th>
+                    <th scope="col" className="px-3 py-2 font-medium">Meaning</th>
+                    <th scope="col" className="px-3 py-2 font-medium text-right">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {COMMON_WORDS.map(({ word, transliteration, gloss, value }) => (
+                    <tr key={word} className="border-t border-border">
+                      <td className="px-3 py-1.5 text-lg">{word}</td>
+                      <td className="px-3 py-1.5 text-muted-foreground">{transliteration}</td>
+                      <td className="px-3 py-1.5 text-muted-foreground">{gloss}</td>
+                      <td className="px-3 py-1.5 text-right tabular-nums">{value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
           <section id="chart" className="mb-8">
             <h2 className="text-2xl font-bold mb-3">Hebrew gematria chart</h2>
             <p className="text-muted-foreground mb-4">
@@ -301,6 +369,18 @@ export default function Page() {
               className="text-primary underline underline-offset-4 hover:opacity-80"
             >
               Printable Hebrew reference chart
+            </Link>
+            <Link
+              href="/greek-gematria-calculator"
+              className="text-primary underline underline-offset-4 hover:opacity-80"
+            >
+              Greek gematria calculator
+            </Link>
+            <Link
+              href="/learning/systems"
+              className="text-primary underline underline-offset-4 hover:opacity-80"
+            >
+              Gematria systems compared
             </Link>
             <Link
               href="/english-gematria-calculator"

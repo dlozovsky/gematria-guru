@@ -9,6 +9,7 @@ const NavFooter = () => (
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><Link href="/" className="hover:text-primary transition-colors">Gematria Calculator</Link></li>
             <li><Link href="/hebrew-gematria-calculator" className="hover:text-primary transition-colors">Hebrew Gematria Calculator</Link></li>
+            <li><Link href="/greek-gematria-calculator" className="hover:text-primary transition-colors">Greek Gematria Calculator</Link></li>
             <li><Link href="/english-gematria-calculator" className="hover:text-primary transition-colors">English Gematria Calculator</Link></li>
             <li><Link href="/gematria-calculator-online" className="hover:text-primary transition-colors">Gematria Calculator Online</Link></li>
             <li><Link href="/number-maps" className="hover:text-primary transition-colors">Number Maps</Link></li>
